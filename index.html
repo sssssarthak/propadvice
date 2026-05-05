@@ -79,7 +79,7 @@ nav a:hover { color: var(--white); }
   padding: 5px 14px; border-radius: 2px; display: inline-block; margin-bottom: 28px;
 }
 .hero-left h1 {
-  font-family: 'Lora', serif; font-size: clamp(42px, 5vw, 62px); font-weight: 500;
+  font-family: 'Lora', serif; font-size: clamp(32px, 4.2vw, 62px); font-weight: 500;
   line-height: 1.1; color: var(--white); margin-bottom: 22px;
 }
 .hero-left h1 em { font-style: italic; color: var(--amber-bright); }
@@ -214,26 +214,42 @@ nav a:hover { color: var(--white); }
 .s-k { color: var(--text-soft); } .s-v { font-weight: 700; color: var(--text); }
 
 /* ─── CALCULATORS ─── */
-.c-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; row-gap: 10px; }
-.c-tab { padding: 9px 20px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.54); font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: 'Syne', sans-serif; transition: all .18s; letter-spacing: 0.3px; white-space: nowrap; }
-.c-tab.on, .c-tab:hover { background: var(--amber); color: var(--navy-deep); border-color: var(--amber); }
-.cpanel { display: none; } .cpanel.on { display: block; }
-.c-card { max-width: 820px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; overflow: hidden; }
-.c-2col { display: grid; grid-template-columns: 1fr 1fr; }
-.c-left { padding: 38px; border-right: 1px solid rgba(255,255,255,0.07); }
-.c-right { padding: 38px; }
-.c-lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.38); display: block; margin-bottom: 7px; }
-.c-inp { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 11px 14px; color: var(--white); font-size: 14px; font-family: 'Syne', sans-serif; margin-bottom: 16px; outline: none; transition: border-color .18s; }
-.c-inp:focus { border-color: var(--amber); }
-.c-sel { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 11px 14px; color: var(--white); font-size: 14px; font-family: 'Syne', sans-serif; margin-bottom: 16px; outline: none; cursor: pointer; }
-.c-sel option { background: var(--navy-deep); }
-.c-btn { width: 100%; background: var(--amber); color: var(--navy-deep); border: none; padding: 13px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Syne', sans-serif; transition: background .18s; }
-.c-btn:hover { background: var(--amber-bright); }
-.c-res-lbl { font-size: 10.5px; color: rgba(255,255,255,0.38); margin-bottom: 8px; letter-spacing: 1px; }
-.c-res-big { font-family: 'Lora', serif; font-size: 48px; font-weight: 500; color: var(--amber-bright); line-height: 1; margin-bottom: 24px; }
-.c-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 13px; }
+.c-tabs { display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.c-tab { padding: 14px 22px; border-radius: 0; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px; background: transparent; color: rgba(255,255,255,0.38); font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: 'Syne', sans-serif; transition: all .2s; letter-spacing: 0.3px; white-space: nowrap; }
+.c-tab.on { color: var(--white); border-bottom-color: var(--amber); background: rgba(255,255,255,0.02); }
+.c-tab:hover:not(.on) { color: rgba(255,255,255,0.65); }
+.cpanel { display: none; }
+.cpanel.on { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+.c-inputs { padding: 40px 44px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 22px; }
+.c-inputs-header { margin-bottom: 4px; }
+.c-inputs-title { font-family: 'Lora', serif; font-size: 18px; color: var(--white); font-weight: 500; margin-bottom: 4px; }
+.c-inputs-sub { font-size: 12px; color: rgba(255,255,255,0.28); font-style: italic; }
+.c-results { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; background: rgba(0,0,0,0.2); position: relative; overflow: hidden; }
+.c-results::before { content: ''; position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(192,104,24,0.1) 0%, transparent 70%); pointer-events: none; }
+.c-field { display: flex; flex-direction: column; gap: 8px; }
+.c-lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(255,255,255,0.32); }
+.c-input-wrap { position: relative; }
+.c-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: rgba(255,255,255,0.3); font-weight: 600; pointer-events: none; }
+.c-inp { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 14px 12px 30px; color: var(--white); font-size: 16px; font-family: 'Syne', sans-serif; outline: none; transition: all .2s; }
+.c-inp.no-prefix { padding-left: 14px; }
+.c-inp:focus { border-color: var(--amber); background: rgba(255,255,255,0.08); box-shadow: 0 0 0 3px rgba(192,104,24,0.12); }
+.c-sel { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 36px 12px 14px; color: var(--white); font-size: 14.5px; font-family: 'Syne', sans-serif; outline: none; cursor: pointer; transition: all .2s; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
+.c-sel:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(192,104,24,0.12); }
+.c-sel option { background: #0e1826; }
+.c-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.c-hint { font-size: 10.5px; color: rgba(255,255,255,0.2); margin-top: 2px; font-style: italic; }
+/* Results */
+.c-res-label { font-size: 10.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 14px; position: relative; z-index: 1; }
+.c-res-amount { font-family: 'Lora', serif; font-size: clamp(44px, 4.8vw, 64px); font-weight: 500; color: var(--amber-bright); line-height: 1; margin-bottom: 8px; letter-spacing: -2px; position: relative; z-index: 1; }
+.c-res-amount.positive { color: #6abf87; }
+.c-res-amount.negative { color: #e07070; }
+.c-res-sub { font-size: 12px; color: rgba(255,255,255,0.25); margin-bottom: 28px; position: relative; z-index: 1; font-style: italic; }
+.c-breakdown { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; display: flex; flex-direction: column; position: relative; z-index: 1; }
+.c-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
 .c-row:last-child { border: none; }
-.c-rk { color: rgba(255,255,255,0.48); } .c-rv { font-weight: 700; color: var(--white); }
+.c-rk { color: rgba(255,255,255,0.35); }
+.c-rv { font-weight: 700; color: rgba(255,255,255,0.9); font-size: 13.5px; }
+.c-disclaimer { font-size: 10px; color: rgba(255,255,255,0.15); margin-top: 18px; line-height: 1.6; font-style: italic; position: relative; z-index: 1; }
 
 /* ─── BLOG — editorial magazine grid ─── */
 .editorial-grid {
@@ -449,10 +465,13 @@ body.modal-open { overflow: hidden; touch-action: none; }
   .q-submit { padding: 12px 20px; font-size: 13px; }
 
   /* CALCULATORS */
-  .c-tabs { gap: 6px; }
-  .c-tab { padding: 8px 12px; font-size: 11px; }
-  .c-left, .c-right { padding: 22px 18px; }
-  .c-res-big { font-size: 36px; }
+  .c-tabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+  .c-tab { padding: 11px 16px; font-size: 12px; flex-shrink: 0; }
+  .cpanel.on { grid-template-columns: 1fr; }
+  .c-inputs { padding: 24px 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .c-results { padding: 24px 20px; }
+  .c-res-amount { font-size: 42px; letter-spacing: -1px; }
+  .c-inline { grid-template-columns: 1fr; }
 
   /* BLOG CARDS */
   .editorial-grid { gap: 14px; }
@@ -517,7 +536,7 @@ body.modal-open { overflow: hidden; touch-action: none; }
 <section class="hero">
   <div class="hero-left">
     <div class="h-eyebrow">Australia's Property Intelligence Hub</div>
-    <h1>Expert Guidance for<br><em>Every</em> Property<br>Decision</h1>
+    <h1>Expert Guidance for <em>Every</em> Property Decision</h1>
     <p>From your first inspection to your fifth investment, connect with specialist buyers agents, run the numbers, and buy with confidence.</p>
     <div class="hero-ctas">
       <a href="#quiz" class="btn-amber">Find My Buyers Agent →</a>
@@ -702,12 +721,207 @@ body.modal-open { overflow: hidden; touch-action: none; }
       <button class="c-tab" onclick="cSwitch(this,'cy')">📈 Rental Yield</button>
       <button class="c-tab" onclick="cSwitch(this,'cc')">💵 Cash Flow</button>
     </div>
-    <div class="c-card">
-      <div class="cpanel on" id="cp-cm"><div class="c-2col"><div class="c-left"><label class="c-lbl">Loan Amount ($)</label><input class="c-inp" id="ml" value="600000" oninput="doMort()"><label class="c-lbl">Interest Rate (% p.a.)</label><input class="c-inp" id="mr" value="6.2" step="0.1" oninput="doMort()"><label class="c-lbl">Loan Term</label><select class="c-sel" id="mt" onchange="doMort()"><option value="30">30 years</option><option value="25">25 years</option><option value="20">20 years</option><option value="15">15 years</option></select><label class="c-lbl">Repayment Type</label><select class="c-sel" id="mrt" onchange="doMort()"><option value="pi">Principal & Interest</option><option value="io">Interest Only</option></select></div><div class="c-right"><div class="c-res-lbl">Monthly Repayment</div><div class="c-res-big" id="mm">$3,660</div><div class="c-row"><span class="c-rk">Weekly</span><span class="c-rv" id="mw">$845</span></div><div class="c-row"><span class="c-rk">Fortnightly</span><span class="c-rv" id="mf">$1,690</span></div><div class="c-row"><span class="c-rk">Annual</span><span class="c-rv" id="ma">$43,920</span></div><div class="c-row"><span class="c-rk">Total Interest</span><span class="c-rv" id="mi">$717,600</span></div><div class="c-row"><span class="c-rk">Total Repaid</span><span class="c-rv" id="mto">$1,317,600</span></div></div></div></div>
-      <div class="cpanel" id="cp-cb"><div class="c-2col"><div class="c-left"><label class="c-lbl">Annual Household Income ($)</label><input class="c-inp" id="bi" value="150000" oninput="doBorrow()"><label class="c-lbl">Monthly Living Expenses ($)</label><input class="c-inp" id="be" value="3000" oninput="doBorrow()"><label class="c-lbl">Monthly Debt Repayments ($)</label><input class="c-inp" id="bd" value="500" oninput="doBorrow()"><label class="c-lbl">Dependants</label><select class="c-sel" id="bde" onchange="doBorrow()"><option value="0">None</option><option value="1">1</option><option value="2">2</option><option value="3">3+</option></select></div><div class="c-right"><div class="c-res-lbl">Estimated Borrowing Capacity</div><div class="c-res-big" id="bmax">$742,000</div><div class="c-row"><span class="c-rk">Conservative Estimate</span><span class="c-rv" id="blow">$620,000</span></div><div class="c-row"><span class="c-rk">Max Monthly Repayment</span><span class="c-rv" id="bmo">$4,210</span></div><div class="c-row"><span class="c-rk">Net Monthly Income</span><span class="c-rv" id="bnet">$9,800</span></div></div></div></div>
-      <div class="cpanel" id="cp-cs"><div class="c-2col"><div class="c-left"><label class="c-lbl">Purchase Price ($)</label><input class="c-inp" id="sdp" value="750000" oninput="doStamp()"><label class="c-lbl">State</label><select class="c-sel" id="sds" onchange="doStamp()"><option value="VIC">Victoria</option><option value="NSW">New South Wales</option><option value="QLD">Queensland</option><option value="WA">Western Australia</option><option value="SA">South Australia</option><option value="ACT">ACT</option></select><label class="c-lbl">Buyer Type</label><select class="c-sel" id="sdt" onchange="doStamp()"><option value="oo">Owner Occupier</option><option value="fhb">First Home Buyer</option><option value="inv">Investor</option></select></div><div class="c-right"><div class="c-res-lbl">Stamp Duty Payable</div><div class="c-res-big" id="sdv">$40,070</div><div class="c-row"><span class="c-rk">Purchase Price</span><span class="c-rv" id="sdpp">$750,000</span></div><div class="c-row"><span class="c-rk">Stamp Duty</span><span class="c-rv" id="sdsd">$40,070</span></div><div class="c-row"><span class="c-rk">Other Upfront Costs</span><span class="c-rv">~$3,000</span></div><div class="c-row"><span class="c-rk">Total Upfront</span><span class="c-rv" id="sdtot">$43,070</span></div></div></div></div>
-      <div class="cpanel" id="cp-cy"><div class="c-2col"><div class="c-left"><label class="c-lbl">Property Value ($)</label><input class="c-inp" id="yv" value="650000" oninput="doYield()"><label class="c-lbl">Weekly Rent ($)</label><input class="c-inp" id="yw" value="550" oninput="doYield()"><label class="c-lbl">Annual Costs, rates, insurance, PM ($)</label><input class="c-inp" id="yc" value="8000" oninput="doYield()"></div><div class="c-right"><div class="c-res-lbl">Gross Rental Yield</div><div class="c-res-big" id="ygr">4.4%</div><div class="c-row"><span class="c-rk">Annual Rent</span><span class="c-rv" id="yann">$28,600</span></div><div class="c-row"><span class="c-rk">Net Yield</span><span class="c-rv" id="ynet">3.2%</span></div><div class="c-row"><span class="c-rk">Net Annual Income</span><span class="c-rv" id="yni">$20,600</span></div></div></div></div>
-      <div class="cpanel" id="cp-cc"><div class="c-2col"><div class="c-left"><label class="c-lbl">Purchase Price ($)</label><input class="c-inp" id="cfp" value="700000" oninput="doCF()"><label class="c-lbl">Deposit (%)</label><input class="c-inp" id="cfd" value="20" oninput="doCF()"><label class="c-lbl">Interest Rate (% p.a.)</label><input class="c-inp" id="cfr" value="6.2" step="0.1" oninput="doCF()"><label class="c-lbl">Weekly Rent ($)</label><input class="c-inp" id="cfw" value="600" oninput="doCF()"><label class="c-lbl">Annual Costs ($)</label><input class="c-inp" id="cfc" value="9000" oninput="doCF()"></div><div class="c-right"><div class="c-res-lbl">Monthly Cash Flow</div><div class="c-res-big" id="cfmo">-$412</div><div class="c-row"><span class="c-rk">Monthly Rent</span><span class="c-rv" id="cfmr">$2,600</span></div><div class="c-row"><span class="c-rk">Monthly Mortgage</span><span class="c-rv" id="cfmm">$2,262</span></div><div class="c-row"><span class="c-rk">Monthly Costs</span><span class="c-rv" id="cfmc">$750</span></div><div class="c-row"><span class="c-rk">Annual Position</span><span class="c-rv" id="cfann">-$4,944</span></div></div></div></div>
+    <div class="c-card" style="max-width:960px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:0 0 12px 12px;overflow:hidden;">
+
+      <!-- MORTGAGE -->
+      <div class="cpanel on" id="cp-cm">
+        <div class="c-inputs">
+          <div class="c-inputs-header">
+            <div class="c-inputs-title">Mortgage Repayment</div>
+            <div class="c-inputs-sub">Estimate your monthly repayments based on your loan details</div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Loan Amount</label>
+            <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="ml" value="600000" oninput="doMort()" placeholder="600,000"></div>
+          </div>
+          <div class="c-inline">
+            <div class="c-field">
+              <label class="c-lbl">Interest Rate</label>
+              <div class="c-input-wrap"><input class="c-inp no-prefix" id="mr" value="6.2" step="0.1" oninput="doMort()" placeholder="6.2"><span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(255,255,255,0.3);">% p.a.</span></div>
+            </div>
+            <div class="c-field">
+              <label class="c-lbl">Loan Term</label>
+              <select class="c-sel" id="mt" onchange="doMort()"><option value="30">30 years</option><option value="25">25 years</option><option value="20">20 years</option><option value="15">15 years</option></select>
+            </div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Repayment Type</label>
+            <select class="c-sel" id="mrt" onchange="doMort()"><option value="pi">Principal & Interest</option><option value="io">Interest Only</option></select>
+          </div>
+        </div>
+        <div class="c-results">
+          <div class="c-res-label">Monthly repayment</div>
+          <div class="c-res-amount" id="mm">$3,675</div>
+          <div class="c-res-sub">estimated based on your inputs</div>
+          <div class="c-breakdown">
+            <div class="c-row"><span class="c-rk">Weekly repayment</span><span class="c-rv" id="mw">$848</span></div>
+            <div class="c-row"><span class="c-rk">Fortnightly repayment</span><span class="c-rv" id="mf">$1,696</span></div>
+            <div class="c-row"><span class="c-rk">Annual repayment</span><span class="c-rv" id="ma">$44,100</span></div>
+            <div class="c-row"><span class="c-rk">Total interest charged</span><span class="c-rv" id="mi">$722,900</span></div>
+            <div class="c-row"><span class="c-rk">Total amount repaid</span><span class="c-rv" id="mto">$1,322,900</span></div>
+          </div>
+          <div class="c-disclaimer">This is an estimate only and does not constitute financial advice. Actual repayments may vary.</div>
+        </div>
+      </div>
+
+      <!-- BORROWING -->
+      <div class="cpanel" id="cp-cb">
+        <div class="c-inputs">
+          <div class="c-inputs-header">
+            <div class="c-inputs-title">Borrowing Power</div>
+            <div class="c-inputs-sub">Estimate how much a lender may allow you to borrow</div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Annual Income (before tax)</label>
+            <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="bi" value="150000" oninput="doBorrow()" placeholder="150,000"></div>
+          </div>
+          <div class="c-inline">
+            <div class="c-field">
+              <label class="c-lbl">Monthly Expenses</label>
+              <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="be" value="3000" oninput="doBorrow()" placeholder="3,000"></div>
+            </div>
+            <div class="c-field">
+              <label class="c-lbl">Monthly Debt Repayments</label>
+              <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="bd" value="500" oninput="doBorrow()" placeholder="500"></div>
+            </div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Number of Dependants</label>
+            <select class="c-sel" id="bde" onchange="doBorrow()"><option value="0">None</option><option value="1">1 dependant</option><option value="2">2 dependants</option><option value="3">3 or more</option></select>
+          </div>
+        </div>
+        <div class="c-results">
+          <div class="c-res-label">You may be able to borrow up to</div>
+          <div class="c-res-amount" id="bmax">$742,000</div>
+          <div class="c-res-sub">estimated borrowing capacity</div>
+          <div class="c-breakdown">
+            <div class="c-row"><span class="c-rk">Conservative estimate</span><span class="c-rv" id="blow">$630,700</span></div>
+            <div class="c-row"><span class="c-rk">Max monthly repayment</span><span class="c-rv" id="bmo">$4,210</span></div>
+            <div class="c-row"><span class="c-rk">Net monthly income</span><span class="c-rv" id="bnet">$9,800</span></div>
+          </div>
+          <div class="c-disclaimer">This is a general guide only. Lenders assess serviceability differently. Speak with a mortgage broker for an accurate assessment.</div>
+        </div>
+      </div>
+
+      <!-- STAMP DUTY -->
+      <div class="cpanel" id="cp-cs">
+        <div class="c-inputs">
+          <div class="c-inputs-header">
+            <div class="c-inputs-title">Stamp Duty</div>
+            <div class="c-inputs-sub">Calculate government transfer duty for your state and buyer type</div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Purchase Price</label>
+            <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="sdp" value="750000" oninput="doStamp()" placeholder="750,000"></div>
+          </div>
+          <div class="c-inline">
+            <div class="c-field">
+              <label class="c-lbl">State</label>
+              <select class="c-sel" id="sds" onchange="doStamp()"><option value="VIC">Victoria</option><option value="NSW">New South Wales</option><option value="QLD">Queensland</option><option value="WA">Western Australia</option><option value="SA">South Australia</option><option value="ACT">ACT</option></select>
+            </div>
+            <div class="c-field">
+              <label class="c-lbl">Buyer Type</label>
+              <select class="c-sel" id="sdt" onchange="doStamp()"><option value="oo">Owner Occupier</option><option value="fhb">First Home Buyer</option><option value="inv">Investor</option></select>
+            </div>
+          </div>
+        </div>
+        <div class="c-results">
+          <div class="c-res-label">Stamp duty payable</div>
+          <div class="c-res-amount" id="sdv">$40,070</div>
+          <div class="c-res-sub">estimated government transfer duty</div>
+          <div class="c-breakdown">
+            <div class="c-row"><span class="c-rk">Purchase price</span><span class="c-rv" id="sdpp">$750,000</span></div>
+            <div class="c-row"><span class="c-rk">Stamp duty</span><span class="c-rv" id="sdsd">$40,070</span></div>
+            <div class="c-row"><span class="c-rk">Conveyancing (est.)</span><span class="c-rv">~$1,500</span></div>
+            <div class="c-row"><span class="c-rk">Other upfront costs</span><span class="c-rv">~$1,500</span></div>
+            <div class="c-row"><span class="c-rk">Total upfront</span><span class="c-rv" id="sdtot">$43,070</span></div>
+          </div>
+          <div class="c-disclaimer">Rates are indicative. Concessions and thresholds change periodically. Confirm with your conveyancer.</div>
+        </div>
+      </div>
+
+      <!-- RENTAL YIELD -->
+      <div class="cpanel" id="cp-cy">
+        <div class="c-inputs">
+          <div class="c-inputs-header">
+            <div class="c-inputs-title">Rental Yield</div>
+            <div class="c-inputs-sub">Calculate gross and net yield on an investment property</div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Property Value</label>
+            <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="yv" value="650000" oninput="doYield()" placeholder="650,000"></div>
+          </div>
+          <div class="c-inline">
+            <div class="c-field">
+              <label class="c-lbl">Weekly Rent</label>
+              <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="yw" value="550" oninput="doYield()" placeholder="550"></div>
+            </div>
+            <div class="c-field">
+              <label class="c-lbl">Annual Costs</label>
+              <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="yc" value="8000" oninput="doYield()" placeholder="8,000"></div>
+            </div>
+          </div>
+          <div class="c-hint">Annual costs include rates, insurance, property management fees</div>
+        </div>
+        <div class="c-results">
+          <div class="c-res-label">Gross rental yield</div>
+          <div class="c-res-amount" id="ygr">4.40%</div>
+          <div class="c-res-sub">of property value per annum</div>
+          <div class="c-breakdown">
+            <div class="c-row"><span class="c-rk">Annual rental income</span><span class="c-rv" id="yann">$28,600</span></div>
+            <div class="c-row"><span class="c-rk">Net yield (after costs)</span><span class="c-rv" id="ynet">3.17%</span></div>
+            <div class="c-row"><span class="c-rk">Net annual income</span><span class="c-rv" id="yni">$20,600</span></div>
+          </div>
+          <div class="c-disclaimer">Gross yield does not account for mortgage costs, vacancy periods, or capital works.</div>
+        </div>
+      </div>
+
+      <!-- CASH FLOW -->
+      <div class="cpanel" id="cp-cc">
+        <div class="c-inputs">
+          <div class="c-inputs-header">
+            <div class="c-inputs-title">Cash Flow Analysis</div>
+            <div class="c-inputs-sub">See if your investment property is positively or negatively geared</div>
+          </div>
+          <div class="c-inline">
+            <div class="c-field">
+              <label class="c-lbl">Purchase Price</label>
+              <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="cfp" value="700000" oninput="doCF()" placeholder="700,000"></div>
+            </div>
+            <div class="c-field">
+              <label class="c-lbl">Deposit</label>
+              <div class="c-input-wrap"><input class="c-inp no-prefix" id="cfd" value="20" oninput="doCF()" placeholder="20"><span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(255,255,255,0.3);">%</span></div>
+            </div>
+          </div>
+          <div class="c-inline">
+            <div class="c-field">
+              <label class="c-lbl">Interest Rate</label>
+              <div class="c-input-wrap"><input class="c-inp no-prefix" id="cfr" value="6.2" step="0.1" oninput="doCF()" placeholder="6.2"><span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(255,255,255,0.3);">%</span></div>
+            </div>
+            <div class="c-field">
+              <label class="c-lbl">Weekly Rent</label>
+              <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="cfw" value="600" oninput="doCF()" placeholder="600"></div>
+            </div>
+          </div>
+          <div class="c-field">
+            <label class="c-lbl">Annual Costs (rates, insurance, PM)</label>
+            <div class="c-input-wrap"><span class="c-prefix">$</span><input class="c-inp" id="cfc" value="9000" oninput="doCF()" placeholder="9,000"></div>
+          </div>
+        </div>
+        <div class="c-results">
+          <div class="c-res-label">Monthly cash flow</div>
+          <div class="c-res-amount negative" id="cfmo">-$412</div>
+          <div class="c-res-sub">estimated monthly position</div>
+          <div class="c-breakdown">
+            <div class="c-row"><span class="c-rk">Monthly rental income</span><span class="c-rv" id="cfmr">$2,600</span></div>
+            <div class="c-row"><span class="c-rk">Monthly mortgage</span><span class="c-rv" id="cfmm">$2,262</span></div>
+            <div class="c-row"><span class="c-rk">Monthly holding costs</span><span class="c-rv" id="cfmc">$750</span></div>
+            <div class="c-row"><span class="c-rk">Annual position</span><span class="c-rv" id="cfann">-$4,944</span></div>
+          </div>
+          <div class="c-disclaimer">Negative gearing means costs exceed income. This may be tax-deductible — speak to your accountant.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -810,7 +1024,7 @@ function doMort(){const P=+document.getElementById('ml').value,r=+document.getEl
 function doBorrow(){const i=+document.getElementById('bi').value,e=+document.getElementById('be').value,d=+document.getElementById('bd').value,dep=+document.getElementById('bde').value,mi=i/12,av=mi*0.28-e*0.3-d-dep*400,r=0.09/12,n=360,pw=Math.pow(1+r,n),max=av*(pw-1)/(r*pw);document.getElementById('bmax').textContent=fmt(Math.max(0,max));document.getElementById('blow').textContent=fmt(Math.max(0,max*0.85));document.getElementById('bmo').textContent=fmt(Math.max(0,av));document.getElementById('bnet').textContent=fmt(mi*0.72-e-d);}
 function doStamp(){const p=+document.getElementById('sdp').value,st=document.getElementById('sds').value,t=document.getElementById('sdt').value;let d=0;if(st==='VIC'){if(p<=25000)d=p*0.014;else if(p<=130000)d=350+(p-25000)*0.024;else if(p<=960000)d=2870+(p-130000)*0.06;else d=p*0.055;if(t==='fhb'&&p<=600000)d=0;else if(t==='fhb'&&p<=750000)d=d*(p-600000)/150000;}else if(st==='NSW'){if(p<=14000)d=p*0.0125;else if(p<=32000)d=175+(p-14000)*0.015;else if(p<=85000)d=445+(p-32000)*0.0175;else if(p<=319000)d=1372+(p-85000)*0.035;else if(p<=1064000)d=9562+(p-319000)*0.045;else d=43087+(p-1064000)*0.055;if(t==='fhb'&&p<=800000)d=0;}else if(st==='QLD'){if(p<=5000)d=0;else if(p<=75000)d=(p-5000)*0.015;else if(p<=540000)d=1050+(p-75000)*0.035;else if(p<=1e6)d=17325+(p-540000)*0.045;else d=38025+(p-1e6)*0.0575;}else{d=p*0.04;if(t==='fhb')d*=0.5;}document.getElementById('sdv').textContent=fmt(d);document.getElementById('sdpp').textContent=fmt(p);document.getElementById('sdsd').textContent=fmt(d);document.getElementById('sdtot').textContent=fmt(d+3000);}
 function doYield(){const v=+document.getElementById('yv').value,w=+document.getElementById('yw').value,c=+document.getElementById('yc').value,ann=w*52,gr=ann/v*100,ni=ann-c,nt=ni/v*100;document.getElementById('ygr').textContent=pct(gr);document.getElementById('yann').textContent=fmt(ann);document.getElementById('ynet').textContent=pct(nt);document.getElementById('yni').textContent=fmt(ni);}
-function doCF(){const p=+document.getElementById('cfp').value,dep=+document.getElementById('cfd').value/100,r=+document.getElementById('cfr').value/100/12,w=+document.getElementById('cfw').value,c=+document.getElementById('cfc').value,loan=p*(1-dep),n=360,mort=loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),mr=w*52/12,mc=c/12,cf=mr-mort-mc;document.getElementById('cfmo').textContent=(cf>=0?'+':'')+fmt(cf);document.getElementById('cfmo').style.color=cf>=0?'#6abf87':'#e07070';document.getElementById('cfmr').textContent=fmt(mr);document.getElementById('cfmm').textContent=fmt(mort);document.getElementById('cfmc').textContent=fmt(mc);document.getElementById('cfann').textContent=(cf*12>=0?'+':'')+fmt(cf*12);}
+function doCF(){const p=+document.getElementById('cfp').value,dep=+document.getElementById('cfd').value/100,r=+document.getElementById('cfr').value/100/12,w=+document.getElementById('cfw').value,c=+document.getElementById('cfc').value,loan=p*(1-dep),n=360,mort=loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),mr=w*52/12,mc=c/12,cf=mr-mort-mc;const el=document.getElementById('cfmo');el.textContent=(cf>=0?'+':'')+fmt(cf);el.className='c-res-amount '+(cf>=0?'positive':'negative');document.getElementById('cfmr').textContent=fmt(mr);document.getElementById('cfmm').textContent=fmt(mort);document.getElementById('cfmc').textContent=fmt(mc);document.getElementById('cfann').textContent=(cf*12>=0?'+':'')+fmt(cf*12);}
 function cSwitch(btn,id){document.querySelectorAll('.c-tab').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.cpanel').forEach(p=>p.classList.remove('on'));btn.classList.add('on');document.getElementById('cp-'+id).classList.add('on');}
 doMort();doBorrow();doStamp();doYield();doCF();
 
