@@ -335,10 +335,11 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 .art-modal.open { display: flex; align-items: flex-start; justify-content: center; padding: 20px; }
 .art-modal-inner {
   background: var(--paper); border-radius: 10px; max-width: 780px; width: 100%;
-  max-height: calc(100vh - 40px);
-  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  height: calc(100vh - 40px);
+  overflow-y: scroll; -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   box-shadow: 0 40px 100px rgba(0,0,0,0.4); position: relative;
-  animation: modalIn .28s ease; margin-top: 0;
+  animation: modalIn .28s ease;
 }
 @keyframes modalIn { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: none; } }
 .art-close {
@@ -349,10 +350,11 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 .art-close:hover { background: var(--amber); color: var(--navy-deep); border-color: var(--amber); }
+body.modal-open { overflow: hidden; position: fixed; width: 100%; }
 @media (max-width: 600px) {
-  .art-modal.open { padding: 10px; align-items: flex-end; }
-  .art-modal-inner { max-height: calc(100vh - 20px); border-radius: 14px 14px 0 0; }
-  .art-close { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
+  .art-modal.open { padding: 0; align-items: flex-end; }
+  .art-modal-inner { height: 92vh; border-radius: 18px 18px 0 0; width: 100%; max-width: 100%; }
+  .art-close { top: 12px; right: 12px; padding: 8px 14px; font-size: 12px; }
 }
 .art-hero { padding: 48px 52px 32px; border-bottom: 1px solid var(--chalk-dark); }
 .art-hero .art-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
@@ -1090,14 +1092,22 @@ function openArticle(id) {
     </div>
     <div class="art-content">${art.content}</div>
   `;
+  // Lock page scroll on mobile
+  const scrollY = window.scrollY;
+  document.body.style.top = `-${scrollY}px`;
+  document.body.classList.add('modal-open');
+  document.body.dataset.scrollY = scrollY;
   modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  modal.scrollTop = 0;
+  modal.querySelector('.art-modal-inner').scrollTop = 0;
 }
 
 function closeArticle() {
   document.getElementById('article-modal').classList.remove('open');
-  document.body.style.overflow = '';
+  // Restore page scroll
+  const scrollY = document.body.dataset.scrollY || 0;
+  document.body.classList.remove('modal-open');
+  document.body.style.top = '';
+  window.scrollTo(0, parseInt(scrollY));
 }
 
 function closeArticleModal(e) {
