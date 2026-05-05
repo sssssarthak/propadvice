@@ -652,14 +652,40 @@ const qd={};
 function qSel(el,k,v){el.closest('.q-opts').querySelectorAll('.q-opt').forEach(o=>o.classList.remove('on'));el.classList.add('on');qd[k]=v;}
 function qGo(f,t){document.getElementById('qs'+f).classList.add('hidden');document.getElementById('qs'+t).classList.remove('hidden');document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'});}
 function qSubmit(){
-  const fn=document.getElementById('qfn').value,em=document.getElementById('qem').value,ph=document.getElementById('qph').value;
+  const fn=document.getElementById('qfn').value,ln=document.getElementById('qln').value,em=document.getElementById('qem').value,ph=document.getElementById('qph').value;
   if(!fn||!em||!ph){alert('Please complete your name, email and phone.');return;}
+
+  // Show success screen immediately
   document.getElementById('qs9').classList.add('hidden');
   document.getElementById('s-name').textContent=fn;
-  const m={goal:{fh:'First Home',inv:'Investment',up:'Upgrading',dn:'Downsizing'},budget:{u500:'Under $500k','500_800':'$500k–$800k','800_1200':'$800k–$1.2M','1200_2m':'$1.2M–$2M','2mplus':'$2M+'},savings:{u50:'Under $50k','50_100':'$50k–$100k','100_200':'$100k–$200k','200plus':'$200k+'},income:{u80:'Under $80k','80_150':'$80k–$150k','150_250':'$150k–$250k','250plus':'$250k+'},existing:{none:'None',one:'1 property',two3:'2–3','4plus':'4+'},status:{single:'Single',couple:'Couple',family:'Family',joint:'Joint'},state:{vic:'Victoria',nsw:'NSW',qld:'Queensland',wa:'Western Australia',sa:'South Australia',other:'Other'},timeline:{now:'ASAP','3m':'3 months','6m':'3–6 months','12m':'6–12 months'}};
+  const m={goal:{fh:'First Home',inv:'Investment',up:'Upgrading',dn:'Downsizing'},budget:{u500:'Under $500k','500_800':'$500k\u2013$800k','800_1200':'$800k\u2013$1.2M','1200_2m':'$1.2M\u2013$2M','2mplus':'$2M+'},savings:{u50:'Under $50k','50_100':'$50k\u2013$100k','100_200':'$100k\u2013$200k','200plus':'$200k+'},income:{u80:'Under $80k','80_150':'$80k\u2013$150k','150_250':'$150k\u2013$250k','250plus':'$250k+'},existing:{none:'None',one:'1 property',two3:'2\u20133','4plus':'4+'},status:{single:'Single',couple:'Couple',family:'Family',joint:'Joint'},state:{vic:'Victoria',nsw:'NSW',qld:'Queensland',wa:'Western Australia',sa:'South Australia',other:'Other'},timeline:{now:'ASAP','3m':'3 months','6m':'3\u20136 months','12m':'6\u201312 months'}};
   let h='';[['Goal','goal'],['Budget','budget'],['Deposit','savings'],['Income','income'],['Portfolio','existing'],['Status','status'],['State','state'],['Timeline','timeline']].forEach(([l,k])=>{if(qd[k])h+=`<div class="s-row"><span class="s-k">${l}</span><span class="s-v">${(m[k]&&m[k][qd[k]])||qd[k]}</span></div>`;});
   document.getElementById('s-sum').innerHTML=h;
   document.getElementById('qs-ok').classList.remove('hidden');
+
+  // Send to Google Sheets
+  const payload = {
+    firstName: fn,
+    lastName: ln,
+    email: em,
+    phone: ph,
+    goal: (m.goal[qd.goal]||qd.goal||''),
+    budget: (m.budget[qd.budget]||qd.budget||''),
+    savings: (m.savings[qd.savings]||qd.savings||''),
+    income: (m.income[qd.income]||qd.income||''),
+    existing: (m.existing[qd.existing]||qd.existing||''),
+    status: (m.status[qd.status]||qd.status||''),
+    state: (m.state[qd.state]||qd.state||''),
+    timeline: (m.timeline[qd.timeline]||qd.timeline||''),
+    source: 'Main Quiz'
+  };
+
+  fetch('https://script.google.com/macros/s/AKfycbwpYydQficssrD96d5Y4cTudpD-56lv47uhbvdig0r2wLS3LX5rsLkgOcVuo7zloe09/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  }).catch(err => console.log('Sheet error:', err));
 }
 
 // ── CALCULATORS ──
