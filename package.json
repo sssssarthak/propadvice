@@ -1,0 +1,13 @@
+{
+  "name": "propadvice",
+  "version": "1.0.0",
+  "description": "Australia's Property Intelligence Hub",
+  "scripts": {
+    "build": "echo 'Static HTML project - no build step required'",
+    "lint": "echo 'No linter configured for static HTML'",
+    "test": "echo 'No tests configured'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.0"
+  }
+}
