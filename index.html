@@ -350,7 +350,7 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 .art-close:hover { background: var(--amber); color: var(--navy-deep); border-color: var(--amber); }
-body.modal-open { overflow: hidden; position: fixed; width: 100%; }
+body.modal-open { overflow: hidden; touch-action: none; }
 @media (max-width: 600px) {
   .art-modal.open { padding: 0; align-items: flex-end; }
   .art-modal-inner { height: 92vh; border-radius: 18px 18px 0 0; width: 100%; max-width: 100%; }
@@ -1092,22 +1092,17 @@ function openArticle(id) {
     </div>
     <div class="art-content">${art.content}</div>
   `;
-  // Lock page scroll on mobile
-  const scrollY = window.scrollY;
-  document.body.style.top = `-${scrollY}px`;
+  window._modalScrollY = window.scrollY;
   document.body.classList.add('modal-open');
-  document.body.dataset.scrollY = scrollY;
   modal.classList.add('open');
   modal.querySelector('.art-modal-inner').scrollTop = 0;
 }
 
 function closeArticle() {
-  document.getElementById('article-modal').classList.remove('open');
-  // Restore page scroll
-  const scrollY = document.body.dataset.scrollY || 0;
+  const modal = document.getElementById('article-modal');
+  modal.classList.remove('open');
   document.body.classList.remove('modal-open');
-  document.body.style.top = '';
-  window.scrollTo(0, parseInt(scrollY));
+  window.scrollTo({ top: window._modalScrollY || 0, behavior: 'instant' });
 }
 
 function closeArticleModal(e) {
