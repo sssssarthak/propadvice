@@ -361,7 +361,8 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 .art-content ul li { font-family: 'Lora', serif; font-size: 14px; color: var(--text-mid); line-height: 1.7; padding: 6px 0 6px 20px; position: relative; border-bottom: 1px solid var(--chalk-dark); }
 .art-content ul li::before { content: '→'; position: absolute; left: 0; color: var(--amber); font-size: 12px; }
 .art-content ul li:last-child { border-bottom: none; }
-.suburb-table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 13px; }
+.suburb-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0 28px; }
+.suburb-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0; }
 .suburb-table th { background: var(--navy-deep); color: var(--white); padding: 10px 14px; text-align: left; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
 .suburb-table td { padding: 11px 14px; border-bottom: 1px solid var(--chalk-dark); color: var(--text-mid); }
 .suburb-table tr:nth-child(even) td { background: var(--chalk); }
@@ -382,16 +383,111 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
   nav ul { display: none; }
   .hero { grid-template-columns: 1fr; }
   .hero-right { display: none; }
-  .how-grid, .c-2col, .why-grid { grid-template-columns: 1fr; }
-  .editorial-grid, .ed-row2 { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 28px; }
+  .how-grid { grid-template-columns: 1fr; }
+  .c-2col { grid-template-columns: 1fr; }
+  .c-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  .editorial-grid { grid-template-columns: 1fr; }
+  .ed-row2 { grid-template-columns: 1fr; }
   .f-grid { grid-template-columns: 1fr 1fr; }
   .q-body, .q-foot { padding-left: 22px; padding-right: 22px; }
   .q-head { padding: 24px; }
+  .sec { padding: 60px 28px; }
+  /* Article modal tablet */
+  .art-hero { padding: 32px 28px 24px; }
+  .art-content { padding: 24px 28px; }
+  .art-footer { padding: 28px; }
+  /* Tables scroll on tablet */
+  .suburb-table { font-size: 12px; }
+  .suburb-table th, .suburb-table td { padding: 8px 10px; }
 }
+
 @media (max-width: 600px) {
-  .f-grid { grid-template-columns: 1fr; }
-  nav { padding: 0 20px; }
-  .sec, .hero-left { padding-left: 20px; padding-right: 20px; }
+  /* NAV */
+  nav { padding: 0 18px; }
+  .logo { font-size: 17px; }
+
+  /* HERO */
+  .hero-left { padding: 48px 18px 52px; }
+  .hero-left h1 { font-size: 36px; }
+  .hero-left p { font-size: 14px; }
+  .hero-ctas { flex-direction: column; gap: 10px; }
+  .btn-amber, .btn-ghost { text-align: center; padding: 13px 24px; }
+  .h-trust { gap: 12px; }
+
+  /* SECTIONS */
+  .sec { padding: 48px 18px; }
+  .sh h2 { font-size: 26px; }
+
+  /* HOW IT WORKS */
+  .how-box { padding: 32px 22px; }
+  .how-num { font-size: 52px; }
+
+  /* QUIZ */
+  .quiz-wrap { border-radius: 8px; }
+  .q-head { padding: 18px; }
+  .q-title { font-size: 15px; }
+  .q-body { padding: 20px 18px; }
+  .q-foot { padding: 0 18px 24px; }
+  .q-q { font-size: 15px; }
+  .q-opt { padding: 11px 12px; }
+  .q-2col { grid-template-columns: 1fr; }
+  .q-inprow { grid-template-columns: 1fr; gap: 0; }
+  .q-submit { padding: 12px 20px; font-size: 13px; }
+
+  /* CALCULATORS */
+  .c-tabs { gap: 6px; }
+  .c-tab { padding: 8px 12px; font-size: 11px; }
+  .c-left, .c-right { padding: 22px 18px; }
+  .c-res-big { font-size: 36px; }
+
+  /* BLOG CARDS */
+  .editorial-grid { gap: 14px; }
+  .ed-row2 { gap: 14px; }
+  .ed-main-bg { min-height: 200px; font-size: 56px; }
+  .ed-content { padding: 20px 22px 24px; }
+  .ed-content h3 { font-size: 18px; }
+  .ed-item { padding: 18px 20px; }
+  .ed-card { padding: 20px; }
+
+  /* ARTICLE MODAL */
+  .art-modal { padding: 12px 8px; }
+  .art-modal-inner { border-radius: 8px; }
+  .art-close { margin: 12px 12px 0 0; padding: 6px 12px; font-size: 11px; }
+  .art-hero { padding: 20px 18px 18px; }
+  .art-hero h1 { font-size: 22px; }
+  .art-hero .art-intro { font-size: 13px; }
+  .art-content { padding: 18px; }
+  .art-content h2 { font-size: 17px; margin: 24px 0 10px; padding-top: 24px; }
+  .art-content p { font-size: 13.5px; }
+  .art-content ul li { font-size: 13px; }
+  .art-footer { padding: 24px 18px; }
+  .art-callout { padding: 14px 16px; }
+  .art-callout p { font-size: 13px; }
+  /* Make tables scrollable on mobile */
+  .suburb-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 11.5px; white-space: nowrap; }
+  .suburb-table th, .suburb-table td { padding: 8px 10px; }
+
+  /* WHY US */
+  .why-grid { gap: 32px; }
+  .why-left h2 { font-size: 24px; }
+
+  /* FOOTER */
+  .f-grid { grid-template-columns: 1fr; gap: 28px; }
+  footer { padding: 40px 18px 24px; }
+  .f-base { flex-direction: column; gap: 6px; font-size: 10px; }
+  .f-dis { font-size: 10px; }
+
+  /* CTA BLOCK */
+  .cta-block { padding: 52px 18px; }
+  .cta-block h2 { font-size: 26px; }
+  .cta-block p { font-size: 14px; }
+
+  /* MINI QUIZ in hero */
+  .mq { padding: 18px; }
+  .mq-opts { gap: 6px; }
+  .mq-opt { font-size: 12px; padding: 8px 8px; }
 }
 </style>
 </head>
@@ -720,7 +816,7 @@ const articles = {
       <p>Interstate migration is returning and rental vacancy rates across Melbourne are sitting below 2%, pushing gross yields back above 3.5\u20134.5% in many areas. Regional Victoria remains a compelling story for cash flow investors.</p>
       <div class="art-callout"><p>&#128161; <strong>PropAdvice tip:</strong> Victoria\u2019s land tax thresholds mean portfolio structure matters more here than anywhere else in Australia. A buyers agent can help you buy in the right entity.</p></div>
       <h2>The Top 10 \u2014 Ranked</h2>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>#</th><th>Suburb</th><th>Region</th><th>Gross Yield</th><th>10yr Growth</th><th>Why It\u2019s Hot</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td><strong>Sunshine</strong></td><td>Inner West</td><td class="yield-good">4.2%</td><td>7.8% p.a.</td><td>Metro Tunnel, gentrification</td></tr>
@@ -734,7 +830,7 @@ const articles = {
           <tr><td class="rank">9</td><td><strong>Ballarat</strong></td><td>Regional VIC</td><td class="yield-good">5.4%</td><td>6.0% p.a.</td><td>Tree-changers, affordability</td></tr>
           <tr><td class="rank">10</td><td><strong>Reservoir</strong></td><td>North</td><td class="yield-good">3.7%</td><td>7.9% p.a.</td><td>Train access, gentrification</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>Key Investment Themes in 2025\u20132026</h2>
       <ul>
         <li><strong>Infrastructure corridors:</strong> The Metro Tunnel, opening in 2025, directly connects Sunshine to the CBD \u2014 transforming it into a 7-minute commute hub.</li>
@@ -756,7 +852,7 @@ const articles = {
       <p>Sydney\u2019s median house price has surpassed $1.4 million, making it the most expensive city in Australia. But within that number are pockets delivering 4\u20135% gross yields and double-digit capital growth corridors driven by the $120 billion Western Sydney infrastructure pipeline \u2014 including the new Western Sydney International Airport at Badgerys Creek.</p>
       <div class="art-callout"><p>&#128161; The Western Sydney Airport (opening 2026) is one of the largest single infrastructure investments in Australian history. The suburbs within 15 minutes of Badgerys Creek are repricing right now.</p></div>
       <h2>Top 10 Sydney Investment Areas</h2>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>#</th><th>Area</th><th>Zone</th><th>Gross Yield</th><th>Key Driver</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td><strong>Marsden Park</strong></td><td>Western Sydney</td><td class="yield-good">4.3%</td><td>Airport corridor, master-planned</td></tr>
@@ -770,7 +866,7 @@ const articles = {
           <tr><td class="rank">9</td><td><strong>Hornsby</strong></td><td>Upper North Shore</td><td class="yield-good">3.7%</td><td>Rezoning uplift, train access</td></tr>
           <tr><td class="rank">10</td><td><strong>Ingleburn</strong></td><td>South West</td><td class="yield-good">4.7%</td><td>Affordability, strong rental demand</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>Key Themes for Sydney Investors</h2>
       <ul>
         <li><strong>The Western Sydney Airport effect:</strong> Badgerys Creek is creating a new employment hub. Surrounding suburbs are being priced by buyers who haven\u2019t yet moved in \u2014 get ahead of this.</li>
@@ -791,7 +887,7 @@ const articles = {
       <p>The 2032 Brisbane Olympics is a 7-year infrastructure catalyst that is unprecedented in Queensland\u2019s history. $17 billion in public spending on venues, transport, and urban renewal is being deployed right now.</p>
       <div class="art-callout"><p>&#128161; The 2032 Olympics villages and venues are concentrated in Brisbane\u2019s inner-north and the Gold Coast. These areas are being land-banked by developers and investors today.</p></div>
       <h2>Top Brisbane Suburbs to Invest</h2>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td><strong>Woolloongabba</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>Olympics stadium, Cross River Rail hub</td></tr>
@@ -800,9 +896,9 @@ const articles = {
           <tr><td class="rank">4</td><td><strong>Chermside</strong></td><td>Northside</td><td class="yield-good">4.7%</td><td>Major shopping precinct, hospital</td></tr>
           <tr><td class="rank">5</td><td><strong>Morningside</strong></td><td>Inner East</td><td class="yield-good">3.9%</td><td>Lifestyle, inner-ring gentrification</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>Gold Coast Investment Hotspots</h2>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td><strong>Coomera</strong></td><td>Northern GC</td><td class="yield-good">4.9%</td><td>Olympics venue, light rail extension</td></tr>
@@ -810,7 +906,7 @@ const articles = {
           <tr><td class="rank">3</td><td><strong>Robina</strong></td><td>Central GC</td><td class="yield-good">4.6%</td><td>Town centre, university, tech park</td></tr>
           <tr><td class="rank">4</td><td><strong>Pimpama</strong></td><td>Northern GC</td><td class="yield-good">5.3%</td><td>New master-planned estates, affordability</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>Risks to Consider</h2>
       <ul>
         <li><strong>Olympic construction noise:</strong> Woolloongabba will have significant construction disruption through 2031 \u2014 factor this into rental expectations.</li>
@@ -829,7 +925,7 @@ const articles = {
       <p>Perth was the forgotten city of Australian property for most of the 2010s. Then the resources boom returned, interstate migration accelerated, and rental vacancy dropped to a historic 0.7% \u2014 the tightest in the nation. Perth\u2019s median house price has risen over 70% in four years and still sits below $750,000, giving it more upside than any other Australian capital.</p>
       <div class="art-callout"><p>&#128161; Perth\u2019s rental vacancy rate of 0.7% is the tightest in Australia. Every property listed in suburban Perth is getting 20+ applications within 48 hours.</p></div>
       <h2>Top Perth Suburbs for Investment</h2>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>#</th><th>Suburb</th><th>Zone</th><th>Gross Yield</th><th>Median Price</th><th>Why It Stands Out</th></tr></thead>
         <tbody>
           <tr><td class="rank">1</td><td><strong>Armadale</strong></td><td>South East</td><td class="yield-good">5.8%</td><td>$480k</td><td>Affordability + Metronet rail</td></tr>
@@ -839,7 +935,7 @@ const articles = {
           <tr><td class="rank">5</td><td><strong>Balga</strong></td><td>Northern Suburbs</td><td class="yield-good">6.2%</td><td>$420k</td><td>High yield, redevelopment potential</td></tr>
           <tr><td class="rank">6</td><td><strong>Victoria Park</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>$820k</td><td>Inner ring, cafe culture, lifestyle</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>The Metronet Effect</h2>
       <p>WA\u2019s Metronet rail expansion is adding 72km of new rail across Perth\u2019s outer suburbs. Properties within 800 metres of new Metronet stations have historically outperformed the broader market by 3\u20134% per annum. Armadale, Midland, and Ellenbrook are all on new or expanded Metronet lines.</p>
       <h2>Resources Sector Rental Demand</h2>
@@ -909,7 +1005,7 @@ const articles = {
       </ul>
       <h2>The 2026 Rate Environment</h2>
       <p>With mortgage rates between 6\u20137%, most properties in Sydney and Melbourne are significantly negatively geared. Regional centres and Perth/Brisbane still offer positive cash flow options, but these are compressing as prices rise.</p>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>Scenario</th><th>Property Value</th><th>Weekly Rent</th><th>Annual Shortfall</th><th>Tax Saving (45%)</th><th>Net Cost</th></tr></thead>
         <tbody>
           <tr><td>Sydney inner suburb</td><td>$1.1M</td><td>$650</td><td>-$28,400</td><td>+$12,780</td><td>-$15,620/yr</td></tr>
@@ -917,7 +1013,7 @@ const articles = {
           <tr><td>Perth regional</td><td>$480k</td><td>$530</td><td>+$2,100</td><td>-$945</td><td>+$1,155/yr</td></tr>
           <tr><td>QLD regional (Ipswich)</td><td>$540k</td><td>$580</td><td>+$3,200</td><td>-$1,440</td><td>+$1,760/yr</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>The Bottom Line</h2>
       <p>The best property investment is the one with the strongest combination of capital growth, rental yield, and serviceability for your specific situation \u2014 not the one with the most deductions.</p>
     `
@@ -939,7 +1035,7 @@ const articles = {
       </ul>
       <div class="art-callout"><p>&#128161; The FHSS scheme is massively underused. A couple on $200k combined income could save $15,000+ in tax by running their deposit savings through super. Talk to your accountant before you start saving.</p></div>
       <h2>State-by-State Stamp Duty Concessions</h2>
-      <table class="suburb-table">
+      <div class="suburb-table-wrap"><table class="suburb-table">
         <thead><tr><th>State</th><th>Exemption Threshold</th><th>Concession Threshold</th><th>Max Saving</th></tr></thead>
         <tbody>
           <tr><td><strong>VIC</strong></td><td>$600,000</td><td>Up to $750,000</td><td>~$31,000</td></tr>
@@ -948,7 +1044,7 @@ const articles = {
           <tr><td><strong>WA</strong></td><td>$430,000</td><td>Up to $530,000</td><td>~$17,765</td></tr>
           <tr><td><strong>SA</strong></td><td>No exemption</td><td>N/A</td><td>$0</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2>State First Home Owner Grants (FHOG)</h2>
       <ul>
         <li><strong>VIC:</strong> $10,000 for new homes valued up to $750,000 in regional VIC.</li>
