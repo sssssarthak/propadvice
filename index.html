@@ -354,9 +354,9 @@ body.modal-open { overflow: hidden; touch-action: none; }
 @media (max-width: 600px) {
   .art-modal.open { padding: 0; align-items: flex-end; }
   .art-modal-inner { height: 92vh; border-radius: 18px 18px 0 0; width: 100%; max-width: 100%; }
-  .art-close { top: 12px; right: 12px; padding: 8px 14px; font-size: 12px; }
+  .art-close { top: auto; bottom: auto; position: fixed; top: 12px; right: 12px; padding: 8px 14px; font-size: 12px; }
 }
-.art-hero { padding: 48px 52px 32px; border-bottom: 1px solid var(--chalk-dark); }
+.art-hero { padding: 56px 52px 32px; border-bottom: 1px solid var(--chalk-dark); }
 .art-hero .art-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
 .art-hero h1 { font-family: 'Lora', serif; font-size: clamp(24px, 3.5vw, 36px); font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 14px; }
 .art-hero .art-intro { font-family: 'Lora', serif; font-style: italic; font-size: 15px; color: var(--text-soft); line-height: 1.8; margin-bottom: 18px; }
@@ -458,7 +458,7 @@ body.modal-open { overflow: hidden; touch-action: none; }
   .ed-card { padding: 20px; }
 
   /* ARTICLE CONTENT mobile */
-  .art-hero { padding: 20px 18px 18px; }
+  .art-hero { padding: 52px 18px 18px; }
   .art-hero h1 { font-size: 22px; }
   .art-hero .art-intro { font-size: 13px; }
   .art-content { padding: 18px; }
