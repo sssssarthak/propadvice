@@ -205,8 +205,8 @@ nav a:hover { color: var(--white); }
 .s-k { color: var(--text-soft); } .s-v { font-weight: 700; color: var(--text); }
 
 /* ─── CALCULATORS ─── */
-.c-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
-.c-tab { padding: 9px 20px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.54); font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: 'Syne', sans-serif; transition: all .18s; letter-spacing: 0.3px; }
+.c-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; row-gap: 10px; }
+.c-tab { padding: 9px 20px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.54); font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: 'Syne', sans-serif; transition: all .18s; letter-spacing: 0.3px; white-space: nowrap; }
 .c-tab.on, .c-tab:hover { background: var(--amber); color: var(--navy-deep); border-color: var(--amber); }
 .cpanel { display: none; } .cpanel.on { display: block; }
 .c-card { max-width: 820px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; overflow: hidden; }
@@ -231,16 +231,16 @@ nav a:hover { color: var(--white); }
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 2fr 1fr; gap: 2px;
 }
-.ed-main { position: relative; cursor: pointer; overflow: hidden; }
-.ed-main-bg { height: 420px; background: linear-gradient(135deg,#213356,#0e1826); display: flex; align-items: center; justify-content: center; font-size: 80px; position: relative; }
-.ed-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,24,38,0.9) 0%, transparent 55%); }
-.ed-content { position: absolute; bottom: 0; padding: 36px; }
+.ed-main { cursor: pointer; overflow: hidden; display: flex; flex-direction: column; }
+.ed-main-bg { min-height: 260px; flex: 1; background: linear-gradient(135deg,#213356,#0e1826); display: flex; align-items: center; justify-content: center; font-size: 80px; position: relative; }
+.ed-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 30%, rgba(14,24,38,0.5) 100%); }
+.ed-content { background: linear-gradient(135deg,#0e1826,#18263c); padding: 28px 36px 32px; }
 .ed-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber-bright); background: rgba(192,104,24,0.15); padding: 3px 10px; border-radius: 2px; display: inline-block; margin-bottom: 10px; }
-.ed-content h3 { font-family: 'Lora', serif; font-size: 24px; font-weight: 500; color: var(--white); line-height: 1.3; margin-bottom: 8px; }
+.ed-content h3 { font-family: 'Lora', serif; font-size: 22px; font-weight: 500; color: var(--white); line-height: 1.3; margin-bottom: 8px; }
 .ed-content p { font-family: 'Lora', serif; font-style: italic; font-size: 13px; color: rgba(255,255,255,0.6); }
 
 .ed-side { display: flex; flex-direction: column; gap: 2px; }
-.ed-item { background: var(--paper); padding: 24px 28px; cursor: pointer; transition: background .18s; border-left: 3px solid transparent; }
+.ed-item { background: var(--paper); padding: 24px 28px; cursor: pointer; transition: background .18s; border-left: 3px solid transparent; flex: 1; }
 .ed-item:hover { background: var(--sky); border-left-color: var(--amber); }
 .ed-item-tag { font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; display: block; }
 .ed-item h4 { font-family: 'Lora', serif; font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.45; margin-bottom: 6px; }
@@ -296,6 +296,56 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 .f-base { max-width: 1200px; margin: 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; font-size: 11.5px; color: rgba(255,255,255,0.2); }
 .f-dis { font-family: 'Lora', serif; font-style: italic; font-size: 11px; color: rgba(255,255,255,0.16); margin-top: 14px; max-width: 1200px; margin-left: auto; margin-right: auto; line-height: 1.65; }
 
+/* ─── READ MORE TAG ─── */
+.ed-read-more { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--amber-bright); letter-spacing: 0.5px; border-bottom: 1px solid rgba(217,128,42,0.4); padding-bottom: 2px; }
+.ed-main:hover .ed-read-more { border-color: var(--amber-bright); }
+
+/* ─── ARTICLE MODAL ─── */
+.art-modal {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(14,24,38,0.82); backdrop-filter: blur(4px);
+  overflow-y: auto; padding: 40px 20px;
+}
+.art-modal.open { display: flex; align-items: flex-start; justify-content: center; }
+.art-modal-inner {
+  background: var(--paper); border-radius: 10px; max-width: 780px; width: 100%;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.4); position: relative; overflow: hidden;
+  animation: modalIn .28s ease;
+}
+@keyframes modalIn { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: none; } }
+.art-close {
+  position: sticky; top: 0; z-index: 10; float: right; margin: 16px 20px 0 0;
+  background: var(--chalk); border: 1px solid var(--chalk-dark); border-radius: 4px;
+  padding: 6px 14px; font-size: 12px; font-weight: 700; color: var(--text-soft);
+  cursor: pointer; font-family: 'Syne', sans-serif; transition: all .18s;
+}
+.art-close:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.art-hero { padding: 48px 52px 32px; border-bottom: 1px solid var(--chalk-dark); }
+.art-hero .art-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
+.art-hero h1 { font-family: 'Lora', serif; font-size: clamp(24px, 3.5vw, 36px); font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 14px; }
+.art-hero .art-intro { font-family: 'Lora', serif; font-style: italic; font-size: 15px; color: var(--text-soft); line-height: 1.8; margin-bottom: 18px; }
+.art-byline { font-size: 11.5px; color: var(--text-soft); display: flex; gap: 16px; }
+.art-byline span { display: flex; align-items: center; gap: 4px; }
+.art-content { padding: 36px 52px; }
+.art-content h2 { font-family: 'Lora', serif; font-size: 20px; font-weight: 500; color: var(--text); margin: 32px 0 12px; padding-top: 32px; border-top: 1px solid var(--chalk-dark); }
+.art-content h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.art-content p { font-family: 'Lora', serif; font-size: 14.5px; color: var(--text-mid); line-height: 1.85; margin-bottom: 14px; }
+.art-content ul { list-style: none; margin-bottom: 16px; }
+.art-content ul li { font-family: 'Lora', serif; font-size: 14px; color: var(--text-mid); line-height: 1.7; padding: 6px 0 6px 20px; position: relative; border-bottom: 1px solid var(--chalk-dark); }
+.art-content ul li::before { content: '→'; position: absolute; left: 0; color: var(--amber); font-size: 12px; }
+.art-content ul li:last-child { border-bottom: none; }
+.suburb-table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; font-size: 13px; }
+.suburb-table th { background: var(--navy-deep); color: var(--white); padding: 10px 14px; text-align: left; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+.suburb-table td { padding: 11px 14px; border-bottom: 1px solid var(--chalk-dark); color: var(--text-mid); }
+.suburb-table tr:nth-child(even) td { background: var(--chalk); }
+.suburb-table tr:hover td { background: var(--sky); }
+.suburb-table .rank { font-weight: 800; color: var(--amber); }
+.suburb-table .yield-good { color: #2a7a4f; font-weight: 700; }
+.art-callout { background: var(--amber-pale); border-left: 4px solid var(--amber); padding: 18px 22px; border-radius: 0 6px 6px 0; margin: 20px 0 28px; }
+.art-callout p { font-family: 'Lora', serif; font-style: italic; font-size: 14px; color: var(--text); margin: 0; line-height: 1.7; }
+.art-footer { background: var(--navy-deep); padding: 36px 52px; text-align: center; }
+.art-footer p { font-family: 'Lora', serif; font-style: italic; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 18px; }
+
 /* ─── UTILS ─── */
 .hidden { display: none !important; }
 .fade { opacity: 0; transform: translateY(16px); transition: opacity .55s, transform .55s; }
@@ -325,8 +375,8 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
   <a class="logo" href="#">Prop<span class="logo-accent">Advice</span><span class="logo-tag">AU</span></a>
   <ul>
     <li><a href="#how">How It Works</a></li>
-    <li><a href="#calcs">Calculators</a></li>
     <li><a href="#blog">Insights</a></li>
+    <li><a href="#calcs">Calculators</a></li>
     <li><a href="#quiz" class="nav-cta">Get Expert Match</a></li>
   </ul>
 </nav>
@@ -336,7 +386,7 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
   <div class="hero-left">
     <div class="h-eyebrow">Australia's Property Intelligence Hub</div>
     <h1>Expert Guidance for<br><em>Every</em> Property<br>Decision</h1>
-    <p>From your first inspection to your fifth investment — connect with specialist buyers agents, run the numbers, and buy with confidence.</p>
+    <p>From your first inspection to your fifth investment, connect with specialist buyers agents, run the numbers, and buy with confidence.</p>
     <div class="hero-ctas">
       <a href="#quiz" class="btn-amber">Find My Buyers Agent →</a>
       <a href="#blog" class="btn-ghost">Read the Insights</a>
@@ -403,10 +453,10 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 <!-- HOW IT WORKS -->
 <section class="sec sec-white" id="how">
   <div class="wrap fade">
-    <div class="sh center"><span class="sh-ey ey-navy">The Process</span><h2 class="dk">How PropAdvice Works</h2><p class="sh-sub dk">We strip out the noise and connect serious buyers with the right specialist — quickly, precisely, and for free.</p></div>
+    <div class="sh center"><span class="sh-ey ey-navy">The Process</span><h2 class="dk">How PropAdvice Works</h2><p class="sh-sub dk">We strip out the noise and connect serious buyers with the right specialist, quickly, precisely, and for free.</p></div>
     <div class="how-grid">
-      <div class="how-box"><div class="how-accent"></div><div class="how-num">01</div><h3>Complete Your Profile</h3><p>Our 3-minute assessment captures everything a buyers agent needs — goals, budget, deposit, income, existing portfolio, and timeline. No vague enquiries. Real, qualified information.</p></div>
-      <div class="how-box"><div class="how-accent"></div><div class="how-num">02</div><h3>Precision Matching</h3><p>We filter our national network of vetted agents by your exact criteria — target state, property type, price point, and experience. You get highly relevant specialists, not a spam list.</p></div>
+      <div class="how-box"><div class="how-accent"></div><div class="how-num">01</div><h3>Complete Your Profile</h3><p>Our 3-minute assessment captures everything a buyers agent needs, goals, budget, deposit, income, existing portfolio, and timeline. No vague enquiries. Real, qualified information.</p></div>
+      <div class="how-box"><div class="how-accent"></div><div class="how-num">02</div><h3>Precision Matching</h3><p>We filter our national network of vetted agents by your exact criteria, target state, property type, price point, and experience. You get highly relevant specialists, not a spam list.</p></div>
       <div class="how-box"><div class="how-accent"></div><div class="how-num">03</div><h3>Free Discovery Call</h3><p>Your matched agent calls within 48 hours, fully briefed on your situation. They share their strategy, proof of results, and exactly how they'll fight to get you the right property at the right price.</p></div>
     </div>
   </div>
@@ -415,7 +465,7 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 <!-- QUIZ -->
 <section class="sec sec-sky" id="quiz">
   <div class="wrap fade">
-    <div class="sh center"><span class="sh-ey ey-amber">Free Assessment</span><h2 class="dk">Match Me With a Buyers Agent</h2><p class="sh-sub dk">Answer 9 questions about your goals and situation. We'll do the rest — free.</p></div>
+    <div class="sh center"><span class="sh-ey ey-amber">Free Assessment</span><h2 class="dk">Match Me With a Buyers Agent</h2><p class="sh-sub dk">Answer 9 questions about your goals and situation. We'll do the rest, free.</p></div>
     <div class="quiz-wrap">
 
       <div id="qs1">
@@ -446,7 +496,7 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
       <div id="qs8" class="hidden"><div class="q-head"><div class="q-bar"><div class="q-fill" style="width:85%"></div></div><div class="q-meta">Step 8 of 9 · Timeline</div><div class="q-title">Purchase timeline</div></div><div class="q-body"><div class="q-q">When are you looking to buy?</div><div class="q-opts q-2col"><div class="q-opt" onclick="qSel(this,'timeline','now')"><span class="q-opt-em">🚀</span><div class="q-opt-main">Ready now / ASAP</div></div><div class="q-opt" onclick="qSel(this,'timeline','3m')"><span class="q-opt-em">📅</span><div class="q-opt-main">Within 3 months</div></div><div class="q-opt" onclick="qSel(this,'timeline','6m')"><span class="q-opt-em">📅</span><div class="q-opt-main">3 – 6 months</div></div><div class="q-opt" onclick="qSel(this,'timeline','12m')"><span class="q-opt-em">🔭</span><div class="q-opt-main">6 – 12 months</div></div></div></div><div class="q-foot"><button class="q-back" onclick="qGo(8,7)">← Back</button><button class="q-next" onclick="qGo(8,9)">Continue →</button></div></div>
 
       <div id="qs9" class="hidden">
-        <div class="q-head"><div class="q-bar"><div class="q-fill" style="width:96%"></div></div><div class="q-meta">Step 9 of 9 · Contact</div><div class="q-title">Almost there — where do we reach you?</div></div>
+        <div class="q-head"><div class="q-bar"><div class="q-fill" style="width:96%"></div></div><div class="q-meta">Step 9 of 9 · Contact</div><div class="q-title">Almost there, where do we reach you?</div></div>
         <div class="q-body">
           <div class="q-inprow"><div><div class="q-lbl">First Name *</div><input class="q-input" id="qfn" placeholder="Sarah"></div><div><div class="q-lbl">Last Name *</div><input class="q-input" id="qln" placeholder="Johnson"></div></div>
           <div class="q-lbl">Email Address *</div><input class="q-input" id="qem" type="email" placeholder="sarah@email.com" style="margin-bottom:12px">
@@ -467,6 +517,46 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
   </div>
 </section>
 
+<!-- BLOG, editorial layout -->
+<section class="sec sec-chalk" id="blog">
+  <div class="wrap fade">
+    <div class="sh"><span class="sh-ey ey-amber">Market Intelligence</span><h2 class="dk">Property Insights and <em>Suburb Guides</em></h2><p class="sh-sub dk">In-depth analysis of Australia's best investment areas, strategies, and market movements.</p></div>
+  </div>
+  <div class="editorial-grid fade">
+    <div class="ed-main" onclick="openArticle('vic')">
+      <div class="ed-main-bg">🏘️<div class="ed-overlay"></div></div>
+      <div class="ed-content">
+        <div class="ed-tag">📍 Victoria · Featured</div>
+        <h3>Top 10 Investment Suburbs in Victoria for 2026</h3>
+        <p>Rental yields, capital growth data, infrastructure pipeline , ranked for investors right now.</p>
+        <div class="ed-read-more">Read Full Guide →</div>
+      </div>
+    </div>
+    <div class="ed-side">
+      <div class="ed-item" onclick="openArticle('syd')"><span class="ed-item-tag">Sydney · NSW</span><h4>Top 10 Investment Areas in Sydney 2026</h4><p>Western Sydney infrastructure surge, Inner West yields, and coastal markets ranked.</p><div class="ed-meta">8 min read · Apr 2026</div></div>
+      <div class="ed-item" onclick="openArticle('qld')"><span class="ed-item-tag">Queensland</span><h4>Best Suburbs in Brisbane & Gold Coast</h4><p>Olympics legacy and population growth driving QLD investment markets forward.</p><div class="ed-meta">7 min read · Mar 2026</div></div>
+      <div class="ed-item" onclick="openArticle('perth')"><span class="ed-item-tag">Perth · WA</span><h4>Perth Property: Best Suburbs to Buy 2026</h4><p>Affordability, strong yields, and WA's booming resources economy unpacked.</p><div class="ed-meta">6 min read · Feb 2026</div></div>
+    </div>
+  </div>
+  <div class="ed-row2 fade">
+    <div class="ed-card" onclick="openArticle('buyers-agent')"><span class="ed-card-tag">Strategy</span><h4>What Does a Buyers Agent Actually Do?</h4><p>Fees, process, off-market access, and when professional representation is essential.</p><div class="ed-card-meta">9 min read · Jan 2026</div></div>
+    <div class="ed-card" onclick="openArticle('gearing')"><span class="ed-card-tag">Finance</span><h4>Negative vs Positive Gearing in 2026</h4><p>Tax scenarios, cash flow modelling, and which strategy makes sense at different price points.</p><div class="ed-card-meta">10 min read · Jan 2026</div></div>
+    <div class="ed-card" onclick="openArticle('fhb')"><span class="ed-card-tag">First Home Buyers</span><h4>Complete First Home Buyer Guide 2026</h4><p>Every grant and scheme, FHSS, First Home Guarantee, stamp duty concessions explained.</p><div class="ed-card-meta">12 min read · Dec 2025</div></div>
+  </div>
+</section>
+
+<!-- ARTICLE MODAL -->
+<div id="article-modal" class="art-modal" onclick="closeArticleModal(event)">
+  <div class="art-modal-inner">
+    <button class="art-close" onclick="closeArticle()">✕ Close</button>
+    <div id="art-body"></div>
+    <div class="art-footer">
+      <p>Ready to invest in one of these areas? Get matched with a local buyers agent, free.</p>
+      <a href="#quiz" class="btn-amber" onclick="closeArticle()">Get My Free Agent Match →</a>
+    </div>
+  </div>
+</div>
+
 <!-- CALCULATORS -->
 <section class="sec sec-navy" id="calcs">
   <div class="wrap fade">
@@ -482,36 +572,9 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
       <div class="cpanel on" id="cp-cm"><div class="c-2col"><div class="c-left"><label class="c-lbl">Loan Amount ($)</label><input class="c-inp" id="ml" value="600000"><label class="c-lbl">Interest Rate (% p.a.)</label><input class="c-inp" id="mr" value="6.2" step="0.1"><label class="c-lbl">Loan Term</label><select class="c-sel" id="mt"><option value="30">30 years</option><option value="25">25 years</option><option value="20">20 years</option><option value="15">15 years</option></select><label class="c-lbl">Repayment Type</label><select class="c-sel" id="mrt"><option value="pi">Principal & Interest</option><option value="io">Interest Only</option></select><button class="c-btn" onclick="doMort()">Calculate</button></div><div class="c-right"><div class="c-res-lbl">Monthly Repayment</div><div class="c-res-big" id="mm">$3,660</div><div class="c-row"><span class="c-rk">Weekly</span><span class="c-rv" id="mw">$845</span></div><div class="c-row"><span class="c-rk">Fortnightly</span><span class="c-rv" id="mf">$1,690</span></div><div class="c-row"><span class="c-rk">Annual</span><span class="c-rv" id="ma">$43,920</span></div><div class="c-row"><span class="c-rk">Total Interest</span><span class="c-rv" id="mi">$717,600</span></div><div class="c-row"><span class="c-rk">Total Repaid</span><span class="c-rv" id="mto">$1,317,600</span></div></div></div></div>
       <div class="cpanel" id="cp-cb"><div class="c-2col"><div class="c-left"><label class="c-lbl">Annual Household Income ($)</label><input class="c-inp" id="bi" value="150000"><label class="c-lbl">Monthly Living Expenses ($)</label><input class="c-inp" id="be" value="3000"><label class="c-lbl">Monthly Debt Repayments ($)</label><input class="c-inp" id="bd" value="500"><label class="c-lbl">Dependants</label><select class="c-sel" id="bde"><option value="0">None</option><option value="1">1</option><option value="2">2</option><option value="3">3+</option></select><button class="c-btn" onclick="doBorrow()">Calculate</button></div><div class="c-right"><div class="c-res-lbl">Estimated Borrowing Capacity</div><div class="c-res-big" id="bmax">$742,000</div><div class="c-row"><span class="c-rk">Conservative Estimate</span><span class="c-rv" id="blow">$620,000</span></div><div class="c-row"><span class="c-rk">Max Monthly Repayment</span><span class="c-rv" id="bmo">$4,210</span></div><div class="c-row"><span class="c-rk">Net Monthly Income</span><span class="c-rv" id="bnet">$9,800</span></div></div></div></div>
       <div class="cpanel" id="cp-cs"><div class="c-2col"><div class="c-left"><label class="c-lbl">Purchase Price ($)</label><input class="c-inp" id="sdp" value="750000"><label class="c-lbl">State</label><select class="c-sel" id="sds"><option value="VIC">Victoria</option><option value="NSW">New South Wales</option><option value="QLD">Queensland</option><option value="WA">Western Australia</option><option value="SA">South Australia</option><option value="ACT">ACT</option></select><label class="c-lbl">Buyer Type</label><select class="c-sel" id="sdt"><option value="oo">Owner Occupier</option><option value="fhb">First Home Buyer</option><option value="inv">Investor</option></select><button class="c-btn" onclick="doStamp()">Calculate</button></div><div class="c-right"><div class="c-res-lbl">Stamp Duty Payable</div><div class="c-res-big" id="sdv">$40,070</div><div class="c-row"><span class="c-rk">Purchase Price</span><span class="c-rv" id="sdpp">$750,000</span></div><div class="c-row"><span class="c-rk">Stamp Duty</span><span class="c-rv" id="sdsd">$40,070</span></div><div class="c-row"><span class="c-rk">Other Upfront Costs</span><span class="c-rv">~$3,000</span></div><div class="c-row"><span class="c-rk">Total Upfront</span><span class="c-rv" id="sdtot">$43,070</span></div></div></div></div>
-      <div class="cpanel" id="cp-cy"><div class="c-2col"><div class="c-left"><label class="c-lbl">Property Value ($)</label><input class="c-inp" id="yv" value="650000"><label class="c-lbl">Weekly Rent ($)</label><input class="c-inp" id="yw" value="550"><label class="c-lbl">Annual Costs — rates, insurance, PM ($)</label><input class="c-inp" id="yc" value="8000"><button class="c-btn" onclick="doYield()">Calculate</button></div><div class="c-right"><div class="c-res-lbl">Gross Rental Yield</div><div class="c-res-big" id="ygr">4.4%</div><div class="c-row"><span class="c-rk">Annual Rent</span><span class="c-rv" id="yann">$28,600</span></div><div class="c-row"><span class="c-rk">Net Yield</span><span class="c-rv" id="ynet">3.2%</span></div><div class="c-row"><span class="c-rk">Net Annual Income</span><span class="c-rv" id="yni">$20,600</span></div></div></div></div>
+      <div class="cpanel" id="cp-cy"><div class="c-2col"><div class="c-left"><label class="c-lbl">Property Value ($)</label><input class="c-inp" id="yv" value="650000"><label class="c-lbl">Weekly Rent ($)</label><input class="c-inp" id="yw" value="550"><label class="c-lbl">Annual Costs, rates, insurance, PM ($)</label><input class="c-inp" id="yc" value="8000"><button class="c-btn" onclick="doYield()">Calculate</button></div><div class="c-right"><div class="c-res-lbl">Gross Rental Yield</div><div class="c-res-big" id="ygr">4.4%</div><div class="c-row"><span class="c-rk">Annual Rent</span><span class="c-rv" id="yann">$28,600</span></div><div class="c-row"><span class="c-rk">Net Yield</span><span class="c-rv" id="ynet">3.2%</span></div><div class="c-row"><span class="c-rk">Net Annual Income</span><span class="c-rv" id="yni">$20,600</span></div></div></div></div>
       <div class="cpanel" id="cp-cc"><div class="c-2col"><div class="c-left"><label class="c-lbl">Purchase Price ($)</label><input class="c-inp" id="cfp" value="700000"><label class="c-lbl">Deposit (%)</label><input class="c-inp" id="cfd" value="20"><label class="c-lbl">Interest Rate (% p.a.)</label><input class="c-inp" id="cfr" value="6.2" step="0.1"><label class="c-lbl">Weekly Rent ($)</label><input class="c-inp" id="cfw" value="600"><label class="c-lbl">Annual Costs ($)</label><input class="c-inp" id="cfc" value="9000"><button class="c-btn" onclick="doCF()">Calculate</button></div><div class="c-right"><div class="c-res-lbl">Monthly Cash Flow</div><div class="c-res-big" id="cfmo">-$412</div><div class="c-row"><span class="c-rk">Monthly Rent</span><span class="c-rv" id="cfmr">$2,600</span></div><div class="c-row"><span class="c-rk">Monthly Mortgage</span><span class="c-rv" id="cfmm">$2,262</span></div><div class="c-row"><span class="c-rk">Monthly Costs</span><span class="c-rv" id="cfmc">$750</span></div><div class="c-row"><span class="c-rk">Annual Position</span><span class="c-rv" id="cfann">-$4,944</span></div></div></div></div>
     </div>
-  </div>
-</section>
-
-<!-- BLOG — editorial layout -->
-<section class="sec sec-chalk" id="blog">
-  <div class="wrap fade">
-    <div class="sh"><span class="sh-ey ey-amber">Market Intelligence</span><h2 class="dk">Property Insights & <em>Suburb Guides</em></h2><p class="sh-sub dk">In-depth analysis of Australia's best investment areas, strategies, and market movements.</p></div>
-  </div>
-  <div class="editorial-grid fade">
-    <div class="ed-main">
-      <div class="ed-main-bg">🏘️<div class="ed-overlay"></div></div>
-      <div class="ed-content">
-        <div class="ed-tag">📍 Victoria · Featured</div>
-        <h3>Top 10 Investment Suburbs in Victoria for 2025–2026</h3>
-        <p>Rental yields, capital growth data, infrastructure pipeline — ranked for investors right now.</p>
-      </div>
-    </div>
-    <div class="ed-side">
-      <div class="ed-item"><span class="ed-item-tag">Sydney · NSW</span><h4>Top 10 Investment Areas in Sydney 2025</h4><p>Western Sydney infrastructure surge, Inner West yields, and coastal markets ranked.</p><div class="ed-meta">8 min read · May 2025</div></div>
-      <div class="ed-item"><span class="ed-item-tag">Queensland</span><h4>Best Suburbs in Brisbane & Gold Coast</h4><p>Olympics legacy and population growth driving QLD investment markets forward.</p><div class="ed-meta">7 min read · Apr 2025</div></div>
-      <div class="ed-item"><span class="ed-item-tag">Perth · WA</span><h4>Perth Property: Best Suburbs to Buy 2025</h4><p>Affordability, strong yields, and WA's booming resources economy unpacked.</p><div class="ed-meta">6 min read · Apr 2025</div></div>
-    </div>
-  </div>
-  <div class="ed-row2 fade">
-    <div class="ed-card"><span class="ed-card-tag">Strategy</span><h4>What Does a Buyers Agent Actually Do?</h4><p>Fees, process, off-market access, and when professional representation is essential.</p><div class="ed-card-meta">9 min read · Mar 2025</div></div>
-    <div class="ed-card"><span class="ed-card-tag">Finance</span><h4>Negative vs Positive Gearing in 2025</h4><p>Tax scenarios, cash flow modelling, and which strategy makes sense at different price points.</p><div class="ed-card-meta">10 min read · Mar 2025</div></div>
-    <div class="ed-card"><span class="ed-card-tag">First Home Buyers</span><h4>Complete First Home Buyer Guide 2025</h4><p>Every grant and scheme — FHSS, First Home Guarantee, stamp duty concessions explained.</p><div class="ed-card-meta">12 min read · Feb 2025</div></div>
   </div>
 </section>
 
@@ -524,16 +587,16 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
         <h2>Your Advocate.<br><em>Not the Vendor's.</em></h2>
         <p>Every seller has professional representation. We level the playing field by connecting buyers with expert agents legally obligated to act in your interest alone.</p>
         <ul class="why-list">
-          <li class="why-item"><div class="why-check">✓</div><p><strong>Completely Free</strong> — Buyers agents fund the referral. Zero cost to you at any stage.</p></li>
-          <li class="why-item"><div class="why-check">✓</div><p><strong>Vetted & Licensed</strong> — Every agent is independently verified, licensed, and reviewed by past clients.</p></li>
-          <li class="why-item"><div class="why-check">✓</div><p><strong>Off-Market Access</strong> — Our agents source properties you'll never find on Domain or realestate.com.au.</p></li>
-          <li class="why-item"><div class="why-check">✓</div><p><strong>Nationwide Network</strong> — Specialists in every state, from Sydney's inner suburbs to regional growth corridors.</p></li>
-          <li class="why-item"><div class="why-check">✓</div><p><strong>Investment & Owner-Occupier</strong> — Portfolio builders and first home buyers alike, matched to the right specialist.</p></li>
+          <li class="why-item"><div class="why-check">✓</div><p><strong>Completely Free.</strong> Buyers agents fund the referral. Zero cost to you at any stage.</p></li>
+          <li class="why-item"><div class="why-check">✓</div><p><strong>Vetted and Licensed.</strong> Every agent is independently verified, licensed, and reviewed by past clients.</p></li>
+          <li class="why-item"><div class="why-check">✓</div><p><strong>Off-Market Access.</strong> Our agents source properties you'll never find on Domain or realestate.com.au.</p></li>
+          <li class="why-item"><div class="why-check">✓</div><p><strong>Nationwide Network.</strong> Specialists in every state, from Sydney's inner suburbs to regional growth corridors.</p></li>
+          <li class="why-item"><div class="why-check">✓</div><p><strong>Investment and Owner-Occupier.</strong> Portfolio builders and first home buyers alike, matched to the right specialist.</p></li>
         </ul>
       </div>
       <div>
-        <div class="t-card"><div class="stars">★★★★★</div><div class="t-quote">"PropAdvice connected me with a Melbourne specialist who found an off-market property in Brunswick — $42k under comparable sales. Worth every minute of that quiz."</div><div class="t-author"><div class="t-avatar">JT</div><div><div class="t-name">James T.</div><div class="t-loc">First Home Buyer · Melbourne, VIC</div></div></div></div>
-        <div class="t-card"><div class="stars">★★★★★</div><div class="t-quote">"I've used PropAdvice twice for investment purchases. Both times matched same day. My second agent found a positive-cashflow property in Ipswich I never would have discovered alone."</div><div class="t-author"><div class="t-avatar">SR</div><div><div class="t-name">Sophia R.</div><div class="t-loc">Property Investor · Sydney, NSW</div></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><div class="t-quote">"PropAdvice connected me with a Melbourne specialist who found an off-market property in Brunswick, $42k under comparable sales. Worth every minute of that quiz."</div><div class="t-author"><div class="t-avatar">JT</div><div><div class="t-name">James T.</div><div class="t-loc">First Home Buyer · Melbourne, VIC</div></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><div class="t-quote">"I've used PropAdvice twice for investment purchases. Both times matched same day. My second agent found a positive-cashflow property in Ipswich I never would have found alone."</div><div class="t-author"><div class="t-avatar">SR</div><div><div class="t-name">Sophia R.</div><div class="t-loc">Property Investor · Sydney, NSW</div></div></div></div>
         <div class="t-card"><div class="stars">★★★★★</div><div class="t-quote">"My agent was fully briefed before our first call. She saved me hours of research and negotiated $35k off the list price. PropAdvice is genuinely exceptional."</div><div class="t-author"><div class="t-avatar">AL</div><div><div class="t-name">Amanda L.</div><div class="t-loc">Upgrader · Brisbane, QLD</div></div></div></div>
       </div>
     </div>
@@ -544,7 +607,7 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 <div class="cta-block">
   <div class="wrap">
     <h2>Ready to Buy with Confidence?</h2>
-    <p>Join thousands of Australians who found their expert buyers agent through PropAdvice — free, fast, and precisely matched to your goals.</p>
+    <p>Join thousands of Australians who found their expert buyers agent through PropAdvice, free, fast, and precisely matched to your goals.</p>
     <a href="#quiz" class="btn-navy">Start My Free Assessment →</a>
   </div>
 </div>
@@ -552,12 +615,12 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 <!-- FOOTER -->
 <footer>
   <div class="f-grid">
-    <div class="f-brand"><a class="logo" href="#">Prop<span class="logo-accent">Advice</span><span class="logo-tag">AU</span></a><p>Australia's property intelligence hub — expert matching, free calculators, and suburb guides to help you buy smarter at every stage.</p></div>
+    <div class="f-brand"><a class="logo" href="#">Prop<span class="logo-accent">Advice</span><span class="logo-tag">AU</span></a><p>Australia's property intelligence hub, expert matching, free calculators, and suburb guides to help you buy smarter at every stage.</p></div>
     <div class="f-col"><h4>Service</h4><ul><li><a href="#">How It Works</a></li><li><a href="#">Find an Agent</a></li><li><a href="#">Investment</a></li><li><a href="#">First Home Buyers</a></li></ul></div>
     <div class="f-col"><h4>Resources</h4><ul><li><a href="#">Calculators</a></li><li><a href="#">Suburb Guides</a></li><li><a href="#">Market Reports</a></li><li><a href="#">Insights</a></li></ul></div>
     <div class="f-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">For Agents</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
   </div>
-  <div class="f-base"><span>© 2025 PropAdvice Australia Pty Ltd · ABN: XX XXX XXX XXX</span><span>Australian Credit Licence XXXXXX</span></div>
+  <div class="f-base"><span>© 2026 PropAdvice Australia Pty Ltd</span></div>
   <p class="f-dis">PropAdvice is a referral and lead generation platform only. We are not a licensed real estate agency or financial adviser. All calculator results are estimates only and should not be relied upon as financial advice. Please seek independent professional advice before making any property or financial decisions.</p>
 </footer>
 
@@ -590,6 +653,308 @@ function doYield(){const v=+document.getElementById('yv').value,w=+document.getE
 function doCF(){const p=+document.getElementById('cfp').value,dep=+document.getElementById('cfd').value/100,r=+document.getElementById('cfr').value/100/12,w=+document.getElementById('cfw').value,c=+document.getElementById('cfc').value,loan=p*(1-dep),n=360,mort=loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),mr=w*52/12,mc=c/12,cf=mr-mort-mc;document.getElementById('cfmo').textContent=(cf>=0?'+':'')+fmt(cf);document.getElementById('cfmo').style.color=cf>=0?'#6abf87':'#e07070';document.getElementById('cfmr').textContent=fmt(mr);document.getElementById('cfmm').textContent=fmt(mort);document.getElementById('cfmc').textContent=fmt(mc);document.getElementById('cfann').textContent=(cf*12>=0?'+':'')+fmt(cf*12);}
 function cSwitch(btn,id){document.querySelectorAll('.c-tab').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.cpanel').forEach(p=>p.classList.remove('on'));btn.classList.add('on');document.getElementById('cp-'+id).classList.add('on');}
 doMort();doBorrow();doStamp();doYield();doCF();
+
+// ── ARTICLES ──
+const articles = {
+  'vic': {
+    eyebrow: '📍 Victoria · Featured · Apr 2026',
+    title: 'Top 10 Investment Suburbs in Victoria for 2025\u20132026',
+    intro: 'We analysed rental yields, capital growth history, infrastructure pipelines, and population projections across metro and regional Victoria \u2014 ranked and explained for investors right now.',
+    readTime: '8 min read',
+    content: `
+      <h2>Why Victoria Right Now?</h2>
+      <p>Victoria\u2019s property market has stabilised after the post-pandemic correction, with Melbourne\u2019s median dwelling price sitting around $780,000 \u2014 creating strong value compared to Sydney. Infrastructure investment is accelerating, with the Metro Tunnel, Suburban Rail Loop, and the North East Link all driving suburb-level capital growth in targeted corridors.</p>
+      <p>Interstate migration is returning and rental vacancy rates across Melbourne are sitting below 2%, pushing gross yields back above 3.5\u20134.5% in many areas. Regional Victoria remains a compelling story for cash flow investors.</p>
+      <div class="art-callout"><p>&#128161; <strong>PropAdvice tip:</strong> Victoria\u2019s land tax thresholds mean portfolio structure matters more here than anywhere else in Australia. A buyers agent can help you buy in the right entity.</p></div>
+      <h2>The Top 10 \u2014 Ranked</h2>
+      <table class="suburb-table">
+        <thead><tr><th>#</th><th>Suburb</th><th>Region</th><th>Gross Yield</th><th>10yr Growth</th><th>Why It\u2019s Hot</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1</td><td><strong>Sunshine</strong></td><td>Inner West</td><td class="yield-good">4.2%</td><td>7.8% p.a.</td><td>Metro Tunnel, gentrification</td></tr>
+          <tr><td class="rank">2</td><td><strong>Frankston</strong></td><td>Bayside South</td><td class="yield-good">4.6%</td><td>6.9% p.a.</td><td>Affordability + beach + health precinct</td></tr>
+          <tr><td class="rank">3</td><td><strong>Footscray</strong></td><td>Inner West</td><td class="yield-good">3.8%</td><td>8.4% p.a.</td><td>Metro Tunnel hub, hospital precinct</td></tr>
+          <tr><td class="rank">4</td><td><strong>Werribee</strong></td><td>Western Corridor</td><td class="yield-good">4.8%</td><td>6.2% p.a.</td><td>Population growth, Avalon Airport</td></tr>
+          <tr><td class="rank">5</td><td><strong>Bendigo</strong></td><td>Regional VIC</td><td class="yield-good">5.1%</td><td>7.1% p.a.</td><td>Regional city growth, hospital expansion</td></tr>
+          <tr><td class="rank">6</td><td><strong>Heidelberg</strong></td><td>North East</td><td class="yield-good">3.6%</td><td>7.5% p.a.</td><td>NE Link, hospital precinct</td></tr>
+          <tr><td class="rank">7</td><td><strong>Geelong (Bell Post Hill)</strong></td><td>Geelong</td><td class="yield-good">4.9%</td><td>8.2% p.a.</td><td>Fastest growing city in VIC</td></tr>
+          <tr><td class="rank">8</td><td><strong>Maidstone</strong></td><td>Inner West</td><td class="yield-good">4.1%</td><td>7.3% p.a.</td><td>Undervalued, Metro proximity</td></tr>
+          <tr><td class="rank">9</td><td><strong>Ballarat</strong></td><td>Regional VIC</td><td class="yield-good">5.4%</td><td>6.0% p.a.</td><td>Tree-changers, affordability</td></tr>
+          <tr><td class="rank">10</td><td><strong>Reservoir</strong></td><td>North</td><td class="yield-good">3.7%</td><td>7.9% p.a.</td><td>Train access, gentrification</td></tr>
+        </tbody>
+      </table>
+      <h2>Key Investment Themes in 2025\u20132026</h2>
+      <ul>
+        <li><strong>Infrastructure corridors:</strong> The Metro Tunnel, opening in 2025, directly connects Sunshine to the CBD \u2014 transforming it into a 7-minute commute hub.</li>
+        <li><strong>Hospital precincts:</strong> Frankston, Footscray, and Heidelberg all sit adjacent to major hospital expansions, driving both population growth and rental demand.</li>
+        <li><strong>Regional re-rating:</strong> Bendigo and Ballarat are attracting Melbourne buyers priced out of metro markets, with strong infrastructure investment following.</li>
+        <li><strong>Yield compression ahead:</strong> Once interest rates fall, the cap rate compression in high-yield outer suburbs will deliver capital gains for early movers.</li>
+      </ul>
+      <h2>What to Watch Out For</h2>
+      <p>Victoria\u2019s land tax is the highest in the nation and applies at lower thresholds than other states. Investors holding multiple properties should structure ownership carefully. Additionally, the rental reforms introduced in 2024 give tenants stronger rights \u2014 factor this into your property management expectations.</p>
+    `
+  },
+  'syd': {
+    eyebrow: '&#127961;&#65039; Sydney \u00b7 NSW \u00b7 May 2025',
+    title: 'Top 10 Investment Areas in Sydney 2026',
+    intro: 'Western Sydney\u2019s infrastructure surge, Inner West yields, and coastal lifestyle markets \u2014 we rank the best Sydney suburbs for capital growth and rental returns right now.',
+    readTime: '8 min read',
+    content: `
+      <h2>Sydney\u2019s Market in 2025</h2>
+      <p>Sydney\u2019s median house price has surpassed $1.4 million, making it the most expensive city in Australia. But within that number are pockets delivering 4\u20135% gross yields and double-digit capital growth corridors driven by the $120 billion Western Sydney infrastructure pipeline \u2014 including the new Western Sydney International Airport at Badgerys Creek.</p>
+      <div class="art-callout"><p>&#128161; The Western Sydney Airport (opening 2026) is one of the largest single infrastructure investments in Australian history. The suburbs within 15 minutes of Badgerys Creek are repricing right now.</p></div>
+      <h2>Top 10 Sydney Investment Areas</h2>
+      <table class="suburb-table">
+        <thead><tr><th>#</th><th>Area</th><th>Zone</th><th>Gross Yield</th><th>Key Driver</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1</td><td><strong>Marsden Park</strong></td><td>Western Sydney</td><td class="yield-good">4.3%</td><td>Airport corridor, master-planned</td></tr>
+          <tr><td class="rank">2</td><td><strong>Liverpool</strong></td><td>South West</td><td class="yield-good">4.1%</td><td>Health precinct, strong rental demand</td></tr>
+          <tr><td class="rank">3</td><td><strong>Marrickville</strong></td><td>Inner West</td><td class="yield-good">3.5%</td><td>Gentrification, cafe culture, metro</td></tr>
+          <tr><td class="rank">4</td><td><strong>Penrith</strong></td><td>Western Sydney</td><td class="yield-good">4.6%</td><td>Panthers precinct, affordability</td></tr>
+          <tr><td class="rank">5</td><td><strong>Sutherland</strong></td><td>Southern Sydney</td><td class="yield-good">3.8%</td><td>Coastal lifestyle, limited supply</td></tr>
+          <tr><td class="rank">6</td><td><strong>Campbelltown</strong></td><td>South West</td><td class="yield-good">4.9%</td><td>University, hospital, infrastructure</td></tr>
+          <tr><td class="rank">7</td><td><strong>Parramatta</strong></td><td>Greater West</td><td class="yield-good">4.2%</td><td>CBD2, commercial + residential boom</td></tr>
+          <tr><td class="rank">8</td><td><strong>Manly Vale</strong></td><td>Northern Beaches</td><td class="yield-good">3.4%</td><td>Northern Beaches lifestyle, undersupply</td></tr>
+          <tr><td class="rank">9</td><td><strong>Hornsby</strong></td><td>Upper North Shore</td><td class="yield-good">3.7%</td><td>Rezoning uplift, train access</td></tr>
+          <tr><td class="rank">10</td><td><strong>Ingleburn</strong></td><td>South West</td><td class="yield-good">4.7%</td><td>Affordability, strong rental demand</td></tr>
+        </tbody>
+      </table>
+      <h2>Key Themes for Sydney Investors</h2>
+      <ul>
+        <li><strong>The Western Sydney Airport effect:</strong> Badgerys Creek is creating a new employment hub. Surrounding suburbs are being priced by buyers who haven\u2019t yet moved in \u2014 get ahead of this.</li>
+        <li><strong>Inner West gentrification:</strong> Marrickville and Sydenham are following the Newtown/Surry Hills trajectory \u2014 artists and renters first, then owner-occupiers, then investors who wish they\u2019d bought earlier.</li>
+        <li><strong>Parramatta as Sydney\u2019s second CBD:</strong> Massive commercial investment is driving apartment demand. Rental vacancy is near zero in Parramatta CBD.</li>
+        <li><strong>Coastal undersupply:</strong> Northern Beaches and Sutherland Shire remain supply-constrained. Land is finite, and demand from lifestyle buyers is persistent.</li>
+      </ul>
+    `
+  },
+  'qld': {
+    eyebrow: '&#9728;&#65039; Queensland \u00b7 Apr 2025',
+    title: 'Best Suburbs in Brisbane &amp; Gold Coast 2026',
+    intro: 'The Olympics legacy, interstate migration surge, and population growth are driving Queensland\u2019s property market into a multi-year growth cycle. Here\u2019s where to invest now.',
+    readTime: '7 min read',
+    content: `
+      <h2>Why Queensland is Australia\u2019s #1 Investment Story</h2>
+      <p>Queensland has absorbed more interstate migrants than any other state since 2022. Brisbane\u2019s median house price has risen 62% over the past five years and still sits well below Sydney and Melbourne \u2014 making it the most compelling capital growth story for investors entering in 2025.</p>
+      <p>The 2032 Brisbane Olympics is a 7-year infrastructure catalyst that is unprecedented in Queensland\u2019s history. $17 billion in public spending on venues, transport, and urban renewal is being deployed right now.</p>
+      <div class="art-callout"><p>&#128161; The 2032 Olympics villages and venues are concentrated in Brisbane\u2019s inner-north and the Gold Coast. These areas are being land-banked by developers and investors today.</p></div>
+      <h2>Top Brisbane Suburbs to Invest</h2>
+      <table class="suburb-table">
+        <thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1</td><td><strong>Woolloongabba</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>Olympics stadium, Cross River Rail hub</td></tr>
+          <tr><td class="rank">2</td><td><strong>Zillmere</strong></td><td>Northside</td><td class="yield-good">5.2%</td><td>Affordability, strong rental yields</td></tr>
+          <tr><td class="rank">3</td><td><strong>Ipswich</strong></td><td>Western Corridor</td><td class="yield-good">5.8%</td><td>Fastest growing LGA in QLD</td></tr>
+          <tr><td class="rank">4</td><td><strong>Chermside</strong></td><td>Northside</td><td class="yield-good">4.7%</td><td>Major shopping precinct, hospital</td></tr>
+          <tr><td class="rank">5</td><td><strong>Morningside</strong></td><td>Inner East</td><td class="yield-good">3.9%</td><td>Lifestyle, inner-ring gentrification</td></tr>
+        </tbody>
+      </table>
+      <h2>Gold Coast Investment Hotspots</h2>
+      <table class="suburb-table">
+        <thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1</td><td><strong>Coomera</strong></td><td>Northern GC</td><td class="yield-good">4.9%</td><td>Olympics venue, light rail extension</td></tr>
+          <tr><td class="rank">2</td><td><strong>Southport</strong></td><td>CBD Fringe</td><td class="yield-good">5.1%</td><td>Hospital precinct, CBD proximity</td></tr>
+          <tr><td class="rank">3</td><td><strong>Robina</strong></td><td>Central GC</td><td class="yield-good">4.6%</td><td>Town centre, university, tech park</td></tr>
+          <tr><td class="rank">4</td><td><strong>Pimpama</strong></td><td>Northern GC</td><td class="yield-good">5.3%</td><td>New master-planned estates, affordability</td></tr>
+        </tbody>
+      </table>
+      <h2>Risks to Consider</h2>
+      <ul>
+        <li><strong>Olympic construction noise:</strong> Woolloongabba will have significant construction disruption through 2031 \u2014 factor this into rental expectations.</li>
+        <li><strong>Flood risk:</strong> Many Brisbane inner-ring suburbs are flood-affected. Always check council flood maps before buying.</li>
+        <li><strong>Body corporate fees:</strong> Gold Coast high-rise apartments often carry high strata fees \u2014 check these carefully against rental income.</li>
+      </ul>
+    `
+  },
+  'perth': {
+    eyebrow: '&#127749;&#65039; Perth \u00b7 WA \u00b7 Apr 2025',
+    title: 'Perth Property: Best Suburbs to Buy in 2026',
+    intro: 'Affordability, yields above 5%, and WA\u2019s booming resources economy make Perth Australia\u2019s best value capital city market. Here\u2019s where smart investors are buying.',
+    readTime: '6 min read',
+    content: `
+      <h2>Perth: The Market Nobody Saw Coming</h2>
+      <p>Perth was the forgotten city of Australian property for most of the 2010s. Then the resources boom returned, interstate migration accelerated, and rental vacancy dropped to a historic 0.7% \u2014 the tightest in the nation. Perth\u2019s median house price has risen over 70% in four years and still sits below $750,000, giving it more upside than any other Australian capital.</p>
+      <div class="art-callout"><p>&#128161; Perth\u2019s rental vacancy rate of 0.7% is the tightest in Australia. Every property listed in suburban Perth is getting 20+ applications within 48 hours.</p></div>
+      <h2>Top Perth Suburbs for Investment</h2>
+      <table class="suburb-table">
+        <thead><tr><th>#</th><th>Suburb</th><th>Zone</th><th>Gross Yield</th><th>Median Price</th><th>Why It Stands Out</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1</td><td><strong>Armadale</strong></td><td>South East</td><td class="yield-good">5.8%</td><td>$480k</td><td>Affordability + Metronet rail</td></tr>
+          <tr><td class="rank">2</td><td><strong>Midland</strong></td><td>East</td><td class="yield-good">5.6%</td><td>$510k</td><td>Metronet, hospital precinct</td></tr>
+          <tr><td class="rank">3</td><td><strong>Rockingham</strong></td><td>South</td><td class="yield-good">5.4%</td><td>$540k</td><td>Coastal, HMAS Stirling employment</td></tr>
+          <tr><td class="rank">4</td><td><strong>Ellenbrook</strong></td><td>North East</td><td class="yield-good">5.1%</td><td>$580k</td><td>Master-planned, family demand</td></tr>
+          <tr><td class="rank">5</td><td><strong>Balga</strong></td><td>Northern Suburbs</td><td class="yield-good">6.2%</td><td>$420k</td><td>High yield, redevelopment potential</td></tr>
+          <tr><td class="rank">6</td><td><strong>Victoria Park</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>$820k</td><td>Inner ring, cafe culture, lifestyle</td></tr>
+        </tbody>
+      </table>
+      <h2>The Metronet Effect</h2>
+      <p>WA\u2019s Metronet rail expansion is adding 72km of new rail across Perth\u2019s outer suburbs. Properties within 800 metres of new Metronet stations have historically outperformed the broader market by 3\u20134% per annum. Armadale, Midland, and Ellenbrook are all on new or expanded Metronet lines.</p>
+      <h2>Resources Sector Rental Demand</h2>
+      <ul>
+        <li><strong>FIFO worker demand:</strong> Mining companies are housing more fly-in/fly-out workers in Perth\u2019s southern suburbs \u2014 driving consistent rental demand.</li>
+        <li><strong>Defence:</strong> HMAS Stirling and Rockingham\u2019s defence presence creates strong, stable government-backed rental demand.</li>
+        <li><strong>Tech sector growth:</strong> Perth\u2019s emerging tech and resources tech sector is creating younger, higher-income renters in inner suburbs.</li>
+      </ul>
+    `
+  },
+  'buyers-agent': {
+    eyebrow: '&#128203; Strategy \u00b7 Mar 2025',
+    title: 'What Does a Buyers Agent Actually Do \u2014 Is It Worth It?',
+    intro: 'A full breakdown of fees, the buying process, off-market access, and when professional representation is truly worth it.',
+    readTime: '9 min read',
+    content: `
+      <h2>The Problem Most Buyers Don\u2019t Know They Have</h2>
+      <p>When you buy a property in Australia, the seller has a licensed professional \u2014 a selling agent \u2014 whose entire job is to get the highest price possible for their client. That agent owes a legal duty of care to the vendor, not to you. Most buyers walk into this negotiation with no professional representation at all.</p>
+      <p>A buyers agent changes this equation. They are legally and professionally obligated to act solely in your interest \u2014 not the vendor\u2019s, not the developer\u2019s.</p>
+      <div class="art-callout"><p>&#128161; In Australia, all real estate agents are selling agents by default \u2014 their commission comes from the vendor. A buyers agent is the only property professional whose fee comes from you, and who therefore works exclusively for you.</p></div>
+      <h2>What a Buyers Agent Actually Does</h2>
+      <ul>
+        <li><strong>Property brief:</strong> They start by understanding your goals \u2014 budget, location, property type, investment strategy \u2014 and create a formal property brief.</li>
+        <li><strong>Off-market sourcing:</strong> Good buyers agents access 15\u201330% of properties that never reach Domain or realestate.com.au \u2014 sourced through agent relationships built over years.</li>
+        <li><strong>Due diligence:</strong> They coordinate building &amp; pest inspections, strata reports, council searches, and flood/bushfire overlays before you make a formal offer.</li>
+        <li><strong>Auction bidding:</strong> Auction is an emotional environment designed to push prices up. A buyers agent bids without emotional attachment, to a strict ceiling.</li>
+        <li><strong>Negotiation:</strong> After auction or via private treaty, your agent negotiates price, settlement terms, and conditions with the selling agent.</li>
+        <li><strong>Settlement support:</strong> They liaise with your solicitor/conveyancer and mortgage broker through to final settlement.</li>
+      </ul>
+      <h2>How Much Does a Buyers Agent Cost?</h2>
+      <ul>
+        <li><strong>Fixed fee:</strong> Most common for investment purchases. Typically $8,000\u2013$18,000 depending on price bracket and market.</li>
+        <li><strong>Percentage fee:</strong> Usually 1\u20132.5% of the purchase price. More common for high-value or complex purchases.</li>
+      </ul>
+      <p>When you factor in that a good buyers agent typically saves you 3\u20136% on purchase price through negotiation, plus avoids overpaying at auction, the fee usually pays for itself multiple times over.</p>
+      <h2>When Is a Buyers Agent Non-Negotiable?</h2>
+      <ul>
+        <li><strong>Buying at auction</strong> \u2014 the emotional pressure is designed to push prices past your ceiling.</li>
+        <li><strong>Buying interstate</strong> \u2014 you can\u2019t inspect every property; a local agent can.</li>
+        <li><strong>Your first investment property</strong> \u2014 getting the brief wrong here is a costly mistake that follows you for years.</li>
+        <li><strong>Off-market search</strong> \u2014 if the property you want sells before it hits the portals, you\u2019ll never see it without an agent.</li>
+        <li><strong>Time-poor buyers</strong> \u2014 the average buyer spends 300+ hours searching. A buyers agent compresses this to weeks.</li>
+      </ul>
+    `
+  },
+  'gearing': {
+    eyebrow: '&#128176; Finance \u00b7 Mar 2025',
+    title: 'Negative vs Positive Gearing: Which Wins in 2026?',
+    intro: 'Tax scenarios, cash flow modelling, and which strategy wins at different price points and income levels in the current rate environment.',
+    readTime: '10 min read',
+    content: `
+      <h2>The Basics First</h2>
+      <p><strong>Negative gearing</strong> means your rental income is less than your property expenses (mortgage interest, rates, insurance, property management). The shortfall is a tax loss, which you can offset against your other income \u2014 reducing your tax bill.</p>
+      <p><strong>Positive gearing</strong> means your rental income exceeds all your expenses. You\u2019re making a profit from day one, which is taxable \u2014 but you\u2019re also building wealth without reaching into your pocket.</p>
+      <div class="art-callout"><p>&#128161; Neither strategy is universally better. The right answer depends on your income tax rate, your cash flow situation, and your investment horizon.</p></div>
+      <h2>When Negative Gearing Makes Sense</h2>
+      <ul>
+        <li><strong>High-income earners (45% tax bracket):</strong> The tax benefit is worth more when your marginal rate is higher. A $20,000 annual loss saves you $9,000 in tax at 45%.</li>
+        <li><strong>Capital growth focus:</strong> Inner-ring Sydney and Melbourne properties typically yield 3\u20133.5% and are negatively geared \u2014 but deliver 7\u20139% p.a. capital growth.</li>
+        <li><strong>Long holding horizon:</strong> The compounding capital growth of a negatively geared inner-city property can vastly outperform the cash flow of a positively geared regional property over 15+ years.</li>
+      </ul>
+      <h2>When Positive Gearing Makes Sense</h2>
+      <ul>
+        <li><strong>Lower income earners:</strong> If you\u2019re on $80\u2013$120k, the tax break from negative gearing is limited. Positive cash flow builds your capacity to buy more properties faster.</li>
+        <li><strong>Retiring or reducing work:</strong> If you\u2019re winding down income, you need cash flow \u2014 not tax deductions.</li>
+        <li><strong>Building a large portfolio:</strong> Banks assess your borrowing capacity partly on rental income. Positive cash flow properties improve your serviceability for the next purchase.</li>
+      </ul>
+      <h2>The 2026 Rate Environment</h2>
+      <p>With mortgage rates between 6\u20137%, most properties in Sydney and Melbourne are significantly negatively geared. Regional centres and Perth/Brisbane still offer positive cash flow options, but these are compressing as prices rise.</p>
+      <table class="suburb-table">
+        <thead><tr><th>Scenario</th><th>Property Value</th><th>Weekly Rent</th><th>Annual Shortfall</th><th>Tax Saving (45%)</th><th>Net Cost</th></tr></thead>
+        <tbody>
+          <tr><td>Sydney inner suburb</td><td>$1.1M</td><td>$650</td><td>-$28,400</td><td>+$12,780</td><td>-$15,620/yr</td></tr>
+          <tr><td>Brisbane outer suburb</td><td>$620k</td><td>$560</td><td>-$5,800</td><td>+$2,610</td><td>-$3,190/yr</td></tr>
+          <tr><td>Perth regional</td><td>$480k</td><td>$530</td><td>+$2,100</td><td>-$945</td><td>+$1,155/yr</td></tr>
+          <tr><td>QLD regional (Ipswich)</td><td>$540k</td><td>$580</td><td>+$3,200</td><td>-$1,440</td><td>+$1,760/yr</td></tr>
+        </tbody>
+      </table>
+      <h2>The Bottom Line</h2>
+      <p>The best property investment is the one with the strongest combination of capital growth, rental yield, and serviceability for your specific situation \u2014 not the one with the most deductions.</p>
+    `
+  },
+  'fhb': {
+    eyebrow: '&#128273; First Home Buyers \u00b7 Feb 2025',
+    title: 'Complete First Home Buyer Guide Australia 2026',
+    intro: 'Every grant and scheme explained \u2014 FHSS, First Home Guarantee, stamp duty concessions, and the step-by-step process from saving to settlement.',
+    readTime: '12 min read',
+    content: `
+      <h2>The Full Toolkit for First Home Buyers in 2026</h2>
+      <p>Australia has one of the most generous (and confusing) first home buyer support ecosystems in the world. Between federal and state schemes, you could save $40,000\u2013$70,000 in upfront costs \u2014 but only if you structure your purchase correctly and in the right order.</p>
+      <h2>Federal Government Schemes</h2>
+      <ul>
+        <li><strong>First Home Guarantee (FHBG):</strong> Buy with as little as 5% deposit without paying Lenders Mortgage Insurance (LMI). The government guarantees up to 15% of the loan. 50,000 places available per financial year.</li>
+        <li><strong>Regional First Home Buyer Guarantee:</strong> Same as FHBG but for regional properties \u2014 10,000 places. Slightly higher price caps.</li>
+        <li><strong>Family Home Guarantee:</strong> Single parents can buy with just 2% deposit. 5,000 places per year.</li>
+        <li><strong>First Home Super Saver Scheme (FHSS):</strong> Withdraw up to $50,000 per person ($100,000 for couples) from voluntary super contributions to use as a home deposit. Contributions taxed at 15% instead of your marginal rate.</li>
+      </ul>
+      <div class="art-callout"><p>&#128161; The FHSS scheme is massively underused. A couple on $200k combined income could save $15,000+ in tax by running their deposit savings through super. Talk to your accountant before you start saving.</p></div>
+      <h2>State-by-State Stamp Duty Concessions</h2>
+      <table class="suburb-table">
+        <thead><tr><th>State</th><th>Exemption Threshold</th><th>Concession Threshold</th><th>Max Saving</th></tr></thead>
+        <tbody>
+          <tr><td><strong>VIC</strong></td><td>$600,000</td><td>Up to $750,000</td><td>~$31,000</td></tr>
+          <tr><td><strong>NSW</strong></td><td>$800,000</td><td>Up to $1,000,000</td><td>~$31,000</td></tr>
+          <tr><td><strong>QLD</strong></td><td>$500,000</td><td>Up to $550,000</td><td>~$8,750</td></tr>
+          <tr><td><strong>WA</strong></td><td>$430,000</td><td>Up to $530,000</td><td>~$17,765</td></tr>
+          <tr><td><strong>SA</strong></td><td>No exemption</td><td>N/A</td><td>$0</td></tr>
+        </tbody>
+      </table>
+      <h2>State First Home Owner Grants (FHOG)</h2>
+      <ul>
+        <li><strong>VIC:</strong> $10,000 for new homes valued up to $750,000 in regional VIC.</li>
+        <li><strong>NSW:</strong> $10,000 for new homes under $600,000 (or land + build under $750,000).</li>
+        <li><strong>QLD:</strong> $30,000 for new homes under $750,000 \u2014 the most generous FHOG in the country.</li>
+        <li><strong>WA:</strong> $10,000 for new homes.</li>
+      </ul>
+      <h2>Step-by-Step: First Home Buying Process</h2>
+      <ul>
+        <li><strong>Step 1 \u2014 Get pre-approval:</strong> Know exactly what you can borrow before you start inspecting. Pre-approval takes 5\u201310 business days and is valid for 90 days.</li>
+        <li><strong>Step 2 \u2014 Engage a conveyancer/solicitor:</strong> You\u2019ll need one to review contracts. Engage them before you make an offer \u2014 not after.</li>
+        <li><strong>Step 3 \u2014 Check your scheme eligibility:</strong> Confirm FHBG, FHSS, and state grant eligibility with your broker and accountant before you exchange contracts.</li>
+        <li><strong>Step 4 \u2014 Make your offer or bid at auction:</strong> If private treaty, have a building &amp; pest inspection done before you exchange. At auction, you\u2019re exchanging unconditionally on the day.</li>
+        <li><strong>Step 5 \u2014 Exchange contracts and pay deposit:</strong> Typically 10% deposit on exchange. You have a 5-business-day cooling-off period in most states for private treaty.</li>
+        <li><strong>Step 6 \u2014 Settlement:</strong> Usually 30\u201390 days after exchange. Your conveyancer handles the legal transfer. You receive keys on settlement day.</li>
+      </ul>
+      <h2>Common First Home Buyer Mistakes</h2>
+      <ul>
+        <li>Buying without a pre-approval and missing out because finance takes too long.</li>
+        <li>Not checking FHSS eligibility before starting to save \u2014 missing months of tax savings.</li>
+        <li>Skipping building and pest inspection to save $600 \u2014 then discovering $30,000 in defects.</li>
+        <li>Bidding emotionally at auction past your ceiling price.</li>
+        <li>Choosing a solicitor based on price alone \u2014 a poor conveyancer can cost you thousands.</li>
+      </ul>
+    `
+  }
+};
+
+function openArticle(id) {
+  const art = articles[id];
+  if (!art) return;
+  const modal = document.getElementById('article-modal');
+  document.getElementById('art-body').innerHTML = `
+    <div class="art-hero">
+      <span class="art-eyebrow">${art.eyebrow}</span>
+      <h1>${art.title}</h1>
+      <p class="art-intro">${art.intro}</p>
+      <div class="art-byline">
+        <span>⏱ ${art.readTime}</span>
+        <span>📊 PropAdvice Research Team</span>
+      </div>
+    </div>
+    <div class="art-content">${art.content}</div>
+  `;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modal.scrollTop = 0;
+}
+
+function closeArticle() {
+  document.getElementById('article-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeArticleModal(e) {
+  if (e.target === document.getElementById('article-modal')) closeArticle();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
 
 // ── FADE IN ──
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:0.06});
