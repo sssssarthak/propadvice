@@ -341,12 +341,13 @@ footer { background: var(--navy-deep); padding: 52px 52px 28px; }
 }
 @keyframes modalIn { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: none; } }
 .art-close {
-  position: sticky; top: 0; z-index: 10; float: right; margin: 16px 20px 0 0;
-  background: var(--chalk); border: 1px solid var(--chalk-dark); border-radius: 4px;
-  padding: 6px 14px; font-size: 12px; font-weight: 700; color: var(--text-soft);
+  position: fixed; top: 16px; right: 16px; z-index: 1100;
+  background: var(--navy-deep); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+  padding: 8px 16px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8);
   cursor: pointer; font-family: 'Syne', sans-serif; transition: all .18s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
-.art-close:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.art-close:hover { background: var(--amber); color: var(--navy-deep); border-color: var(--amber); }
 .art-hero { padding: 48px 52px 32px; border-bottom: 1px solid var(--chalk-dark); }
 .art-hero .art-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: block; }
 .art-hero h1 { font-family: 'Lora', serif; font-size: clamp(24px, 3.5vw, 36px); font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 14px; }
@@ -785,7 +786,7 @@ function qSubmit(){
     source: 'Main Quiz'
   };
 
-  fetch('https://script.google.com/macros/s/AKfycbw46NbYl8IljFOPV12Y2dptzbun8M8JamVF8BneXKMMrAlfkF9tTyirQS3rwkp-FeZU/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbyinh97aAe-nRzj--qUt_lLBmJZuwiezQHU-vzNHX-PWQ9X6DPRmXw8Z76Ulb6wDMmf/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: {'Content-Type': 'application/json'},
