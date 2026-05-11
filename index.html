@@ -10,14 +10,6 @@
 
   gtag('config', 'AW-18154215001');
 </script>
-  <!-- Event snippet for Submit lead form conversion page -->
-<script>
-  gtag('event', 'conversion', {
-      'send_to': 'AW-18154215001/obnZCLmP6qocENmszdBD',
-      'value': 1.0,
-      'currency': 'AUD'
-  });
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PropAdvice — Australia's Property Intelligence Hub</title>
@@ -1001,6 +993,7 @@ function qGo(f,t){document.getElementById('qs'+f).classList.add('hidden');docume
 function qSubmit(){
   const fn=document.getElementById('qfn').value,ln=document.getElementById('qln').value,em=document.getElementById('qem').value,ph=document.getElementById('qph').value;
   if(!fn||!em||!ph){alert('Please complete your name, email and phone.');return;}
+  gtag('event','conversion',{'send_to':'AW-18154215001/obnZCLmP6qocENmszdBD','value':1.0,'currency':'AUD'});
 
   // Show success screen immediately
   document.getElementById('qs9').classList.add('hidden');
