@@ -831,6 +831,24 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 </div>
 
 <script>
+
+// Fix ALL internal anchor links to account for 100px fixed header
+document.addEventListener('click', function(e) {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const href = a.getAttribute('href');
+  if (!href || href === '#') return;
+  e.preventDefault();
+  if (href === '#top') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  const target = document.querySelector(href);
+  if (!target) return;
+  const offset = target.getBoundingClientRect().top + window.scrollY - 108;
+  window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
+});
+
 // FAQ toggle
 function toggleFaq(el){
   el.classList.toggle('open');
