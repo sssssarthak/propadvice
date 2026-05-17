@@ -52,7 +52,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;background:var(--navy-deep);}
 body{font-family:'Syne',sans-serif;background:var(--chalk);color:var(--text);overflow-x:hidden;}
-@media(max-width:900px){body{padding-bottom:68px;}}
+
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:400;background:var(--navy-deep);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;}
@@ -312,10 +312,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 .f-base{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:11.5px;color:rgba(255,255,255,0.2);}
 .f-dis{font-family:'Lora',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,0.16);margin-top:14px;max-width:1200px;margin-left:auto;margin-right:auto;line-height:1.65;}
 
-/* STICKY MOBILE CTA */
-.mob-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--navy-deep);padding:12px 18px;border-top:2px solid var(--amber);box-shadow:0 -8px 24px rgba(0,0,0,0.28);}
-.mob-cta a{display:block;background:var(--amber);color:var(--paper);text-align:center;padding:14px;border-radius:6px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:0.2px;}
-@media(max-width:900px){.mob-cta{display:block;}}
 
 /* FAQ SECTION */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
@@ -335,61 +331,66 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 @media(max-width:900px){
   nav ul{display:none;}
   .hero{grid-template-columns:1fr;min-height:auto;height:auto;}
-  .hero-left{padding:32px 28px 20px;justify-content:flex-start;}
+  .hero-left{padding:28px 20px 20px;justify-content:flex-start;}
   .hero-left::after{display:none;}
-  .hero-right{padding:24px 28px 52px;align-items:stretch;}
+  .hero-right{padding:16px 20px 36px;align-items:stretch;}
   .hero-right::before{display:none;}
-  .stats-bar{padding:24px 28px;}
-  .stats-inner{grid-template-columns:repeat(2,1fr);gap:20px;}
-  .stat-item{border:none;text-align:left;padding:0;}
+  .h-eyebrow{font-size:9px;letter-spacing:2px;padding:4px 10px;margin-bottom:12px;white-space:normal;line-height:1.3;}
+  .hero-left h1{font-size:clamp(28px,7vw,40px);margin-bottom:10px;}
+  .hero-sub{font-size:13.5px;margin-bottom:14px;}
+  .hero-proof{padding:12px 14px;margin-bottom:14px;}
+  .h-trust{gap:12px;}
+  .h-ti{font-size:11px;}
+  .h-mini-stats{margin-top:16px;}
+  .h-ms-val{font-size:18px;}
+  .quiz-panel{max-width:100%;}
   .how-grid{grid-template-columns:1fr;}
   .why-grid{grid-template-columns:1fr;gap:40px;}
-  .editorial-grid{grid-template-columns:1fr;}
-  .ed-row2{grid-template-columns:1fr;}
   .f-grid{grid-template-columns:1fr 1fr;}
-  .sec{padding:60px 28px;}
+  .sec{padding:52px 20px;}
   .cpanel.on{grid-template-columns:1fr;}
   .c-inputs{padding:24px 20px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
   .c-results{padding:24px 20px;}
   .art-hero{padding:28px 24px 20px;}
   .art-content{padding:20px 24px;}
   .art-footer-cta{padding:24px;}
+  .blog-grid{grid-template-columns:repeat(2,1fr);}
+  .blog-featured{flex-direction:column;align-items:flex-start;gap:14px;padding:22px;}
+  .blog-feat-left h3{font-size:18px;}
 }
 @media(max-width:600px){
-  nav{padding:0 18px;}
-  .logo{font-size:17px;}
-  .sec{padding:48px 18px;}
-  .sh h2{font-size:26px;}
+  nav{padding:0 16px;}
+  .logo{font-size:16px;}
+  .sec{padding:44px 16px;}
+  .sh h2{font-size:24px;}
   .how-box{padding:28px 20px;}
   .how-num{font-size:48px;}
-  .hero-left{padding:36px 18px 20px;}
-  .hero-left h1{font-size:28px;}
-  .hero-right{padding:20px 18px 44px;}
+  .hero-left{padding:24px 16px 16px;}
+  .hero-left h1{font-size:30px;}
+  .hero-right{padding:14px 16px 32px;}
   .qp-inprow{grid-template-columns:1fr;}
+  .qp-opts{grid-template-columns:1fr;}
   .c-tabs{overflow-x:auto;flex-wrap:nowrap;}
-  .c-tab{padding:11px 16px;font-size:12px;flex-shrink:0;}
-  .c-res-amount{font-size:42px;}
+  .c-tab{padding:11px 14px;font-size:11.5px;flex-shrink:0;}
+  .c-res-amount{font-size:38px;}
   .c-inline{grid-template-columns:1fr;}
-  .editorial-grid,.ed-row2{gap:12px;}
-  .ed-main-bg{min-height:180px;font-size:52px;}
-  .ed-content{padding:18px 20px 22px;}
-  .ed-content h3{font-size:17px;}
-  .ed-item{padding:16px 18px;}
-  .ed-card{padding:18px;}
+  .blog-grid{grid-template-columns:1fr;}
+  .blog-featured{padding:18px;}
   .art-modal.open{padding:0;align-items:flex-end;}
   .art-modal-inner{height:92dvh;border-radius:18px 18px 0 0;max-width:100%;}
-  .art-hero{padding:18px 18px 16px;}
+  .art-hero{padding:18px 16px 16px;}
   .art-hero h1{font-size:20px;}
-  .art-content{padding:16px 18px;}
+  .art-content{padding:16px 16px;}
   .art-content h2{font-size:17px;}
   .suburb-table{display:block;overflow-x:auto;white-space:nowrap;font-size:11.5px;}
   .suburb-table th,.suburb-table td{padding:8px 10px;}
   .why-grid{gap:28px;}
   .f-grid{grid-template-columns:1fr;gap:24px;}
-  footer{padding:36px 18px 24px;}
+  footer{padding:36px 16px 24px;}
   .f-base{flex-direction:column;gap:6px;font-size:10px;}
-  .cta-block{padding:48px 18px;}
-  .stats-inner{grid-template-columns:1fr 1fr;}
+  .cta-block{padding:44px 16px;}
+  .faq-grid{grid-template-columns:1fr;}
+  .h-mini-stats{grid-template-columns:1fr 1fr 1fr;}
 }
 </style>
 </head>
@@ -820,10 +821,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   <p class="f-dis">PropAdvice is a referral and lead generation platform only. We are not a licensed real estate agency or financial adviser. All calculator results are estimates only and should not be relied upon as financial advice. Please seek independent professional advice before making any property or financial decisions.</p>
 </footer>
 
-<!-- STICKY MOBILE CTA -->
-<div class="mob-cta" id="mob-cta">
-  <a href="#top" onclick="document.getElementById('mob-cta').style.display='none'">Get My Free Buyers Agent Match →</a>
-</div>
 
 <script>
 
@@ -852,7 +849,6 @@ function toggleFaq(el){
 }
 
 // Hide sticky CTA once quiz is submitted
-function hideMobCta(){ document.getElementById('mob-cta').style.display='none'; }
 
 // ONE QUIZ. ONE FLOW. No mini quiz. No "complete profile". Done.
 const qd = {};
@@ -892,7 +888,6 @@ function qSubmit() {
   if (!document.getElementById('qconsent').checked) { alert('Please confirm your consent to proceed.'); return; }
 
   gtag('event', 'conversion', { 'send_to': 'AW-18154215001/obnZCLmP6qocENmszdBD', 'value': 1.0, 'currency': 'AUD' });
-  hideMobCta();
 
   document.querySelectorAll('[id^="qstep-"]').forEach(s => s.classList.add('hidden'));
   document.getElementById('s-name').textContent = fn;
