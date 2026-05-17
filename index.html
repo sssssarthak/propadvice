@@ -832,7 +832,15 @@ document.addEventListener('click', function(e) {
   if (!href || href === '#') return;
   e.preventDefault();
   if (href === '#top' || href === '#quiz') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 900) {
+      const qp = document.getElementById('quiz-panel');
+      if (qp) {
+        const offset = qp.getBoundingClientRect().top + window.scrollY - 108;
+        window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     return;
   }
   const target = document.querySelector(href);
