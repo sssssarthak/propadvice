@@ -65,11 +65,9 @@ nav a:hover{color:var(--white);}
 .nav-cta{background:var(--amber);color:var(--navy-deep) !important;padding:8px 20px;border-radius:3px;font-weight:700 !important;}
 .nav-cta:hover{background:var(--amber-bright) !important;}
 /* urgency bar sits fixed directly below nav */
-.urgency-bar{position:fixed;top:64px;left:0;right:0;z-index:399;background:var(--amber);padding:7px 20px;text-align:center;font-size:12px;font-weight:700;color:var(--navy-deep);letter-spacing:0.2px;}
-.urgency-bar span{opacity:0.7;font-weight:400;margin-left:8px;}
 
 /* HERO */
-.hero{min-height:calc(100dvh - 100px);height:auto;padding-top:0;margin-top:100px;display:grid;grid-template-columns:5fr 6fr;position:relative;overflow:hidden;align-items:stretch;}
+.hero{min-height:calc(100dvh - 64px);height:auto;padding-top:0;margin-top:64px;display:grid;grid-template-columns:5fr 6fr;position:relative;overflow:hidden;align-items:stretch;}
 .hero-left{background:var(--navy-deep);padding:36px clamp(36px,4vw,80px) 36px clamp(36px,5vw,100px);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
 .hero-left::after{content:'';position:absolute;top:0;right:-1px;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--amber) 40%,var(--amber) 60%,transparent);opacity:0.4;}
 .hero-right{background:var(--navy-mid);padding:24px 40px 24px 28px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;}
@@ -327,13 +325,19 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 .fade{opacity:0;transform:translateY(16px);transition:opacity .55s,transform .55s;}
 .fade.vis{opacity:1;transform:none;}
 
+
+/* MOBILE HERO CTA */
+.hero-mob-cta{display:none;}
+@media(max-width:900px){
+  .hero-mob-cta{display:block;background:var(--amber);color:var(--navy-deep);text-decoration:none;font-size:15px;font-weight:800;text-align:center;padding:16px 24px;border-radius:8px;margin:16px 0 20px;letter-spacing:0.2px;}
+}
 /* RESPONSIVE */
 @media(max-width:900px){
   nav ul{display:none;}
-  .hero{grid-template-columns:1fr;min-height:auto;height:auto;}
-  .hero-left{padding:24px 20px 16px;justify-content:flex-start;}
+  .hero{grid-template-columns:1fr;min-height:auto;height:auto;display:flex;flex-direction:column;}
+  .hero-left{padding:24px 20px 16px;justify-content:flex-start;order:2;}
   .hero-left::after{display:none;}
-  .hero-right{padding:12px 20px 28px;align-items:stretch;}
+  .hero-right{padding:16px 20px 8px;align-items:stretch;order:1;}
   .hero-right::before{display:none;}
   .how-grid{grid-template-columns:1fr;}
   .why-grid{grid-template-columns:1fr;gap:40px;}
@@ -358,7 +362,7 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   .how-num{font-size:48px;}
   /* Hero - tight and clean on mobile */
   .hero-left{padding:20px 16px 12px;}
-  .hero-left h1{font-size:28px;margin-bottom:8px;}
+  .hero-left h1{font-size:32px;margin-bottom:8px;line-height:1.1;}
   .hero-sub{font-size:13px;line-height:1.6;margin-bottom:12px;}
   .h-eyebrow{display:inline-block;width:auto;font-size:8.5px;letter-spacing:1.5px;padding:3px 9px;margin-bottom:10px;white-space:nowrap;}
   /* Testimonial - compact */
@@ -377,7 +381,7 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   .h-ms-val{font-size:17px;}
   .h-ms-lbl{font-size:9.5px;}
   /* Quiz */
-  .hero-right{padding:10px 16px 24px;}
+  .hero-right{padding:12px 16px 16px;}
   .quiz-panel{max-width:100%;}
   .qp-opts{grid-template-columns:1fr;}
   .qp-inprow{grid-template-columns:1fr;}
@@ -417,18 +421,18 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   </ul>
 </nav>
 
-<!-- URGENCY BAR -->
-<div class="urgency-bar">
-  ⚡ Limited agent capacity in VIC, NSW &amp; QLD right now — matching closes when spots fill.<span>Takes 3 minutes. Always free.</span>
-</div>
 
 <!-- HERO — quiz lives here, one single flow -->
 <div id="quiz" style="position:absolute;top:0;visibility:hidden;"></div>
 <section class="hero" id="top">
   <div class="hero-left">
-    <div class="h-eyebrow">Australia's Property Intelligence Hub</div>
-    <h1>Stop Overpaying.<br>Get <em>Your Expert</em><br>on Your Side.</h1>
-    <p class="hero-sub">Every seller has a professional negotiating against you. We match you with a vetted buyers agent who works for you alone. Free, in 3 minutes.</p>
+    <div class="h-eyebrow">Free Buyers Agent Matching</div>
+    <h1>The seller has<br>an expert.<br><em>Now you do too.</em></h1>
+    <p class="hero-sub">We match you with a vetted buyers agent who negotiates for you alone. Free, in 3 minutes.</p>
+
+    <!-- Mobile only: get to quiz fast -->
+    <a href="#quiz-panel" class="hero-mob-cta">Find My Agent →</a>
+
     <div class="hero-proof">
       <div class="hero-proof-stars">★★★★★</div>
       <div class="hero-proof-quote">"Found an off-market property in Frankston North, $38k under comparable sales. Worth every minute."</div>
@@ -443,11 +447,10 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
       <div class="h-ti"><span class="h-tick">✓</span> Vetted agents only</div>
       <div class="h-ti"><span class="h-tick">✓</span> 48hr response</div>
     </div>
-
     <div class="h-mini-stats">
       <div class="h-mini-stat"><div class="h-ms-val">2,400+</div><div class="h-ms-lbl">Properties secured</div></div>
-      <div class="h-mini-stat"><div class="h-ms-val">$31k</div><div class="h-ms-lbl">Avg. saving per buyer</div></div>
-      <div class="h-mini-stat"><div class="h-ms-val">4.9★</div><div class="h-ms-lbl">Average rating</div></div>
+      <div class="h-mini-stat"><div class="h-ms-val">$31k</div><div class="h-ms-lbl">Avg. saving</div></div>
+      <div class="h-mini-stat"><div class="h-ms-val">4.9★</div><div class="h-ms-lbl">Rating</div></div>
     </div>
   </div>
 
@@ -856,7 +859,7 @@ document.addEventListener('click', function(e) {
   }
   const target = document.querySelector(href);
   if (!target) return;
-  const offset = target.getBoundingClientRect().top + window.scrollY - 108;
+  const offset = target.getBoundingClientRect().top + window.scrollY - 72;
   window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
 });
 
