@@ -938,7 +938,8 @@ document.addEventListener('click', function(e) {
   e.preventDefault();
   if (href === '#top' || href === '#quiz') {
     if (window.innerWidth <= 900) {
-      document.getElementById('quiz-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const qp = document.getElementById('quiz-panel');
+window.scrollTo({ top: qp.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
