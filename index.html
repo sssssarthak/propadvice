@@ -411,6 +411,7 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 </div>
 
 <!-- HERO — quiz lives here, one single flow -->
+<div id="quiz" style="position:absolute;top:0;visibility:hidden;"></div>
 <section class="hero" id="top">
   <div class="hero-left">
     <div class="h-eyebrow">Australia's Property Intelligence Hub</div>
@@ -570,12 +571,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
     </div>
   </div>
 </section>
-
-<!-- anchor so #quiz in ad URLs still works -->
-<div id="quiz" style="position:relative;top:-64px;visibility:hidden;"></div>
-
-
-</div>
 
 <!-- HOW IT WORKS -->
 <section class="sec sec-white" id="how">
@@ -839,7 +834,7 @@ document.addEventListener('click', function(e) {
   const href = a.getAttribute('href');
   if (!href || href === '#') return;
   e.preventDefault();
-  if (href === '#top') {
+  if (href === '#top' || href === '#quiz') {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
