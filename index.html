@@ -53,7 +53,6 @@
 html{scroll-behavior:smooth;background:var(--navy-deep);}
 body{font-family:'Syne',sans-serif;background:var(--chalk);color:var(--text);overflow-x:hidden;}
 
-
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:400;background:var(--navy-deep);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;}
 .logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--white);text-decoration:none;letter-spacing:-0.5px;display:flex;align-items:center;gap:3px;}
@@ -64,10 +63,21 @@ nav a{font-size:13px;font-weight:600;color:rgba(255,255,255,0.58);text-decoratio
 nav a:hover{color:var(--white);}
 .nav-cta{background:var(--amber);color:var(--navy-deep) !important;padding:8px 20px;border-radius:3px;font-weight:700 !important;}
 .nav-cta:hover{background:var(--amber-bright) !important;}
-/* urgency bar sits fixed directly below nav */
 
-/* HERO */
-.hero{min-height:calc(100dvh - 64px);height:auto;padding-top:0;margin-top:64px;display:grid;grid-template-columns:5fr 6fr;position:relative;overflow:hidden;align-items:stretch;}
+/* ============================================
+   HERO — DESKTOP (unchanged)
+   ============================================ */
+.hero{
+  min-height:calc(100dvh - 64px);
+  height:auto;
+  padding-top:0;
+  margin-top:64px;
+  display:grid;
+  grid-template-columns:5fr 6fr;
+  position:relative;
+  overflow:hidden;
+  align-items:stretch;
+}
 .hero-left{background:var(--navy-deep);padding:36px clamp(36px,4vw,80px) 36px clamp(36px,5vw,100px);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
 .hero-left::after{content:'';position:absolute;top:0;right:-1px;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--amber) 40%,var(--amber) 60%,transparent);opacity:0.4;}
 .hero-right{background:var(--navy-mid);padding:24px 40px 24px 28px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;}
@@ -230,8 +240,6 @@ nav a:hover{color:var(--white);}
 .blog-card h4{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--text);line-height:1.45;margin-bottom:8px;}
 .blog-card p{font-family:'Lora',serif;font-style:italic;font-size:12.5px;color:var(--text-soft);line-height:1.6;flex:1;}
 .blog-card-meta{font-size:11px;color:var(--text-soft);margin-top:14px;padding-top:12px;border-top:1px solid var(--chalk-dark);}
-@media(max-width:900px){.blog-grid{grid-template-columns:repeat(2,1fr);}.blog-featured{flex-direction:column;align-items:flex-start;gap:16px;padding:24px;}}
-@media(max-width:600px){.blog-grid{grid-template-columns:1fr;}.blog-featured{padding:20px;}}
 
 /* WHY */
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
@@ -310,7 +318,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 .f-base{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:11.5px;color:rgba(255,255,255,0.2);}
 .f-dis{font-family:'Lora',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,0.16);margin-top:14px;max-width:1200px;margin-left:auto;margin-right:auto;line-height:1.65;}
 
-
 /* FAQ SECTION */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
 .faq-item{padding:20px 0;border-bottom:1px solid var(--chalk-dark);}
@@ -320,92 +327,184 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 .faq-q.open::after{content:'−';}
 .faq-a{font-family:'Lora',serif;font-style:italic;font-size:13.5px;color:var(--text-soft);line-height:1.75;display:none;padding-top:6px;}
 .faq-a.open{display:block;}
-@media(max-width:700px){.faq-grid{grid-template-columns:1fr;}}
 .hidden{display:none !important;}
 .fade{opacity:0;transform:translateY(16px);transition:opacity .55s,transform .55s;}
 .fade.vis{opacity:1;transform:none;}
 
+/* ============================================
+   MOBILE — complete rewrite below 900px
+   ============================================
+   Layout:  nav → hero-copy block → quiz block → rest of page
+   NO order tricks. Flex column, natural DOM order.
+   ============================================ */
 
-/* MOBILE HERO CTA */
-.hero-mob-cta{display:none;}
-@media(max-width:900px){
-  .hero-mob-cta{display:block;background:var(--amber);color:var(--navy-deep);text-decoration:none;font-size:15px;font-weight:800;text-align:center;padding:16px 24px;border-radius:8px;margin:16px 0 20px;letter-spacing:0.2px;}
+/* Hide desktop-only elements on mobile */
+.hero-mob-cta { display: none; } /* not needed anymore */
+
+@media (max-width: 900px) {
+  /* Kill nav links, keep logo */
+  nav { padding: 0 16px; }
+  nav ul { display: none; }
+  .logo { font-size: 17px; }
+
+  /* ── HERO: stack vertically, copy on top, quiz below ── */
+  .hero {
+    display: flex;
+    flex-direction: column;   /* natural: left (copy) then right (quiz) */
+    min-height: unset;
+    height: auto;
+    margin-top: 64px;
+    padding: 0;
+  }
+
+  /* ── HERO LEFT = copy block ── */
+  .hero-left {
+    order: 1;                  /* always first */
+    background: var(--navy-deep);
+    padding: 28px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .hero-left::after { display: none; }
+
+  .h-eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    margin-bottom: 12px;
+  }
+
+  .hero-left h1 {
+    font-size: 34px;
+    line-height: 1.08;
+    margin-bottom: 10px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 16px;
+    max-width: 100%;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* Testimonial quote — compact but readable */
+  .hero-proof {
+    padding: 12px 14px 12px 18px;
+    margin-bottom: 14px;
+    max-width: 100%;
+  }
+  .hero-proof::before { font-size: 44px; top: -6px; left: 10px; }
+  .hero-proof-stars { font-size: 11px; margin-bottom: 4px; }
+  .hero-proof-quote { font-size: 12.5px; line-height: 1.55; margin-bottom: 6px; }
+  .hero-proof-author { font-size: 9.5px; }
+  .hero-proof-badge { font-size: 9px; padding: 2px 7px; }
+
+  /* Trust pills — single row, smaller */
+  .h-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin-bottom: 0;
+  }
+  .h-ti { font-size: 11px; gap: 4px; }
+
+  /* Stats bar — 3 cols, compact */
+  .h-mini-stats {
+    margin-top: 16px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .h-mini-stat { padding: 12px 10px; }
+  .h-ms-val { font-size: 18px; }
+  .h-ms-lbl { font-size: 9.5px; }
+
+  /* ── HERO RIGHT = quiz block ── */
+  .hero-right {
+    order: 2;                  /* always second */
+    background: var(--navy-mid);
+    padding: 20px 16px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-right::before { display: none; }
+
+  /* Quiz panel fills width on mobile */
+  .quiz-panel {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  }
+
+  /* Quiz options: single column on mobile */
+  .qp-opts { grid-template-columns: 1fr; gap: 6px; }
+  .qp-opts.single-col { grid-template-columns: 1fr; }
+  .qp-opt { padding: 11px 14px; }
+  .qp-opt-text { font-size: 13px; }
+
+  /* Quiz contact form: single column */
+  .qp-inprow { grid-template-columns: 1fr; gap: 0; }
+  .qp-body { padding: 16px 18px; }
+  .qp-foot { padding: 0 18px 16px; }
+
+  /* Submit button full width on mobile */
+  .qp-submit {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  .qp-foot { flex-direction: column; gap: 10px; align-items: stretch; }
+  .qp-back { align-self: flex-start; }
+
+  /* ── REST OF PAGE ── */
+  .sec { padding: 48px 16px; }
+  .sh h2 { font-size: 26px; }
+  .sh-sub { font-size: 14px; }
+
+  .how-grid { grid-template-columns: 1fr; }
+  .how-box { padding: 28px 20px; }
+  .how-num { font-size: 52px; }
+
+  .why-grid { grid-template-columns: 1fr; gap: 36px; }
+
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-featured { flex-direction: column; align-items: flex-start; gap: 14px; padding: 22px; }
+  .blog-feat-left h3 { font-size: 18px; }
+
+  .cpanel.on { grid-template-columns: 1fr; }
+  .c-inputs { padding: 24px 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .c-results { padding: 24px 20px; }
+  .c-tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .c-tab { padding: 11px 14px; font-size: 11.5px; flex-shrink: 0; }
+  .c-res-amount { font-size: 40px; }
+  .c-inline { grid-template-columns: 1fr; }
+
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-item:nth-last-child(2) { border-bottom: 1px solid var(--chalk-dark); }
+
+  .f-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  footer { padding: 36px 16px 24px; }
+  .f-base { flex-direction: column; gap: 6px; font-size: 10px; }
+  .cta-block { padding: 48px 16px; }
+
+  .art-modal.open { padding: 0; align-items: flex-end; }
+  .art-modal-inner { height: 92dvh; border-radius: 18px 18px 0 0; max-width: 100%; }
+  .art-hero { padding: 20px 18px 16px; }
+  .art-hero h1 { font-size: 20px; }
+  .art-content { padding: 16px 18px; }
+  .art-content h2 { font-size: 17px; }
+  .art-footer-cta { padding: 24px 18px; }
+  .suburb-table { display: block; overflow-x: auto; white-space: nowrap; font-size: 11.5px; }
+  .suburb-table th, .suburb-table td { padding: 8px 10px; }
 }
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav ul{display:none;}
-  .hero{grid-template-columns:1fr;min-height:auto;height:auto;display:flex;flex-direction:column;}
-  .hero-left{padding:24px 20px 16px;justify-content:flex-start;order:2;}
-  .hero-left::after{display:none;}
-  .hero-right{padding:16px 20px 8px;align-items:stretch;order:1;}
-  .hero-right::before{display:none;}
-  .how-grid{grid-template-columns:1fr;}
-  .why-grid{grid-template-columns:1fr;gap:40px;}
-  .f-grid{grid-template-columns:1fr 1fr;}
-  .sec{padding:52px 20px;}
-  .cpanel.on{grid-template-columns:1fr;}
-  .c-inputs{padding:24px 20px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
-  .c-results{padding:24px 20px;}
-  .art-hero{padding:28px 24px 20px;}
-  .art-content{padding:20px 24px;}
-  .art-footer-cta{padding:24px;}
-  .blog-grid{grid-template-columns:repeat(2,1fr);}
-  .blog-featured{flex-direction:column;align-items:flex-start;gap:14px;padding:22px;}
-  .blog-feat-left h3{font-size:18px;}
-}
-@media(max-width:600px){
-  nav{padding:0 16px;}
-  .logo{font-size:16px;}
-  .sec{padding:44px 16px;}
-  .sh h2{font-size:24px;}
-  .how-box{padding:28px 20px;}
-  .how-num{font-size:48px;}
-  /* Hero - tight and clean on mobile */
-  .hero-left{padding:20px 16px 12px;}
-  .hero-left h1{font-size:32px;margin-bottom:8px;line-height:1.1;}
-  .hero-sub{font-size:13px;line-height:1.6;margin-bottom:12px;}
-  .h-eyebrow{display:inline-block;width:auto;font-size:8.5px;letter-spacing:1.5px;padding:3px 9px;margin-bottom:10px;white-space:nowrap;}
-  /* Testimonial - compact */
-  .hero-proof{padding:10px 14px;margin-bottom:12px;}
-  .hero-proof::before{font-size:40px;}
-  .hero-proof-stars{font-size:11px;margin-bottom:4px;}
-  .hero-proof-quote{font-size:12px;line-height:1.5;margin-bottom:6px;}
-  .hero-proof-author{font-size:9.5px;}
-  .hero-proof-badge{font-size:9px;padding:2px 7px;}
-  /* Trust pills - single row */
-  .h-trust{gap:10px;margin-bottom:0;}
-  .h-ti{font-size:10.5px;}
-  /* Mini stats - no wrapping */
-  .h-mini-stats{margin-top:12px;}
-  .h-mini-stat{padding:11px 12px;}
-  .h-ms-val{font-size:17px;}
-  .h-ms-lbl{font-size:9.5px;}
-  /* Quiz */
-  .hero-right{padding:12px 16px 16px;}
-  .quiz-panel{max-width:100%;}
-  .qp-opts{grid-template-columns:1fr;}
-  .qp-inprow{grid-template-columns:1fr;}
-  /* Rest */
-  .c-tabs{overflow-x:auto;flex-wrap:nowrap;}
-  .c-tab{padding:11px 14px;font-size:11.5px;flex-shrink:0;}
-  .c-res-amount{font-size:38px;}
-  .c-inline{grid-template-columns:1fr;}
-  .blog-grid{grid-template-columns:1fr;}
-  .blog-featured{padding:18px;}
-  .art-modal.open{padding:0;align-items:flex-end;}
-  .art-modal-inner{height:92dvh;border-radius:18px 18px 0 0;max-width:100%;}
-  .art-hero{padding:18px 16px 16px;}
-  .art-hero h1{font-size:20px;}
-  .art-content{padding:16px 16px;}
-  .art-content h2{font-size:17px;}
-  .suburb-table{display:block;overflow-x:auto;white-space:nowrap;font-size:11.5px;}
-  .suburb-table th,.suburb-table td{padding:8px 10px;}
-  .why-grid{gap:28px;}
-  .f-grid{grid-template-columns:1fr;gap:24px;}
-  footer{padding:36px 16px 24px;}
-  .f-base{flex-direction:column;gap:6px;font-size:10px;}
-  .cta-block{padding:44px 16px;}
-  .faq-grid{grid-template-columns:1fr;}
+
+@media (max-width: 480px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .f-grid { grid-template-columns: 1fr; gap: 20px; }
+  .hero-left h1 { font-size: 30px; }
 }
 </style>
 </head>
@@ -421,17 +520,14 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   </ul>
 </nav>
 
-
-<!-- HERO — quiz lives here, one single flow -->
 <div id="quiz" style="position:absolute;top:0;visibility:hidden;"></div>
 <section class="hero" id="top">
+
+  <!-- LEFT = Hero copy. On mobile: renders FIRST (top of page) -->
   <div class="hero-left">
     <div class="h-eyebrow">Free Buyers Agent Matching</div>
     <h1>The seller has<br>an expert.<br><em>Now you do too.</em></h1>
     <p class="hero-sub">We match you with a vetted buyers agent who negotiates for you alone. Free, in 3 minutes.</p>
-
-    <!-- Mobile only: get to quiz fast -->
-    <a href="#quiz-panel" class="hero-mob-cta">Find My Agent →</a>
 
     <div class="hero-proof">
       <div class="hero-proof-stars">★★★★★</div>
@@ -441,6 +537,7 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
         <div class="hero-proof-badge">Saved $38k</div>
       </div>
     </div>
+
     <div class="h-trust">
       <div class="h-ti"><span class="h-tick">✓</span> Free to use</div>
       <div class="h-ti"><span class="h-tick">✓</span> No obligation</div>
@@ -454,8 +551,8 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
     </div>
   </div>
 
+  <!-- RIGHT = Quiz. On mobile: renders SECOND (below hero copy) -->
   <div class="hero-right">
-    <!-- THE ONE QUIZ. No mini quiz. No "complete profile". Just this. -->
     <div class="quiz-panel" id="quiz-panel">
 
       <div id="qstep-1" class="qp-step">
@@ -607,8 +704,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 <section class="sec sec-chalk" id="blog">
   <div class="wrap fade">
     <div class="sh"><span class="sh-ey ey-amber">Market Intelligence</span><h2 class="dk">Property Insights &amp; <em>Suburb Guides</em></h2><p class="sh-sub dk">In-depth analysis of Australia's best investment areas, strategies, and market movements.</p></div>
-
-    <!-- Featured banner -->
     <div class="blog-featured fade" onclick="openArticle('vic')">
       <div class="blog-feat-left">
         <span class="sh-ey ey-white" style="margin-bottom:12px;">Victoria · Featured</span>
@@ -619,8 +714,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
         <span class="blog-feat-read">Read Full Guide →</span>
       </div>
     </div>
-
-    <!-- 3x3 grid -->
     <div class="blog-grid fade">
       <div class="blog-card" onclick="openArticle('syd')"><span class="blog-card-tag">Sydney · NSW</span><h4>Top 10 Investment Areas in Sydney 2026</h4><p>Western Sydney infrastructure surge, Inner West yields, and coastal markets ranked.</p><div class="blog-card-meta">8 min · Apr 2026</div></div>
       <div class="blog-card" onclick="openArticle('qld')"><span class="blog-card-tag">Queensland</span><h4>Best Suburbs in Brisbane &amp; Gold Coast 2026</h4><p>Olympics legacy and population growth driving QLD investment markets forward.</p><div class="blog-card-meta">7 min · Mar 2026</div></div>
@@ -794,7 +887,7 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   </div>
 </section>
 
-<!-- FAQ — SEO + conversion -->
+<!-- FAQ -->
 <section class="sec sec-chalk" id="faq">
   <div class="wrap fade">
     <div class="sh center">
@@ -835,10 +928,8 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   <p class="f-dis">PropAdvice is a referral and lead generation platform only. We are not a licensed real estate agency or financial adviser. All calculator results are estimates only and should not be relied upon as financial advice. Please seek independent professional advice before making any property or financial decisions.</p>
 </footer>
 
-
 <script>
-
-// Fix ALL internal anchor links to account for 100px fixed header
+// Fix ALL internal anchor links to account for fixed header
 document.addEventListener('click', function(e) {
   const a = e.target.closest('a[href^="#"]');
   if (!a) return;
@@ -846,15 +937,7 @@ document.addEventListener('click', function(e) {
   if (!href || href === '#') return;
   e.preventDefault();
   if (href === '#top' || href === '#quiz') {
-    if (window.innerWidth <= 900) {
-      const qp = document.getElementById('quiz-panel');
-      if (qp) {
-        const offset = qp.getBoundingClientRect().top + window.scrollY - 108;
-        window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
   const target = document.querySelector(href);
@@ -864,15 +947,12 @@ document.addEventListener('click', function(e) {
 });
 
 // FAQ toggle
-function toggleFaq(el){
+function toggleFaq(el) {
   el.classList.toggle('open');
-  const a = el.nextElementSibling;
-  a.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
 }
 
-// Hide sticky CTA once quiz is submitted
-
-// ONE QUIZ. ONE FLOW. No mini quiz. No "complete profile". Done.
+// QUIZ
 const qd = {};
 
 function qNext(el, key, val, nextStep) {
@@ -892,9 +972,13 @@ function showStep(n) {
   t.classList.remove('qp-step');
   void t.offsetWidth;
   t.classList.add('qp-step');
-  // Mobile: scroll quiz panel into view
+  // On mobile, scroll quiz panel into view smoothly
   if (window.innerWidth <= 900) {
-    setTimeout(() => document.getElementById('quiz-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    setTimeout(() => {
+      const qp = document.getElementById('quiz-panel');
+      const top = qp.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 60);
   }
 }
 
@@ -953,7 +1037,7 @@ doMort();doBorrow();doStamp();doYield();doCF();
 
 // ARTICLES
 const articles={
-  'budget2026':{eyebrow:'🏛️ Federal Budget · Policy · May 2026',title:'2026 Federal Budget: What It Means for Australian Property Buyers',intro:'The Albanese Government\'s 2026 Federal Budget landed with several measures directly affecting property buyers, investors, and renters. Here\'s what actually matters and what you need to do about it.',readTime:'11 min read',content:`<h2>The Big Picture: Housing Was Front and Centre</h2><p>For the first time in years, housing affordability dominated the Federal Budget narrative. The government announced a multi-pronged approach — expanding first home buyer schemes, funding 40,000 new social and affordable dwellings, and targeted tax changes that will affect investors and owner-occupiers differently.</p><div class="art-callout"><p>💡 <strong>PropAdvice view:</strong> Most of these measures benefit buyers who act in the next 12 months. Scheme places fill up fast — the First Home Guarantee allocated its full 50,000 places within 9 months last cycle.</p></div><h2>First Home Buyer Changes</h2><p>The Federal Budget 2026 expanded the Help to Buy shared equity scheme, allocating an additional $1.1 billion and raising income thresholds. Under the updated scheme, eligible buyers can purchase with as little as a 2% deposit, with the government taking up to a 40% equity stake in the property.</p><ul><li><strong>Income cap raised:</strong> Singles up to $90,000 (was $80,000), couples up to $120,000 (was $100,000).</li><li><strong>Price caps lifted:</strong> Property price caps increased by approximately $50,000 in each state to reflect current market conditions.</li><li><strong>First Home Guarantee continues:</strong> 50,000 places per year with a 5% deposit and no LMI — now includes permanent residents for the first time.</li><li><strong>Regional First Home Buyer Guarantee:</strong> 10,000 additional places for buyers purchasing outside capital cities.</li></ul><h2>What Happened with Negative Gearing?</h2><p>Negative gearing survived — again. Despite significant pre-budget speculation, the government made no changes to negative gearing deductibility or the 50% capital gains tax discount for investment properties held over 12 months. This was largely expected given the political sensitivity and the government's focus on supply-side measures instead.</p><div class="art-callout"><p>💡 Negative gearing remains fully intact. If you were holding off buying an investment property over CGT fears, those fears were unfounded for this budget cycle.</p></div><h2>Housing Supply: 40,000 New Homes</h2><p>The government committed $6.2 billion to build 40,000 social and affordable homes over five years through the Housing Australia Future Fund. An additional $1 billion was allocated to state and territory governments to fast-track planning approvals and infrastructure for medium-density housing. The practical impact on investors: more supply in affordable housing corridors over the medium term, which marginally softens rental yields in some markets but is unlikely to shift the dial materially within 3 years.</p><h2>Shared Equity: The Hidden Opportunity</h2><p>Help to Buy's expansion is significant but misunderstood. The government co-owning up to 40% of your property sounds attractive for access — but it means you also share 40% of your capital gains on sale. For a property that grows from $600,000 to $900,000 over 10 years, that's $120,000 of your gain that flows back to the government on exit. For buyers planning to hold long-term and build equity aggressively, a more conventional route with a buyers agent negotiating a strong price may ultimately be more valuable.</p><h2>Stamp Duty & State Interactions</h2><p>The Federal Budget doesn't directly control stamp duty (a state tax), but the Commonwealth's Help to Buy and First Home Guarantee schemes interact with state concessions. Victoria, NSW, and Queensland have all maintained their First Home Buyer stamp duty exemptions at current thresholds with no 2026 changes announced.</p><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>State</th><th>FHB Stamp Duty Threshold</th><th>2026 Change</th><th>Federal Scheme Compatible</th></tr></thead><tbody><tr><td><strong>VIC</strong></td><td>$600,000 full exemption</td><td>No change</td><td>Yes — stacks with FHBG</td></tr><tr><td><strong>NSW</strong></td><td>$800,000 full exemption</td><td>No change</td><td>Yes</td></tr><tr><td><strong>QLD</strong></td><td>$500,000 full exemption</td><td>No change</td><td>Yes</td></tr><tr><td><strong>WA</strong></td><td>$430,000 full exemption</td><td>No change</td><td>Yes</td></tr><tr><td><strong>SA</strong></td><td>$650,000 full exemption</td><td>No change</td><td>Yes</td></tr></tbody></table></div><h2>Tax Cuts: Serviceability Impact</h2><p>The Stage 3 successor tax adjustments in the 2026 budget deliver modest rate reductions for middle-income earners. For property buyers, the practical effect is a small improvement in borrowing serviceability — APRA stress tests are applied to your income net of tax, so a $1,000 annual tax cut translates to roughly $10,000–$15,000 of additional borrowing capacity depending on the lender.</p><h2>What Should Buyers Do Right Now?</h2><ul><li><strong>Check your scheme eligibility first:</strong> Use our quiz to get matched with an agent who knows exactly which schemes apply to your situation.</li><li><strong>Don't wait for more supply:</strong> The 40,000 homes are a 5-year pipeline. The market today is what it is — waiting for supply doesn't help buyers in 2026.</li><li><strong>Investors: act before sentiment shifts:</strong> With negative gearing intact and rates expected to ease through 2026, the investment case is strong right now.</li><li><strong>Run your numbers:</strong> Use our stamp duty and cash flow calculators below to model your exact situation before committing.</li></ul>`,},
+  'budget2026':{eyebrow:'🏛️ Federal Budget · Policy · May 2026',title:'2026 Federal Budget: What It Means for Australian Property Buyers',intro:'The Albanese Government\'s 2026 Federal Budget landed with several measures directly affecting property buyers, investors, and renters. Here\'s what actually matters and what you need to do about it.',readTime:'11 min read',content:`<h2>The Big Picture: Housing Was Front and Centre</h2><p>For the first time in years, housing affordability dominated the Federal Budget narrative. The government announced a multi-pronged approach — expanding first home buyer schemes, funding 40,000 new social and affordable dwellings, and targeted tax changes that will affect investors and owner-occupiers differently.</p><div class="art-callout"><p>💡 <strong>PropAdvice view:</strong> Most of these measures benefit buyers who act in the next 12 months. Scheme places fill up fast — the First Home Guarantee allocated its full 50,000 places within 9 months last cycle.</p></div><h2>First Home Buyer Changes</h2><p>The Federal Budget 2026 expanded the Help to Buy shared equity scheme, allocating an additional $1.1 billion and raising income thresholds. Under the updated scheme, eligible buyers can purchase with as little as a 2% deposit, with the government taking up to a 40% equity stake in the property.</p><ul><li><strong>Income cap raised:</strong> Singles up to $90,000 (was $80,000), couples up to $120,000 (was $100,000).</li><li><strong>Price caps lifted:</strong> Property price caps increased by approximately $50,000 in each state to reflect current market conditions.</li><li><strong>First Home Guarantee continues:</strong> 50,000 places per year with a 5% deposit and no LMI — now includes permanent residents for the first time.</li><li><strong>Regional First Home Buyer Guarantee:</strong> 10,000 additional places for buyers purchasing outside capital cities.</li></ul><h2>What Happened with Negative Gearing?</h2><p>Negative gearing survived — again. Despite significant pre-budget speculation, the government made no changes to negative gearing deductibility or the 50% capital gains tax discount for investment properties held over 12 months. This was largely expected given the political sensitivity and the government's focus on supply-side measures instead.</p><div class="art-callout"><p>💡 Negative gearing remains fully intact. If you were holding off buying an investment property over CGT fears, those fears were unfounded for this budget cycle.</p></div><h2>Housing Supply: 40,000 New Homes</h2><p>The government committed $6.2 billion to build 40,000 social and affordable homes over five years through the Housing Australia Future Fund. An additional $1 billion was allocated to state and territory governments to fast-track planning approvals and infrastructure for medium-density housing.</p><h2>What Should Buyers Do Right Now?</h2><ul><li><strong>Check your scheme eligibility first:</strong> Use our quiz to get matched with an agent who knows exactly which schemes apply to your situation.</li><li><strong>Don't wait for more supply:</strong> The 40,000 homes are a 5-year pipeline. The market today is what it is.</li><li><strong>Investors: act before sentiment shifts:</strong> With negative gearing intact and rates expected to ease through 2026, the investment case is strong right now.</li><li><strong>Run your numbers:</strong> Use our stamp duty and cash flow calculators to model your exact situation before committing.</li></ul>`},
   'vic':{eyebrow:'📍 Victoria · Featured · Apr 2026',title:'Top 10 Investment Suburbs in Victoria for 2025–2026',intro:'We analysed rental yields, capital growth history, infrastructure pipelines, and population projections across metro and regional Victoria — ranked for investors right now.',readTime:'8 min read',content:`<h2>Why Victoria Right Now?</h2><p>Victoria's property market has stabilised after the post-pandemic correction, with Melbourne's median dwelling price sitting around $780,000 — creating strong value compared to Sydney. Infrastructure investment is accelerating, with the Metro Tunnel, Suburban Rail Loop, and the North East Link all driving suburb-level capital growth.</p><div class="art-callout"><p>💡 <strong>PropAdvice tip:</strong> Victoria's land tax thresholds mean portfolio structure matters more here than anywhere else. A buyers agent can help you buy in the right entity.</p></div><h2>The Top 10 — Ranked</h2><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Region</th><th>Gross Yield</th><th>10yr Growth</th><th>Why It's Hot</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Sunshine</strong></td><td>Inner West</td><td class="yield-good">4.2%</td><td>7.8% p.a.</td><td>Metro Tunnel, gentrification</td></tr><tr><td class="rank">2</td><td><strong>Frankston</strong></td><td>Bayside South</td><td class="yield-good">4.6%</td><td>6.9% p.a.</td><td>Affordability + beach + health precinct</td></tr><tr><td class="rank">3</td><td><strong>Footscray</strong></td><td>Inner West</td><td class="yield-good">3.8%</td><td>8.4% p.a.</td><td>Metro Tunnel hub, hospital precinct</td></tr><tr><td class="rank">4</td><td><strong>Werribee</strong></td><td>Western Corridor</td><td class="yield-good">4.8%</td><td>6.2% p.a.</td><td>Population growth, Avalon Airport</td></tr><tr><td class="rank">5</td><td><strong>Bendigo</strong></td><td>Regional VIC</td><td class="yield-good">5.1%</td><td>7.1% p.a.</td><td>Regional city growth, hospital expansion</td></tr><tr><td class="rank">6</td><td><strong>Heidelberg</strong></td><td>North East</td><td class="yield-good">3.6%</td><td>7.5% p.a.</td><td>NE Link, hospital precinct</td></tr><tr><td class="rank">7</td><td><strong>Geelong</strong></td><td>Geelong</td><td class="yield-good">4.9%</td><td>8.2% p.a.</td><td>Fastest growing city in VIC</td></tr><tr><td class="rank">8</td><td><strong>Maidstone</strong></td><td>Inner West</td><td class="yield-good">4.1%</td><td>7.3% p.a.</td><td>Undervalued, Metro proximity</td></tr><tr><td class="rank">9</td><td><strong>Ballarat</strong></td><td>Regional VIC</td><td class="yield-good">5.4%</td><td>6.0% p.a.</td><td>Tree-changers, affordability</td></tr><tr><td class="rank">10</td><td><strong>Reservoir</strong></td><td>North</td><td class="yield-good">3.7%</td><td>7.9% p.a.</td><td>Train access, gentrification</td></tr></tbody></table></div>`},
   'syd':{eyebrow:'🌉 Sydney · NSW · Apr 2026',title:'Top 10 Investment Areas in Sydney 2026',intro:'Western Sydney\'s infrastructure surge, Inner West yields, and coastal lifestyle markets — ranked for capital growth and rental returns right now.',readTime:'8 min read',content:`<h2>Sydney's Market in 2026</h2><p>Sydney's median house price has surpassed $1.4 million. But within that are pockets delivering 4–5% gross yields and double-digit capital growth corridors driven by the $120 billion Western Sydney infrastructure pipeline.</p><div class="art-callout"><p>💡 The Western Sydney Airport is one of the largest single infrastructure investments in Australian history. Suburbs within 15 minutes of Badgerys Creek are repricing right now.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Area</th><th>Zone</th><th>Gross Yield</th><th>Key Driver</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Marsden Park</strong></td><td>Western Sydney</td><td class="yield-good">4.3%</td><td>Airport corridor</td></tr><tr><td class="rank">2</td><td><strong>Liverpool</strong></td><td>South West</td><td class="yield-good">4.1%</td><td>Health precinct</td></tr><tr><td class="rank">3</td><td><strong>Marrickville</strong></td><td>Inner West</td><td class="yield-good">3.5%</td><td>Gentrification, metro</td></tr><tr><td class="rank">4</td><td><strong>Penrith</strong></td><td>Western Sydney</td><td class="yield-good">4.6%</td><td>Panthers precinct</td></tr><tr><td class="rank">5</td><td><strong>Campbelltown</strong></td><td>South West</td><td class="yield-good">4.9%</td><td>University, hospital</td></tr><tr><td class="rank">6</td><td><strong>Parramatta</strong></td><td>Greater West</td><td class="yield-good">4.2%</td><td>CBD2 boom</td></tr><tr><td class="rank">7</td><td><strong>Hornsby</strong></td><td>Upper North Shore</td><td class="yield-good">3.7%</td><td>Rezoning uplift</td></tr><tr><td class="rank">8</td><td><strong>Ingleburn</strong></td><td>South West</td><td class="yield-good">4.7%</td><td>Affordability</td></tr></tbody></table></div>`},
   'qld':{eyebrow:'☀️ Queensland · Mar 2026',title:'Best Suburbs in Brisbane & Gold Coast 2026',intro:'The Olympics legacy, interstate migration surge, and population growth are driving Queensland\'s property market into a multi-year growth cycle.',readTime:'7 min read',content:`<h2>Why Queensland is Australia's #1 Investment Story</h2><p>Queensland has absorbed more interstate migrants than any other state since 2022. Brisbane's median house price has risen 62% over five years and still sits well below Sydney and Melbourne.</p><div class="art-callout"><p>💡 The 2032 Brisbane Olympics is a 7-year infrastructure catalyst. $17 billion in public spending is being deployed right now.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Woolloongabba</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>Olympics stadium</td></tr><tr><td class="rank">2</td><td><strong>Ipswich</strong></td><td>Western Corridor</td><td class="yield-good">5.8%</td><td>Fastest growing LGA in QLD</td></tr><tr><td class="rank">3</td><td><strong>Zillmere</strong></td><td>Northside</td><td class="yield-good">5.2%</td><td>Affordability, yields</td></tr><tr><td class="rank">4</td><td><strong>Coomera</strong></td><td>Northern GC</td><td class="yield-good">4.9%</td><td>Olympics venue, light rail</td></tr><tr><td class="rank">5</td><td><strong>Southport</strong></td><td>GC CBD</td><td class="yield-good">5.1%</td><td>Hospital precinct</td></tr></tbody></table></div>`},
