@@ -937,7 +937,11 @@ document.addEventListener('click', function(e) {
   if (!href || href === '#') return;
   e.preventDefault();
   if (href === '#top' || href === '#quiz') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 900) {
+      document.getElementById('quiz-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     return;
   }
   const target = document.querySelector(href);
