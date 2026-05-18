@@ -675,61 +675,6 @@ body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));}
   animation: quizPulseIn 0.7s cubic-bezier(0.36,0.07,0.19,0.97);
 }
 
-/* Arrow pointer that appears above the quiz on desktop when attention fires */
-.quiz-arrow {
-  position: absolute;
-  top: -48px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  z-index: 20;
-}
-.quiz-arrow.show { opacity: 1; }
-.quiz-arrow-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--amber-bright);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.quiz-arrow-icon {
-  font-size: 18px;
-  animation: bounceDown 0.9s ease infinite;
-  line-height: 1;
-}
-@keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(5px); }
-}
-
-/* On mobile: highlight the first option subtly to invite a tap */
-.quiz-panel.attention .qp-opt:first-child {
-  border-color: rgba(217,128,42,0.4);
-  background: rgba(192,104,24,0.09);
-  animation: optInvite 1.2s ease 0.6s 2;
-}
-@keyframes optInvite {
-  0%,100% { border-color: rgba(255,255,255,0.09); background: rgba(255,255,255,0.04); }
-  50%     { border-color: rgba(217,128,42,0.45); background: rgba(192,104,24,0.1); }
-}
-
-/* Progress bar shimmer when attention fires */
-.quiz-panel.attention .qp-progress-fill {
-  animation: shimmer 1s ease 0.3s 1;
-}
-@keyframes shimmer {
-  0%   { filter: brightness(1); }
-  50%  { filter: brightness(1.6); }
-  100% { filter: brightness(1); }
-}
 
 
 /* =============================================
@@ -929,10 +874,7 @@ body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));}
 
   <div class="hero-right">
     <div style="position:relative;width:100%;max-width:540px;">
-      <div class="quiz-arrow" id="quiz-arrow">
-        <span class="quiz-arrow-text">Start here →</span>
-        <span class="quiz-arrow-icon">↓</span>
-      </div>
+
       <div class="quiz-panel" id="quiz-panel">
 
       <div id="qstep-1" class="qp-step">
@@ -1490,30 +1432,19 @@ body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));}
 
 // ---- Quiz attention animation ----
 function scrollToQuiz() {
-  var qp = document.getElementById('quiz-panel');
-  if (!qp) return;
-  var offset = qp.getBoundingClientRect().top + window.scrollY - 90;
-  window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
-  // Fire attention after scroll lands
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(function() {
     triggerQuizAttention();
-  }, 550);
+  }, 500);
 }
 
 function triggerQuizAttention() {
   var qp = document.getElementById('quiz-panel');
-  var arrow = document.getElementById('quiz-arrow');
   if (!qp) return;
-  // Pulse animation
   qp.classList.remove('attention');
-  void qp.offsetWidth; // reflow to restart
+  void qp.offsetWidth;
   qp.classList.add('attention');
   setTimeout(function() { qp.classList.remove('attention'); }, 900);
-  // Arrow pointer (desktop only)
-  if (arrow && window.innerWidth > 900) {
-    arrow.classList.add('show');
-    setTimeout(function() { arrow.classList.remove('show'); }, 2800);
-  }
 }
 
 // Smooth anchor scroll
