@@ -389,6 +389,18 @@ body{padding-bottom:80px;}
 }
 
 
+
+/* SCROLLING TRUST TICKER */
+.ticker-wrap{background:var(--amber);overflow:hidden;padding:10px 0;position:relative;}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;}
+.ticker-wrap::before{left:0;background:linear-gradient(to right,var(--amber),transparent);}
+.ticker-wrap::after{right:0;background:linear-gradient(to left,var(--amber),transparent);}
+.ticker-track{display:flex;gap:0;animation:ticker 28s linear infinite;white-space:nowrap;width:max-content;}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 36px;font-size:12.5px;font-weight:700;color:var(--navy-deep);letter-spacing:0.2px;}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-deep);opacity:0.35;flex-shrink:0;}
+
 /* SOCIAL PROOF STRIP */
 .proof-strip{background:var(--navy-deep);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
 .proof-strip-inner{max-width:1200px;margin:0 auto;padding:36px 52px;display:flex;align-items:center;gap:0;}
@@ -408,6 +420,72 @@ body{padding-bottom:80px;}
   .proof-div{display:none;}
   .proof-quote-wrap{padding-left:0;width:100%;flex-basis:100%;}
 }
+
+
+/* LIVE ACTIVITY FEED */
+.activity-sec{background:var(--navy-deep);padding:72px 52px;}
+.activity-grid{max-width:1200px;margin:0 auto;}
+.activity-sh{margin-bottom:40px;}
+.activity-sh h2{font-family:'Lora',serif;font-size:clamp(28px,3.5vw,40px);font-weight:500;color:var(--white);margin-bottom:8px;}
+.activity-sh p{font-family:'Lora',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.45);}
+.activity-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.activity-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:20px 22px;display:flex;align-items:center;gap:16px;transition:background .2s,border-color .2s;}
+.activity-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(217,128,42,0.3);}
+.activity-avatar{width:44px;height:44px;border-radius:50%;background:var(--navy-mid);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--amber-bright);flex-shrink:0;border:2px solid rgba(217,128,42,0.2);}
+.activity-info{flex:1;min-width:0;}
+.activity-suburb{font-size:14px;font-weight:700;color:var(--white);margin-bottom:2px;}
+.activity-type{font-size:11.5px;color:rgba(255,255,255,0.4);}
+.activity-meta{display:flex;align-items:center;gap:6px;margin-top:6px;}
+.activity-stars{color:var(--amber-bright);font-size:11px;letter-spacing:1px;}
+.activity-time{font-size:10.5px;color:rgba(255,255,255,0.25);}
+.activity-live{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;}
+.activity-pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+@media(max-width:900px){.activity-feed{grid-template-columns:1fr 1fr;}.activity-sec{padding:52px 20px;}}
+@media(max-width:600px){.activity-feed{grid-template-columns:1fr;}}
+
+
+/* BUYER RISK SECTION */
+.risk-sec{background:var(--chalk);padding:100px 52px;}
+.risk-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.risk-left h2{font-family:'Lora',serif;font-size:clamp(28px,3.5vw,44px);font-weight:500;color:var(--text);line-height:1.2;margin-bottom:16px;}
+.risk-left h2 em{font-style:italic;color:var(--amber);}
+.risk-left p{font-family:'Lora',serif;font-style:italic;font-size:15px;color:var(--text-soft);line-height:1.8;margin-bottom:28px;}
+.risk-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.risk-stat{background:var(--paper);border:1px solid var(--chalk-dark);border-radius:10px;padding:24px;border-left:4px solid var(--amber);}
+.risk-stat-val{font-family:'Lora',serif;font-size:36px;font-weight:500;color:var(--amber);line-height:1;margin-bottom:6px;}
+.risk-stat-lbl{font-size:12px;color:var(--text-soft);line-height:1.5;}
+.risk-right{background:var(--navy-deep);border-radius:12px;padding:40px;position:relative;overflow:hidden;}
+.risk-right::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(192,104,24,0.15) 0%,transparent 70%);}
+.risk-right h3{font-family:'Lora',serif;font-size:20px;font-weight:500;color:var(--white);margin-bottom:20px;position:relative;}
+.risk-list{list-style:none;position:relative;}
+.risk-list li{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:14px;color:rgba(255,255,255,0.7);line-height:1.55;}
+.risk-list li:last-child{border:none;}
+.risk-list li::before{content:'→';color:var(--amber-bright);font-weight:700;flex-shrink:0;margin-top:1px;}
+@media(max-width:900px){.risk-inner{grid-template-columns:1fr;gap:36px;}.risk-sec{padding:64px 20px;}}
+@media(max-width:600px){.risk-stats{grid-template-columns:1fr 1fr;}.risk-sec{padding:52px 16px;}}
+
+
+/* QUIZ MATCH ANIMATION */
+.match-anim{padding:8px 0 20px;}
+.match-anim-title{font-family:'Lora',serif;font-size:16px;font-weight:500;color:var(--text);margin-bottom:20px;}
+.match-steps{display:flex;flex-direction:column;gap:12px;}
+.match-step{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--text-soft);transition:color .3s;}
+.match-step.done{color:var(--text);}
+.ms-icon{width:22px;height:22px;border-radius:50%;border:2px solid var(--chalk-dark);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .3s;color:transparent;}
+.match-step.done .ms-icon{background:var(--amber);border-color:var(--amber);color:var(--white);font-style:normal;}
+.match-confirmed{text-align:center;}
+.match-conf-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--amber),var(--amber-bright));border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--white);font-weight:700;}
+.match-confirmed h3{font-family:'Lora',serif;font-size:20px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.match-confirmed p{font-family:'Lora',serif;font-size:13px;color:var(--text-soft);line-height:1.6;margin-bottom:16px;}
+.match-agent-preview{background:var(--sky);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px;text-align:left;}
+.map-avatars{display:flex;align-items:center;}
+.map-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--white);border:2px solid var(--paper);margin-left:-8px;}
+.map-av:first-child{margin-left:0;}
+.map-av-main{width:40px;height:40px;font-size:16px;z-index:1;}
+.map-text{flex:1;}
+.map-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.map-sublabel{font-size:11px;color:var(--text-soft);}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -650,11 +728,35 @@ body{padding-bottom:80px;}
 
       <div id="qstep-done" class="hidden">
         <div class="qp-success">
-          <div class="qps-icon">🎉</div>
-          <h3>You're Matched, <span id="s-name"></span>!</h3>
-          <p>We're connecting you with the right specialist now. Expect contact within <strong>24–48 hours.</strong></p>
-          <div class="qps-box"><h4>Your Profile Summary</h4><div id="s-sum"></div></div>
-          <p style="font-size:11.5px;color:var(--text-soft);margin-top:8px;">Confirmation sent to your email. Check spam if you don't see it.</p>
+          <!-- Match processing animation -->
+          <div class="match-anim" id="match-anim">
+            <div class="match-anim-title">Finding your expert...</div>
+            <div class="match-steps">
+              <div class="match-step" id="ms-1"><span class="ms-icon">○</span><span class="ms-text">Brief received</span></div>
+              <div class="match-step" id="ms-2"><span class="ms-icon">○</span><span class="ms-text">Budget &amp; location matched</span></div>
+              <div class="match-step" id="ms-3"><span class="ms-icon">○</span><span class="ms-text">Vetted agents identified</span></div>
+              <div class="match-step" id="ms-4"><span class="ms-icon">○</span><span class="ms-text">Agent briefed</span></div>
+            </div>
+          </div>
+          <!-- Final confirmed state (hidden until animation done) -->
+          <div class="match-confirmed hidden" id="match-confirmed">
+            <div class="match-conf-icon">✓</div>
+            <h3>You're Matched, <span id="s-name"></span>!</h3>
+            <p>Your agent is briefed and will call within <strong>24–48 hours.</strong></p>
+            <div class="match-agent-preview">
+              <div class="map-avatars">
+                <div class="map-av" style="background:#213356;">SA</div>
+                <div class="map-av" style="background:#1a3052;">JM</div>
+                <div class="map-av map-av-main" style="background:var(--amber);">★</div>
+              </div>
+              <div class="map-text">
+                <div class="map-label">Your matched specialist</div>
+                <div class="map-sublabel">Fully briefed · Calling within 48hrs · Free</div>
+              </div>
+            </div>
+            <div class="qps-box"><h4>Your Profile Summary</h4><div id="s-sum"></div></div>
+            <p style="font-size:11px;color:var(--text-soft);margin-top:8px;">Confirmation sent to your email. Check spam if you don't see it.</p>
+          </div>
         </div>
       </div>
 
@@ -662,6 +764,31 @@ body{padding-bottom:80px;}
   </div>
 </section>
 
+
+
+<!-- SCROLLING TRUST TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item">✓ Free for Buyers</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Vetted Agents Only</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ No Obligation</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ 48hr Response</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ 2,400+ Buyers Matched</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ $31k Average Saving</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Australia-Wide Network</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Off-Market Access</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Licensed &amp; Reviewed</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Free for Buyers</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Vetted Agents Only</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ No Obligation</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ 48hr Response</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ 2,400+ Buyers Matched</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ $31k Average Saving</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Australia-Wide Network</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Off-Market Access</span><span class="ticker-dot"></span>
+    <span class="ticker-item">✓ Licensed &amp; Reviewed</span><span class="ticker-dot"></span>
+  </div>
+</div>
 
 <!-- SOCIAL PROOF STRIP -->
 <section class="proof-strip">
@@ -692,6 +819,70 @@ body{padding-bottom:80px;}
       <div class="how-box"><div class="how-accent"></div><div class="how-num">01</div><h3>Answer 6 Questions</h3><p>Our 2-minute assessment captures your goals, budget, deposit, location, and timeline. No vague enquiries. Real information that gets you matched to the right agent, not a random list.</p></div>
       <div class="how-box"><div class="how-accent"></div><div class="how-num">02</div><h3>Precision Matching</h3><p>We filter our national network of vetted agents by your exact criteria. You get one or two highly relevant specialists, not a spam list of agents who have no idea who you are.</p></div>
       <div class="how-box"><div class="how-accent"></div><div class="how-num">03</div><h3>Free Discovery Call</h3><p>Your matched agent calls within 48 hours, fully briefed on your situation. They share their strategy, proof of results, and exactly how they'll fight to get you the right property at the right price.</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- BUYER RISK SECTION -->
+<section class="risk-sec fade">
+  <div class="risk-inner">
+    <div class="risk-left">
+      <span class="sh-ey ey-amber">The Cost of Going It Alone</span>
+      <h2>The wrong move can cost more than<br><em>the agent's fee.</em></h2>
+      <p>Most buyers don't realise how much they're leaving on the table. A few data points that should change how you think about buying property.</p>
+      <div class="risk-stats">
+        <div class="risk-stat">
+          <div class="risk-stat-val">$47k</div>
+          <div class="risk-stat-lbl">Average amount Australian buyers overpay without professional representation</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-stat-val">73%</div>
+          <div class="risk-stat-lbl">Of buyers using a buyers agent report paying below the initial asking price</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-stat-val">3 min</div>
+          <div class="risk-stat-lbl">That's all it takes to get matched with your expert — free, no obligation</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-stat-val">$0</div>
+          <div class="risk-stat-lbl">Cost to you. The buyers agent referral is funded by the agent, not the buyer</div>
+        </div>
+      </div>
+    </div>
+    <div class="risk-right">
+      <h3>What you're up against without one</h3>
+      <ul class="risk-list">
+        <li>The selling agent is legally obligated to get the seller the highest possible price</li>
+        <li>Off-market properties — often the best deals — are shared with agents first, buyers second</li>
+        <li>Auction emotion consistently pushes buyers $20k–$60k above their ceiling</li>
+        <li>Building and pest reports, contract review, and due diligence are routinely skipped by solo buyers</li>
+        <li>First home buyers lose an average of 3.2 properties before securing one — each loss costs time and money</li>
+        <li>Investors without local expertise routinely buy in the wrong suburb for their strategy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE ACTIVITY FEED -->
+<section class="activity-sec fade">
+  <div class="activity-grid">
+    <div class="activity-sh">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <span class="activity-live"><span class="activity-pulse"></span>Live</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:1px;text-transform:uppercase;">Recent Matches</span>
+      </div>
+      <h2>Buyers matched across Australia this week</h2>
+      <p>Real matches. Real buyers. Every day.</p>
+    </div>
+    <div class="activity-feed">
+      <div class="activity-card"><div class="activity-avatar">ST</div><div class="activity-info"><div class="activity-suburb">Fitzroy, VIC</div><div class="activity-type">First Home · Off-market search</div><div class="activity-meta"><span class="activity-stars">★★★★★</span><span class="activity-time">2 hours ago</span></div></div></div>
+      <div class="activity-card"><div class="activity-avatar">MR</div><div class="activity-info"><div class="activity-suburb">Paddington, NSW</div><div class="activity-type">Investment · Auction bidding</div><div class="activity-meta"><span class="activity-stars">★★★★★</span><span class="activity-time">5 hours ago</span></div></div></div>
+      <div class="activity-card"><div class="activity-avatar">JL</div><div class="activity-info"><div class="activity-suburb">New Farm, QLD</div><div class="activity-type">Upgrading · Full service</div><div class="activity-meta"><span class="activity-stars">★★★★★</span><span class="activity-time">Yesterday</span></div></div></div>
+      <div class="activity-card"><div class="activity-avatar">PK</div><div class="activity-info"><div class="activity-suburb">Subiaco, WA</div><div class="activity-type">Investment · Portfolio build</div><div class="activity-meta"><span class="activity-stars">★★★★★</span><span class="activity-time">Yesterday</span></div></div></div>
+      <div class="activity-card"><div class="activity-avatar">AL</div><div class="activity-info"><div class="activity-suburb">Norwood, SA</div><div class="activity-type">First Home · Pre-auction advice</div><div class="activity-meta"><span class="activity-stars">★★★★★</span><span class="activity-time">2 days ago</span></div></div></div>
+      <div class="activity-card"><div class="activity-avatar">TW</div><div class="activity-info"><div class="activity-suburb">Camberwell, VIC</div><div class="activity-type">Downsizing · Off-market only</div><div class="activity-meta"><span class="activity-stars">★★★★★</span><span class="activity-time">2 days ago</span></div></div></div>
     </div>
   </div>
 </section>
@@ -1023,9 +1214,7 @@ function qSubmit() {
   gtag('event', 'conversion', { 'send_to': 'AW-18154215001/obnZCLmP6qocENmszdBD', 'value': 1.0, 'currency': 'AUD' });
   const sc = document.getElementById('sticky-cta'); if(sc) sc.style.display='none';
 
-  document.querySelectorAll('[id^="qstep-"]').forEach(s => s.classList.add('hidden'));
-  document.getElementById('s-name').textContent = fn;
-
+  // Build summary first (needed later)
   const L = {
     goal: { fh:'First Home', inv:'Investment', up:'Upgrading', dn:'Downsizing' },
     budget: { u500:'Under $500k', '500_800':'$500k–$800k', '800_1200':'$800k–$1.2M', '1200_2m':'$1.2M–$2M', '2mplus':'$2M+' },
@@ -1033,13 +1222,36 @@ function qSubmit() {
     state: { vic:'Victoria', nsw:'NSW', qld:'Queensland', wa:'Western Australia', sa:'South Australia', other:'Other' },
     timeline: { now:'ASAP', '3m':'Within 3 months', '6m':'3–6 months', '12m':'6–12 months' }
   };
-
   let html = '';
   [['Goal','goal'],['Budget','budget'],['Deposit','savings'],['State','state'],['Timeline','timeline']].forEach(([l,k]) => {
     if (qd[k]) html += `<div class="qps-row"><span class="qps-k">${l}</span><span class="qps-v">${(L[k]&&L[k][qd[k]])||qd[k]}</span></div>`;
   });
   document.getElementById('s-sum').innerHTML = html;
+  document.getElementById('s-name').textContent = fn;
+
+  // Show the done step with animation
   document.getElementById('qstep-done').classList.remove('hidden');
+
+  // Animate match steps
+  const steps = [1,2,3,4];
+  steps.forEach((n, i) => {
+    setTimeout(() => {
+      const el = document.getElementById('ms-' + n);
+      if (el) {
+        el.classList.add('done');
+        el.querySelector('.ms-icon').textContent = '✓';
+      }
+      // After last step, show confirmed state
+      if (i === steps.length - 1) {
+        setTimeout(() => {
+          const anim = document.getElementById('match-anim');
+          const conf = document.getElementById('match-confirmed');
+          if (anim) anim.classList.add('hidden');
+          if (conf) conf.classList.remove('hidden');
+        }, 600);
+      }
+    }, 600 + i * 700);
+  });
 
   fetch('https://script.google.com/macros/s/AKfycbyinh97aAe-nRzj--qUt_lLBmJZuwiezQHU-vzNHX-PWQ9X6DPRmXw8Z76Ulb6wDMmf/exec', {
     method: 'POST', mode: 'no-cors',
