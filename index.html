@@ -1429,11 +1429,21 @@ body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));}
 
 // ---- Quiz attention animation ----
 function scrollToQuiz() {
-  var dist = window.scrollY;
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // CSS smooth scroll is ~0.3px/ms, cap at 600ms
-  var delay = Math.min(600, Math.max(150, dist * 0.3));
-  setTimeout(triggerQuizAttention, delay);
+  // Poll until scroll actually stops, then fire
+  var last = -1;
+  var checks = 0;
+  function waitForStop() {
+    var cur = window.scrollY;
+    if (cur === last || checks > 60) {
+      triggerQuizAttention();
+    } else {
+      last = cur;
+      checks++;
+      requestAnimationFrame(waitForStop);
+    }
+  }
+  requestAnimationFrame(waitForStop);
 }
 
 function triggerQuizAttention() {
