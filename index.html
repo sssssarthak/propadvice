@@ -90,8 +90,8 @@ nav a:hover{color:var(--white);}
 .hero{min-height:calc(100dvh - 64px);height:auto;padding-top:0;margin-top:64px;display:grid;grid-template-columns:5fr 6fr;position:relative;overflow:hidden;align-items:stretch;}
 .hero-left{background:var(--navy-deep);padding:48px clamp(36px,4vw,80px) 48px clamp(40px,5vw,100px);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
 .hero-left::after{content:'';position:absolute;top:0;right:-1px;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--amber) 40%,var(--amber) 60%,transparent);opacity:0.4;}
-.hero-right{background:var(--navy-mid);padding:24px 40px 24px 28px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;}
-.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 80% 20%,rgba(192,104,24,0.12) 0%,transparent 60%);}
+.hero-right{background:linear-gradient(160deg,#1e2f50 0%,var(--navy-mid) 50%,#192840 100%);padding:32px 44px 32px 32px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 65% 15%,rgba(192,104,24,0.14) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 30% 85%,rgba(33,51,86,0.6) 0%,transparent 70%);}
 .h-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--amber-bright);background:rgba(192,104,24,0.1);border:1px solid rgba(192,104,24,0.2);padding:5px 14px;border-radius:2px;display:inline-block;margin-bottom:14px;}
 .hero-left h1{font-family:'Lora',serif;font-size:clamp(28px,3.8vw,62px);font-weight:500;line-height:1.15;color:var(--white);margin-bottom:18px;}
 .hero-left h1 em{font-style:italic;color:var(--amber-bright);}
@@ -114,16 +114,16 @@ nav a:hover{color:var(--white);}
 .h-ms-lbl{font-size:10.5px;color:rgba(255,255,255,0.35);letter-spacing:0.3px;}
 
 /* QUIZ PANEL */
-.quiz-panel{background:var(--paper);border-radius:10px;overflow:hidden;position:relative;z-index:2;box-shadow:0 24px 60px rgba(0,0,0,0.3);width:100%;max-width:540px;}
-.qp-head{background:var(--navy-deep);padding:16px 26px;}
+.quiz-panel{background:var(--paper);border-radius:10px;overflow:hidden;position:relative;z-index:2;box-shadow:0 24px 60px rgba(0,0,0,0.3);width:100%;max-width:540px;display:flex;flex-direction:column;}
+.qp-head{background:var(--navy-deep);padding:16px 26px;flex-shrink:0;}
 .qp-progress-track{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;margin-bottom:10px;}
 .qp-progress-fill{height:100%;background:var(--amber);border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
 .qp-meta{font-size:10.5px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;margin-bottom:3px;}
 .qp-title{font-size:15px;font-weight:700;color:var(--white);}
-.qp-body{padding:18px 26px;}
+.qp-body{padding:18px 26px;flex:1;overflow-y:auto;overscroll-behavior:contain;}
 .qp-question{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px;line-height:1.4;}
-.qp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.qp-opts.single-col{grid-template-columns:1fr;}
+.qp-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.qp-opts.single-col{grid-template-columns:1fr;gap:9px;}
 .qp-opt{padding:10px 14px;border:2px solid var(--chalk-dark);border-radius:8px;background:var(--chalk);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:9px;}
 .qp-opt:hover{border-color:var(--navy);background:var(--sky);}
 .qp-opt.on{border-color:var(--amber);background:var(--amber-pale);}
@@ -137,17 +137,17 @@ nav a:hover{color:var(--white);}
 .qp-notice{background:var(--sky);border:1px solid var(--sky-mid);border-radius:6px;padding:9px 12px;font-size:11px;color:var(--text-mid);margin-bottom:9px;line-height:1.5;}
 .qp-consent{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--text-mid);cursor:pointer;margin-bottom:4px;}
 .qp-consent input{margin-top:2px;accent-color:var(--navy);}
-.qp-foot{padding:0 26px 18px;display:flex;justify-content:space-between;align-items:center;}
+.qp-foot{padding:14px 26px 18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-top:1px solid rgba(255,255,255,0.07);}
 .qp-back{background:none;border:none;font-size:12px;font-weight:700;color:var(--text-soft);cursor:pointer;font-family:'Syne',sans-serif;transition:color .18s;padding:0;}
 .qp-back:hover{color:var(--text);}
 .qp-submit{background:var(--amber);color:var(--paper);border:none;padding:12px 28px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;transition:all .18s;}
 .qp-submit:hover{background:var(--amber-bright);}
 .qp-trust{font-size:11px;color:var(--text-soft);display:flex;align-items:center;gap:4px;}
-.qp-step{animation:stepIn .28s ease;}
+.qp-step{animation:stepIn .28s ease;display:flex;flex-direction:column;flex:1;min-height:0;}
 @keyframes stepIn{from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:none;}}
 
 /* Success */
-.qp-success{padding:36px 28px;text-align:center;}
+.qp-success{padding:24px 26px;text-align:center;flex:1;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;justify-content:flex-start;}
 .qps-icon{width:64px;height:64px;background:var(--sky);border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:28px;}
 .qp-success h3{font-family:'Lora',serif;font-size:22px;font-weight:500;color:var(--text);margin-bottom:8px;}
 .qp-success p{font-family:'Lora',serif;font-size:13px;color:var(--text-soft);line-height:1.7;}
@@ -359,45 +359,13 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   .hero-mob-cta{display:none !important;}
 }
 
-/* FIXED BOTTOM CTA */
-.sticky-cta{
-  position:fixed;
-  bottom:0;left:0;right:0;
-  z-index:600;
-  /* Pad for iOS safe area (home indicator) */
-  padding:10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-  background:var(--navy-deep);
-  border-top:1px solid rgba(255,255,255,0.08);
-  pointer-events:none;
-  opacity:0;
-  transform:translateY(100%);
-  transition:opacity .25s,transform .25s;
-  /* Only show on mobile — desktop doesn't need it */
-}
+/* FIXED BOTTOM CTA — all screens */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:600;padding:28px 20px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,rgba(14,24,38,1) 55%,rgba(14,24,38,0));pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease;will-change:transform;}
 .sticky-cta.visible{opacity:1;transform:translateY(0);pointer-events:all;}
-.sticky-cta a{
-  display:block;
-  width:100%;
-  background:var(--amber);
-  color:var(--white);
-  text-align:center;
-  padding:15px 24px;
-  border-radius:8px;
-  font-size:15px;
-  font-weight:800;
-  text-decoration:none;
-  letter-spacing:0.2px;
-  box-shadow:0 4px 20px rgba(192,104,24,0.4);
-  transition:background .18s;
-}
-.sticky-cta a:hover{background:var(--amber-bright);}
-/* Reserve space so content isn't hidden behind sticky bar */
-body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
-@media(min-width:901px){
-  /* Hide entirely on desktop — not needed */
-  .sticky-cta{display:none;}
-  body{padding-bottom:0;}
-}
+.sticky-cta a{display:block;max-width:480px;margin:0 auto;background:var(--amber);color:var(--white);text-align:center;padding:16px 32px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;letter-spacing:0.2px;box-shadow:0 4px 24px rgba(192,104,24,0.45);transition:background .18s;}
+.sticky-cta a:active{background:var(--amber-bright);}
+body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));}
+@media(max-width:480px){.sticky-cta a{font-size:14px;padding:15px 24px;}}
 
 /* SCROLLING TRUST TICKER */
 .ticker-wrap{background:var(--amber);overflow:hidden;padding:10px 0;position:relative;}
@@ -574,6 +542,8 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header strip */
@@ -589,11 +559,11 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
   box-shadow: 0 0 10px rgba(217,128,42,0.55);
 }
 
-.qp-meta  { color: rgba(255,255,255,0.28); }
-.qp-title { color: var(--white); }
+.qp-meta  { color: rgba(255,255,255,0.35); letter-spacing: 0.3px; }
+.qp-title { color: var(--white); font-size: 16px; }
 
 /* Body */
-.qp-body { background: transparent; }
+.qp-body { background: transparent; padding: 20px 26px 8px; }
 .qp-question { color: rgba(255,255,255,0.88); }
 
 /* Option tiles */
@@ -681,6 +651,159 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
 }
 .map-label    { color: rgba(255,255,255,0.85); }
 .map-sublabel { color: rgba(255,255,255,0.35); }
+
+/* =============================================
+   PREMIUM SUCCESS STATE — dopamine sequence
+   ============================================= */
+
+/* SVG ring animation */
+.mc-ring-wrap {
+  width: 80px; height: 80px;
+  margin: 0 auto 18px;
+  position: relative;
+}
+.mc-ring { width: 80px; height: 80px; transform: rotate(-90deg); }
+.mc-ring-fill {
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.4,0,0.2,1);
+}
+.mc-ring-fill.animate { stroke-dashoffset: 0; }
+.mc-check {
+  transform: rotate(90deg);
+  transform-origin: 40px 40px;
+  transition: stroke-dashoffset 0.45s cubic-bezier(0.4,0,0.2,1) 0.7s;
+}
+.mc-check.animate { stroke-dashoffset: 0; }
+
+/* Headline */
+.mc-headline {
+  font-family: 'Lora', serif;
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.mc-pre  { color: rgba(255,255,255,0.75); }
+.mc-name { color: var(--amber-bright); font-style: italic; }
+.mc-sub  {
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.mc-footnote {
+  font-size: 11px;
+  color: rgba(255,255,255,0.22);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ---- Fixed quiz height responsive adjustments ---- */
+/* Each step fills the panel between head and foot */
+[id^="qstep-"]:not(.hidden) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+[id^="qstep-"]:not(.hidden) .qp-body {
+  flex: 1;
+  min-height: 0;
+}
+/* Success state fills correctly */
+#qstep-done:not(.hidden) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+/* step-6 and done are handled by natural content flow */
+/* Mobile: fit to screen height gracefully */
+@media(max-width:900px) {
+  .quiz-panel { min-height: 0; }
+}
+
+
+/* Staggered reveal items */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition-delay: calc(var(--ri) * 120ms + 200ms);
+}
+.reveal-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Agent card */
+.mc-agent-card {
+  position: relative;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.mc-agent-glow {
+  position: absolute;
+  top: -30px; left: 50%;
+  transform: translateX(-50%);
+  width: 160px; height: 80px;
+  background: radial-gradient(ellipse, rgba(192,104,24,0.25) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 2.8s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+.mc-agent-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  position: relative;
+}
+.mc-avatars { display: flex; align-items: center; }
+.mc-av {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  border: 2px solid rgba(255,255,255,0.12);
+  margin-left: -7px;
+}
+.mc-av:first-child { margin-left: 0; }
+.mc-av-star {
+  width: 34px; height: 34px;
+  background: var(--amber);
+  color: var(--navy-deep);
+  font-size: 14px;
+  z-index: 1;
+  box-shadow: 0 0 12px rgba(192,104,24,0.5);
+}
+.mc-agent-text { flex: 1; text-align: left; }
+.mc-agent-label { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 2px; }
+.mc-agent-sub   { font-size: 10.5px; color: rgba(255,255,255,0.32); }
+.mc-live-badge  {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700;
+  color: #4caf82; letter-spacing: 0.8px;
+  text-transform: uppercase;
+  background: rgba(76,175,130,0.12);
+  border: 1px solid rgba(76,175,130,0.28);
+  padding: 4px 9px; border-radius: 20px;
+}
+.mc-pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4caf82;
+  animation: pulse 2s infinite;
+}
+
 </style>
 </head>
 <body>
@@ -843,7 +966,10 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
       </div>
 
       <div id="qstep-done" class="hidden">
-        <div class="qp-success">
+        <div class="qp-success" style="position:relative;overflow:hidden;">
+          <canvas id="confetti-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;"></canvas>
+
+          <!-- Phase 1: Processing -->
           <div class="match-anim" id="match-anim">
             <div class="match-anim-title">Finding your expert...</div>
             <div class="match-steps">
@@ -853,23 +979,38 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
               <div class="match-step" id="ms-4"><span class="ms-icon">○</span><span class="ms-text">Agent briefed</span></div>
             </div>
           </div>
+
+          <!-- Phase 2: Confirmed -->
           <div class="match-confirmed hidden" id="match-confirmed">
-            <div class="match-conf-icon">✓</div>
-            <h3>You're Matched, <span id="s-name"></span>!</h3>
-            <p>Your agent is briefed and will call within <strong>24–48 hours.</strong></p>
-            <div class="match-agent-preview">
-              <div class="map-avatars">
-                <div class="map-av" style="background:#213356;">SA</div>
-                <div class="map-av" style="background:#1a3052;">JM</div>
-                <div class="map-av map-av-main" style="background:var(--amber);">★</div>
-              </div>
-              <div class="map-text">
-                <div class="map-label">Your matched specialist</div>
-                <div class="map-sublabel">Fully briefed · Calling within 48hrs · Free</div>
+            <div class="mc-ring-wrap">
+              <svg class="mc-ring" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.07)" stroke-width="3"/>
+                <circle class="mc-ring-fill" cx="40" cy="40" r="36" stroke="url(#ringGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226"/>
+                <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#d9802a"/><stop offset="100%" stop-color="#c06818"/></linearGradient></defs>
+                <path class="mc-check" d="M26 40l10 10 18-18" stroke="#d9802a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40"/>
+              </svg>
+            </div>
+            <div class="mc-headline reveal-item" style="--ri:0">
+              <span class="mc-pre">You're matched, </span><span class="mc-name" id="s-name"></span><span class="mc-pre">!</span>
+            </div>
+            <p class="mc-sub reveal-item" style="--ri:1">Your agent is briefed and will call within <strong style="color:var(--amber-bright)">24–48 hours.</strong></p>
+            <div class="mc-agent-card reveal-item" style="--ri:2">
+              <div class="mc-agent-glow"></div>
+              <div class="mc-agent-inner">
+                <div class="mc-avatars">
+                  <div class="mc-av" style="background:#213356;">SA</div>
+                  <div class="mc-av" style="background:#1a3052;">JM</div>
+                  <div class="mc-av mc-av-star">★</div>
+                </div>
+                <div class="mc-agent-text">
+                  <div class="mc-agent-label">Your matched specialist</div>
+                  <div class="mc-agent-sub">Fully briefed · Calling within 48hrs · Free</div>
+                </div>
+                <div class="mc-live-badge"><span class="mc-pulse"></span>Live</div>
               </div>
             </div>
-            <div class="qps-box"><h4>Your Profile Summary</h4><div id="s-sum"></div></div>
-            <p style="font-size:11px;margin-top:8px;">Confirmation sent to your email. Check spam if you don't see it.</p>
+            <div class="qps-box reveal-item" style="--ri:3"><h4>Your Profile Summary</h4><div id="s-sum"></div></div>
+            <p class="mc-footnote reveal-item" style="--ri:4">Confirmation sent to your email. Check spam if needed.</p>
           </div>
         </div>
       </div>
@@ -1245,9 +1386,6 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
   var cta = document.getElementById('sticky-cta');
   if (!cta) return;
   function checkScroll(){
-    // Only show on mobile
-    if (window.innerWidth > 900) { cta.classList.remove('visible'); return; }
-    // Show after user scrolls 200px
     if (window.scrollY > 200) cta.classList.add('visible');
     else cta.classList.remove('visible');
   }
@@ -1318,6 +1456,12 @@ function showStep(n) {
   t.classList.remove('qp-step');
   void t.offsetWidth;
   t.classList.add('qp-step');
+  // Update panel height class for step 6
+  const panel = document.getElementById('quiz-panel');
+  if (panel) {
+    panel.classList.remove('step-6','step-done');
+    if (n === 6) panel.classList.add('step-6');
+  }
   if (window.innerWidth <= 900) {
     setTimeout(() => document.getElementById('quiz-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
   }
@@ -1353,23 +1497,108 @@ function qSubmit() {
   document.querySelectorAll('[id^="qstep-"]').forEach(s => s.classList.add('hidden'));
   document.getElementById('qstep-done').classList.remove('hidden');
 
+  // Step-through animation
   const steps = [1,2,3,4];
   steps.forEach((n, i) => {
     setTimeout(() => {
       const el = document.getElementById('ms-' + n);
       if (el) { el.classList.add('done'); el.querySelector('.ms-icon').textContent = '✓'; }
       if (i === steps.length - 1) {
-        setTimeout(() => {
-          const anim = document.getElementById('match-anim');
-          const conf = document.getElementById('match-confirmed');
-          if (anim) anim.classList.add('hidden');
-          if (conf) conf.classList.remove('hidden');
-        }, 600);
+        setTimeout(() => showMatchConfirmed(fn), 600);
       }
     }, 600 + i * 700);
   });
 
-  fetch('https://script.google.com/macros/s/AKfycbyinh97aAe-nRzj--qUt_lLBmJZuwiezQHU-vzNHX-PWQ9X6DPRmXw8Z76Ulb6wDMmf/exec', {
+  // ---- Premium success reveal ----
+  function showMatchConfirmed(firstName) {
+    var panel = document.getElementById('quiz-panel');
+    if (panel) { panel.classList.remove('step-6'); panel.classList.add('step-done'); }
+    var anim = document.getElementById('match-anim');
+    var conf = document.getElementById('match-confirmed');
+    if (anim) anim.classList.add('hidden');
+    if (conf) {
+      conf.classList.remove('hidden');
+      // Animate SVG ring + checkmark
+      setTimeout(function() {
+        var ring = conf.querySelector('.mc-ring-fill');
+        var check = conf.querySelector('.mc-check');
+        if (ring)  ring.classList.add('animate');
+        if (check) check.classList.add('animate');
+      }, 60);
+      // Stagger reveal items
+      var items = conf.querySelectorAll('.reveal-item');
+      items.forEach(function(el) {
+        setTimeout(function() { el.classList.add('show'); }, 80);
+      });
+      // Fire confetti
+      setTimeout(function() { fireConfetti(); }, 400);
+      // Scroll into view on mobile
+      if (window.innerWidth <= 900) {
+        setTimeout(function() {
+          var qp = document.getElementById('quiz-panel');
+          if (qp) qp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+  }
+
+  // ---- Confetti engine ----
+  function fireConfetti() {
+    var canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.offsetWidth, H = canvas.offsetHeight;
+    canvas.width = W; canvas.height = H;
+    var colors = ['#d9802a','#c06818','#ffffff','#4caf82','#fef3e6','#f5a623'];
+    var particles = [];
+    for (var i = 0; i < 72; i++) {
+      particles.push({
+        x: W * 0.5 + (Math.random() - 0.5) * W * 0.4,
+        y: H * 0.22,
+        vx: (Math.random() - 0.5) * 5.5,
+        vy: -(Math.random() * 5 + 2),
+        size: Math.random() * 5 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rot: Math.random() * 360,
+        rotV: (Math.random() - 0.5) * 8,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle',
+        alpha: 1,
+        gravity: 0.18 + Math.random() * 0.08
+      });
+    }
+    var frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var alive = false;
+      particles.forEach(function(p) {
+        if (p.alpha <= 0) return;
+        alive = true;
+        p.vy += p.gravity;
+        p.x += p.vx; p.y += p.vy;
+        p.rot += p.rotV;
+        if (frame > 40) p.alpha -= 0.018;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.55);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size/2, 0, Math.PI*2);
+          ctx.fill();
+        }
+        ctx.restore();
+      });
+      frame++;
+      if (alive && frame < 140) requestAnimationFrame(draw);
+      else ctx.clearRect(0, 0, W, H);
+    }
+    draw();
+  }
+
+    fetch('https://script.google.com/macros/s/AKfycbyinh97aAe-nRzj--qUt_lLBmJZuwiezQHU-vzNHX-PWQ9X6DPRmXw8Z76Ulb6wDMmf/exec', {
     method: 'POST', mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
