@@ -1430,12 +1430,10 @@ body{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));}
 // ---- Quiz attention animation ----
 function scrollToQuiz() {
   var dist = window.scrollY;
-  // Smooth scroll back to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Fire animation only after scroll has actually finished
-  // Estimate: ~1px per ms, min 300ms, max 900ms
-  var delay = Math.min(900, Math.max(300, dist * 0.55));
-  setTimeout(function() { triggerQuizAttention(); }, delay);
+  // CSS smooth scroll is ~0.3px/ms, cap at 600ms
+  var delay = Math.min(600, Math.max(150, dist * 0.3));
+  setTimeout(triggerQuizAttention, delay);
 }
 
 function triggerQuizAttention() {
