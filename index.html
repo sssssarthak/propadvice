@@ -24,7 +24,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PropAdvice — Free Buyers Agent Matching, Australia-Wide">
 <meta name="twitter:description" content="Matched to a vetted buyers agent in 3 minutes. Free for buyers. Australia-wide.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzBlMTgyNiIvPgogIDx0ZXh0IHg9IjQiIHk9IjI0IiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIyMyIgZmlsbD0iI2Q5ODAyYSI+UDwvdGV4dD4KPC9zdmc+">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"PropAdvice","description":"PropAdvice matches Australian property buyers with vetted buyers agents — free of charge.","url":"https://www.propadvice.com.au","areaServed":["Victoria","New South Wales","Queensland","Western Australia","South Australia"],"serviceType":"Buyers Agent Referral","priceRange":"Free","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"312"}}</script>
@@ -56,7 +61,7 @@ body{font-family:'Syne',sans-serif;background:var(--chalk);color:var(--text);ove
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:400;background:var(--navy-deep);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--white);text-decoration:none;letter-spacing:-0.5px;display:flex;align-items:center;gap:3px;}
+.logo{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--white);text-decoration:none;letter-spacing:-0.5px;display:flex;align-items:center;gap:3px;}
 .logo-accent{color:var(--amber-bright);}
 .logo-tag{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-left:10px;padding-left:10px;border-left:1px solid rgba(255,255,255,0.14);}
 nav ul{list-style:none;display:flex;gap:30px;align-items:center;}
@@ -64,6 +69,21 @@ nav a{font-size:13px;font-weight:600;color:rgba(255,255,255,0.58);text-decoratio
 nav a:hover{color:var(--white);}
 .nav-cta{background:var(--amber);color:var(--navy-deep) !important;padding:8px 20px;border-radius:3px;font-weight:700 !important;}
 .nav-cta:hover{background:var(--amber-bright) !important;}
+
+/* HAMBURGER */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:500;}
+.nav-burger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* MOBILE DRAWER */
+.nav-drawer{display:none;position:fixed;top:64px;left:0;right:0;background:var(--navy-deep);z-index:399;padding:12px 0 20px;border-bottom:2px solid rgba(217,128,42,0.3);box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+.nav-drawer.open{display:block;}
+.nav-drawer a{display:block;padding:14px 24px;font-size:15px;font-weight:600;color:rgba(255,255,255,0.7);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);}
+.nav-drawer a:last-child{border:none;}
+.nav-drawer a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
+.nav-drawer .nav-cta{background:var(--amber);color:var(--navy-deep) !important;margin:16px 24px 0;border-radius:8px;text-align:center;padding:14px 24px;font-size:15px;font-weight:700 !important;}
 /* urgency bar sits fixed directly below nav */
 
 /* HERO */
@@ -139,20 +159,20 @@ nav a:hover{color:var(--white);}
 .qps-v{font-weight:700;color:var(--text);}
 
 /* SECTIONS */
-.sec{padding:100px 52px;}
+.sec{padding:112px 52px;}
 .sec-chalk{background:var(--chalk);}
 .sec-white{background:var(--paper);}
 .sec-navy{background:var(--navy);}
 .sec-sky{background:var(--sky);}
 .wrap{max-width:1200px;margin:0 auto;}
-.sh{margin-bottom:64px;}
+.sh{margin-bottom:64px;padding-top:8px;}
 .sh.center{text-align:center;}
 .sh.center .sh-sub{margin-left:auto;margin-right:auto;}
 .sh-ey{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;display:inline-block;padding:4px 12px;border-radius:2px;margin-bottom:16px;}
 .ey-amber{color:var(--amber);background:var(--amber-pale);border:1px solid rgba(192,104,24,0.14);}
 .ey-navy{color:var(--slate-light);background:rgba(47,77,112,0.08);border:1px solid rgba(47,77,112,0.14);}
 .ey-white{color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);}
-.sh h2{font-family:'Lora',serif;font-size:clamp(30px,4vw,48px);font-weight:500;line-height:1.15;}
+.sh h2{font-family:'Lora',serif;font-size:clamp(32px,4vw,52px);font-weight:500;line-height:1.15;letter-spacing:-0.5px;}
 .sh h2.dk{color:var(--text);}
 .sh h2.lt{color:var(--white);}
 .sh h2 em{font-style:italic;color:var(--amber);}
@@ -175,8 +195,8 @@ nav a:hover{color:var(--white);}
 .how-accent{position:absolute;bottom:0;left:0;height:3px;width:0;background:var(--amber);transition:width .4s;}
 .how-box:hover .how-accent{width:100%;}
 .how-num{font-family:'Syne',sans-serif;font-size:72px;font-weight:800;color:var(--sky-mid);line-height:1;margin-bottom:16px;letter-spacing:-3px;}
-.how-box h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:10px;}
-.how-box p{font-family:'Lora',serif;font-size:14px;color:var(--text-soft);line-height:1.72;}
+.how-box h3{font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;}
+.how-box p{font-family:'Lora',serif;font-size:14.5px;color:var(--text-soft);line-height:1.8;}
 
 /* CALCS */
 .c-tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.1);}
@@ -224,11 +244,11 @@ nav a:hover{color:var(--white);}
 .blog-feat-right{flex-shrink:0;}
 .blog-feat-read{display:inline-block;background:var(--amber);color:var(--navy-deep);padding:12px 24px;border-radius:4px;font-size:13px;font-weight:700;white-space:nowrap;}
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.blog-card{background:var(--paper);border-radius:10px;padding:24px;cursor:pointer;border:1px solid var(--chalk-dark);transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;}
+.blog-card{background:var(--paper);border-radius:10px;padding:28px;cursor:pointer;border:1px solid var(--chalk-dark);transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;}
 .blog-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(14,24,38,0.12);border-color:rgba(192,104,24,0.3);}
 .blog-card-new{border-top:3px solid var(--amber);}
 .blog-card-tag{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-light);margin-bottom:10px;display:block;}
-.blog-card h4{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--text);line-height:1.45;margin-bottom:8px;}
+.blog-card h4{font-family:'Lora',serif;font-size:16px;font-weight:500;color:var(--text);line-height:1.45;margin-bottom:8px;}
 .blog-card p{font-family:'Lora',serif;font-style:italic;font-size:12.5px;color:var(--text-soft);line-height:1.6;flex:1;}
 .blog-card-meta{font-size:11px;color:var(--text-soft);margin-top:14px;padding-top:12px;border-top:1px solid var(--chalk-dark);}
 @media(max-width:900px){.blog-grid{grid-template-columns:repeat(2,1fr);}.blog-featured{flex-direction:column;align-items:flex-start;gap:16px;padding:24px;}}
@@ -242,7 +262,7 @@ nav a:hover{color:var(--white);}
 .why-list{list-style:none;}
 .why-item{display:flex;gap:14px;margin-bottom:15px;align-items:flex-start;}
 .why-check{width:20px;height:20px;min-width:20px;background:var(--amber-pale);border:1px solid rgba(192,104,24,0.2);color:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;margin-top:2px;}
-.why-item p{font-size:14px;color:var(--text-mid);line-height:1.6;}
+.why-item p{font-size:14.5px;color:var(--text-mid);line-height:1.7;}
 .why-item strong{color:var(--text);}
 .t-card{background:var(--chalk);border:1px solid var(--chalk-dark);border-radius:10px;padding:28px;margin-bottom:16px;transition:border-color .2s;}
 .t-card:hover{border-color:rgba(192,104,24,0.3);}
@@ -314,9 +334,9 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 
 /* FAQ SECTION */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
-.faq-item{padding:20px 0;border-bottom:1px solid var(--chalk-dark);}
+.faq-item{padding:24px 0;border-bottom:1px solid var(--chalk-dark);}
 .faq-item:last-child,.faq-item:nth-last-child(2){border-bottom:none;}
-.faq-q{font-size:14.5px;font-weight:700;color:var(--text);margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-q{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
 .faq-q::after{content:'+';font-size:18px;color:var(--amber);font-weight:400;flex-shrink:0;}
 .faq-q.open::after{content:'−';}
 .faq-a{font-family:'Lora',serif;font-style:italic;font-size:13.5px;color:var(--text-soft);line-height:1.75;display:none;padding-top:6px;}
@@ -333,31 +353,60 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   .hero-mob-cta{display:block;background:var(--amber);color:var(--navy-deep);text-decoration:none;font-size:15px;font-weight:800;text-align:center;padding:16px 24px;border-radius:8px;margin:16px 0 20px;letter-spacing:0.2px;}
 }
 
-/* STICKY BOTTOM CTA — mobile only */
-.sticky-cta{display:none;}
+/* FIXED BOTTOM CTA — ALL screens */
+.sticky-cta{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:600;
+  padding:12px 20px 16px;
+  background:linear-gradient(to top,rgba(14,24,38,0.97) 60%,transparent);
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .3s,transform .3s;
+}
+.sticky-cta.visible{opacity:1;transform:none;pointer-events:all;}
+.sticky-cta a{
+  display:block;
+  max-width:480px;
+  margin:0 auto;
+  background:var(--amber);
+  color:var(--white);
+  text-align:center;
+  padding:16px 32px;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:800;
+  text-decoration:none;
+  letter-spacing:0.2px;
+  box-shadow:0 4px 24px rgba(192,104,24,0.45);
+  transition:background .18s,transform .18s;
+}
+.sticky-cta a:hover{background:var(--amber-bright);transform:translateY(-2px);}
+body{padding-bottom:80px;}
+@media(max-width:480px){
+  .sticky-cta a{font-size:14px;padding:15px 24px;}
+}
+
+
+/* SOCIAL PROOF STRIP */
+.proof-strip{background:var(--navy-deep);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
+.proof-strip-inner{max-width:1200px;margin:0 auto;padding:36px 52px;display:flex;align-items:center;gap:0;}
+.proof-stat{flex-shrink:0;padding:0 40px;text-align:center;}
+.proof-stat:first-child{padding-left:0;}
+.proof-val{font-family:'Lora',serif;font-size:32px;font-weight:500;color:var(--amber-bright);line-height:1;margin-bottom:4px;}
+.proof-lbl{font-size:11px;color:rgba(255,255,255,0.38);letter-spacing:0.5px;white-space:nowrap;}
+.proof-div{width:1px;height:52px;background:rgba(255,255,255,0.08);flex-shrink:0;}
+.proof-quote-wrap{flex:1;padding-left:40px;}
+.proof-stars{color:#f5a623;font-size:13px;letter-spacing:1px;margin-bottom:6px;}
+.proof-quote{font-family:'Lora',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.72);line-height:1.6;margin-bottom:6px;}
+.proof-attr{font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.5px;display:flex;align-items:center;gap:10px;}
+.proof-badge{background:rgba(76,175,130,0.15);border:1px solid rgba(76,175,130,0.3);color:#4caf82;font-size:10px;padding:2px 8px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;}
 @media(max-width:900px){
-  .sticky-cta{
-    display:block;
-    position:fixed;
-    bottom:0;left:0;right:0;
-    z-index:600;
-    padding:12px 16px 16px;
-    background:linear-gradient(to top,var(--navy-deep) 70%,transparent);
-  }
-  .sticky-cta a{
-    display:block;
-    background:var(--amber);
-    color:var(--white);
-    text-align:center;
-    padding:16px;
-    border-radius:10px;
-    font-size:15px;
-    font-weight:800;
-    text-decoration:none;
-    letter-spacing:0.2px;
-    box-shadow:0 4px 20px rgba(192,104,24,0.4);
-  }
-  body { padding-bottom: 80px; }
+  .proof-strip-inner{padding:24px 20px;flex-wrap:wrap;gap:20px;}
+  .proof-stat{padding:0;flex:1;min-width:80px;}
+  .proof-div{display:none;}
+  .proof-quote-wrap{padding-left:0;width:100%;flex-basis:100%;}
 }
 
 /* RESPONSIVE */
@@ -448,38 +497,36 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
     <li><a href="#calcs">Calculators</a></li>
     <li><a href="#top" class="nav-cta">Get Expert Match</a></li>
   </ul>
+  <!-- Hamburger — mobile only -->
+  <button class="nav-burger" id="nav-burger" aria-label="Menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="#how"  onclick="closeNav()">How It Works</a>
+  <a href="#blog" onclick="closeNav()">Insights</a>
+  <a href="#calcs" onclick="closeNav()">Calculators</a>
+  <a href="#why"  onclick="closeNav()">Why PropAdvice</a>
+  <a href="#faq"  onclick="closeNav()">FAQ</a>
+  <a href="#top"  class="nav-cta" onclick="closeNav()">Get My Free Match →</a>
+</div>
 
 
 <!-- HERO — quiz lives here, one single flow -->
 <div id="quiz" style="position:absolute;top:0;visibility:hidden;"></div>
 <section class="hero" id="top">
   <div class="hero-left">
+    <div class="h-eyebrow">Free · Vetted · Australian</div>
     <h1>The seller has<br>an expert.<br><em>Now you do too.</em></h1>
-    <p class="hero-sub">Matched with a vetted buyers agent in 3 minutes. Free.</p>
-
-    <!-- Mobile only: get to quiz fast -->
-    <a href="#quiz-panel" class="hero-mob-cta">Find My Agent →</a>
-
-    <div class="hero-proof">
-      <div class="hero-proof-stars">★★★★★</div>
-      <div class="hero-proof-quote">"Found an off-market property in Frankston North, $38k under comparable sales. Worth every minute."</div>
-      <div class="hero-proof-row">
-        <div class="hero-proof-author">JAMES T. · FIRST HOME BUYER, MELBOURNE</div>
-        <div class="hero-proof-badge">Saved $38k</div>
-      </div>
-    </div>
+    <p class="hero-sub">Matched with a vetted buyers agent in 3 minutes. Always free.</p>
     <div class="h-trust">
-      <div class="h-ti"><span class="h-tick">✓</span> Free to use</div>
+      <div class="h-ti"><span class="h-tick">✓</span> Free forever</div>
       <div class="h-ti"><span class="h-tick">✓</span> No obligation</div>
-      <div class="h-ti"><span class="h-tick">✓</span> Vetted agents only</div>
       <div class="h-ti"><span class="h-tick">✓</span> 48hr response</div>
     </div>
-    <div class="h-mini-stats">
-      <div class="h-mini-stat"><div class="h-ms-val">2,400+</div><div class="h-ms-lbl">Properties secured</div></div>
-      <div class="h-mini-stat"><div class="h-ms-val">$31k</div><div class="h-ms-lbl">Avg. saving</div></div>
-      <div class="h-mini-stat"><div class="h-ms-val">4.9★</div><div class="h-ms-lbl">Rating</div></div>
-    </div>
+    <a href="#quiz-panel" class="hero-mob-cta">Find My Agent →</a>
   </div>
 
   <div class="hero-right">
@@ -615,6 +662,24 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   </div>
 </section>
 
+
+<!-- SOCIAL PROOF STRIP -->
+<section class="proof-strip">
+  <div class="proof-strip-inner">
+    <div class="proof-stat"><div class="proof-val">2,400+</div><div class="proof-lbl">Properties secured</div></div>
+    <div class="proof-div"></div>
+    <div class="proof-stat"><div class="proof-val">$31k</div><div class="proof-lbl">Average saving per buyer</div></div>
+    <div class="proof-div"></div>
+    <div class="proof-stat"><div class="proof-val">4.9 ★</div><div class="proof-lbl">Average rating</div></div>
+    <div class="proof-div"></div>
+    <div class="proof-quote-wrap">
+      <div class="proof-stars">★★★★★</div>
+      <div class="proof-quote">"Found an off-market property in Frankston North, $38k under comparable sales."</div>
+      <div class="proof-attr">James T. · First Home Buyer, Melbourne <span class="proof-badge">Saved $38k</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="sec sec-white" id="how">
   <div class="wrap fade">
@@ -678,7 +743,7 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 <!-- CALCULATORS -->
 <section class="sec sec-navy" id="calcs">
   <div class="wrap fade">
-    <div class="sh center" style="max-width:960px;margin-left:auto;margin-right:auto;"><span class="sh-ey ey-white">Free Tools</span><h2 class="lt">Property Calculators</h2><p class="sh-sub lt">Run the numbers before you commit.</p></div>
+    <div class="sh" style="max-width:960px;margin-left:auto;margin-right:auto;"><span class="sh-ey ey-white">Free Tools</span><h2 class="lt">Property Calculators</h2><p class="sh-sub lt">Run the numbers before you commit.</p></div>
     <div class="c-tabs">
       <button class="c-tab on" onclick="cSwitch(this,'cm')">🏠 Mortgage</button>
       <button class="c-tab" onclick="cSwitch(this,'cb')">💰 Borrowing Power</button>
@@ -851,6 +916,11 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   </div>
 </div>
 
+<!-- FIXED BOTTOM CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="#quiz-panel">Get My Free Agent Match →</a>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="f-grid">
@@ -865,6 +935,19 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 
 
 <script>
+
+// STICKY CTA: show after user scrolls past hero
+(function(){
+  var cta = document.getElementById('sticky-cta');
+  if (!cta) return;
+  function checkScroll(){
+    var heroH = document.getElementById('top') ? document.getElementById('top').offsetHeight : 400;
+    if (window.scrollY > heroH * 0.6) cta.classList.add('visible');
+    else cta.classList.remove('visible');
+  }
+  window.addEventListener('scroll', checkScroll, {passive:true});
+  checkScroll();
+})();
 
 // Fix ALL internal anchor links to account for 100px fixed header
 document.addEventListener('click', function(e) {
