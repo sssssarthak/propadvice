@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PropAdvice — Find Your Buyers Agent in 3 Minutes. Free. | Australia</title>
+<title>PropAdvice - Find Your Buyers Agent in 3 Minutes. Free. | Australia</title>
 <meta name="description" content="Find a vetted buyers agent in Melbourne, Sydney, Brisbane, Perth or Adelaide — matched to your goals in 3 minutes, completely free. Expert representation against sellers.">
 <meta name="keywords" content="buyers agent, buyers advocate, find buyers agent Melbourne, buyers agent Sydney, buyers agent Brisbane, buyers agent Perth, free buyers agent matching, property buyer Australia">
 <meta name="robots" content="index, follow">
@@ -353,6 +353,16 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
   .hero-mob-cta{display:block;background:var(--amber);color:var(--navy-deep);text-decoration:none;font-size:15px;font-weight:800;text-align:center;padding:16px 24px;border-radius:8px;margin:16px 0 20px;letter-spacing:0.2px;}
 }
 
+/* Mobile quiz slot — quiz panel gets moved here by JS on mobile */
+.hero-mob-quiz{display:none;}
+@media(max-width:900px){
+  .hero-mob-quiz{display:block;margin:20px 0 4px;}
+  /* hide the original hero-right on mobile once quiz is moved */
+  .hero-right.quiz-moved{display:none;}
+  /* hide the CTA button since quiz is now inline */
+  .hero-mob-cta{display:none !important;}
+}
+
 /* FIXED BOTTOM CTA — ALL screens */
 .sticky-cta{
   position:fixed;
@@ -599,6 +609,10 @@ body{padding-bottom:80px;}
     <div class="h-eyebrow">Free · Vetted · Australian</div>
     <h1>The seller has<br>an expert.<br><em>Now you do too.</em></h1>
     <p class="hero-sub">Matched with a vetted buyers agent in 3 minutes. Always free.</p>
+
+    <!-- Quiz panel injected here on mobile only -->
+    <div class="hero-mob-quiz" id="hero-mob-quiz"></div>
+
     <div class="h-trust">
       <div class="h-ti"><span class="h-tick">✓</span> Free forever</div>
       <div class="h-ti"><span class="h-tick">✓</span> No obligation</div>
@@ -935,14 +949,14 @@ body{padding-bottom:80px;}
 <section class="sec sec-navy" id="calcs">
   <div class="wrap fade">
     <div class="sh" style="max-width:960px;margin-left:auto;margin-right:auto;"><span class="sh-ey ey-white">Free Tools</span><h2 class="lt">Property Calculators</h2><p class="sh-sub lt">Run the numbers before you commit.</p></div>
-    <div class="c-tabs">
+    <div class="c-tabs" style="max-width:1200px;margin:0 auto;">
       <button class="c-tab on" onclick="cSwitch(this,'cm')">🏠 Mortgage</button>
       <button class="c-tab" onclick="cSwitch(this,'cb')">💰 Borrowing Power</button>
       <button class="c-tab" onclick="cSwitch(this,'cs')">🧾 Stamp Duty</button>
       <button class="c-tab" onclick="cSwitch(this,'cy')">📈 Rental Yield</button>
       <button class="c-tab" onclick="cSwitch(this,'cc')">💵 Cash Flow</button>
     </div>
-    <div style="max-width:960px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:0 0 12px 12px;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:0 0 12px 12px;overflow:hidden;">
       <div class="cpanel on" id="cp-cm">
         <div class="c-inputs">
           <div><div class="c-inputs-title">Mortgage Repayment</div><div class="c-inputs-sub">Estimate your monthly repayments</div></div>
@@ -1126,6 +1140,31 @@ body{padding-bottom:80px;}
 
 
 <script>
+
+// MOBILE: move quiz panel into hero-left slot (between sub and trust pills)
+(function(){
+  var slot = document.getElementById('hero-mob-quiz');
+  var panel = document.getElementById('quiz-panel');
+  var heroRight = panel ? panel.parentElement : null;
+  if (!slot || !panel || !heroRight) return;
+  var originalParent = heroRight;
+  var isMoved = false;
+
+  function reposition(){
+    var mobile = window.innerWidth <= 900;
+    if (mobile && !isMoved) {
+      slot.appendChild(panel);
+      heroRight.classList.add('quiz-moved');
+      isMoved = true;
+    } else if (!mobile && isMoved) {
+      heroRight.appendChild(panel);
+      heroRight.classList.remove('quiz-moved');
+      isMoved = false;
+    }
+  }
+  reposition();
+  window.addEventListener('resize', reposition);
+})();
 
 // STICKY CTA: show after user scrolls past hero
 (function(){
