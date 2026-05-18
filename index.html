@@ -1123,7 +1123,7 @@ body{padding-bottom:80px;}
 
 <!-- FIXED BOTTOM CTA -->
 <div class="sticky-cta" id="sticky-cta">
-  <a href="#quiz-panel">Get My Free Agent Match →</a>
+  <a href="#top" onclick="if(window.innerWidth<=900){event.preventDefault();var qp=document.getElementById('quiz-panel');if(qp){window.scrollTo({top:qp.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});}}">Get My Free Agent Match →</a>
 </div>
 
 <!-- FOOTER -->
