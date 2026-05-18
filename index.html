@@ -72,6 +72,7 @@ nav a:hover{color:var(--white);}
 
 /* HAMBURGER */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:500;}
+@media(max-width:900px){.nav-burger{display:flex;}}
 .nav-burger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .25s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
@@ -84,7 +85,6 @@ nav a:hover{color:var(--white);}
 .nav-drawer a:last-child{border:none;}
 .nav-drawer a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
 .nav-drawer .nav-cta{background:var(--amber);color:var(--navy-deep) !important;margin:16px 24px 0;border-radius:8px;text-align:center;padding:14px 24px;font-size:15px;font-weight:700 !important;}
-/* urgency bar sits fixed directly below nav */
 
 /* HERO */
 .hero{min-height:calc(100dvh - 64px);height:auto;padding-top:0;margin-top:64px;display:grid;grid-template-columns:5fr 6fr;position:relative;overflow:hidden;align-items:stretch;}
@@ -331,7 +331,6 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 .f-base{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:11.5px;color:rgba(255,255,255,0.2);}
 .f-dis{font-family:'Lora',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,0.16);margin-top:14px;max-width:1200px;margin-left:auto;margin-right:auto;line-height:1.65;}
 
-
 /* FAQ SECTION */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;}
 .faq-item{padding:24px 0;border-bottom:1px solid var(--chalk-dark);}
@@ -346,59 +345,59 @@ footer{background:var(--navy-deep);padding:52px 52px 28px;}
 .fade{opacity:0;transform:translateY(16px);transition:opacity .55s,transform .55s;}
 .fade.vis{opacity:1;transform:none;}
 
-
 /* MOBILE HERO CTA */
 .hero-mob-cta{display:none;}
 @media(max-width:900px){
   .hero-mob-cta{display:block;background:var(--amber);color:var(--navy-deep);text-decoration:none;font-size:15px;font-weight:800;text-align:center;padding:16px 24px;border-radius:8px;margin:16px 0 20px;letter-spacing:0.2px;}
 }
 
-/* Mobile quiz slot — quiz panel gets moved here by JS on mobile */
+/* Mobile quiz slot */
 .hero-mob-quiz{display:none;}
 @media(max-width:900px){
   .hero-mob-quiz{display:block;margin:20px 0 4px;}
-  /* hide the original hero-right on mobile once quiz is moved */
   .hero-right.quiz-moved{display:none;}
-  /* hide the CTA button since quiz is now inline */
   .hero-mob-cta{display:none !important;}
 }
 
-/* FIXED BOTTOM CTA — ALL screens */
+/* FIXED BOTTOM CTA */
 .sticky-cta{
   position:fixed;
   bottom:0;left:0;right:0;
   z-index:600;
-  padding:12px 20px 16px;
-  background:linear-gradient(to top,rgba(14,24,38,0.97) 60%,transparent);
+  /* Pad for iOS safe area (home indicator) */
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background:var(--navy-deep);
+  border-top:1px solid rgba(255,255,255,0.08);
   pointer-events:none;
   opacity:0;
-  transform:translateY(10px);
-  transition:opacity .3s,transform .3s;
+  transform:translateY(100%);
+  transition:opacity .25s,transform .25s;
+  /* Only show on mobile — desktop doesn't need it */
 }
-.sticky-cta.visible{opacity:1;transform:none;pointer-events:all;}
+.sticky-cta.visible{opacity:1;transform:translateY(0);pointer-events:all;}
 .sticky-cta a{
   display:block;
-  max-width:480px;
-  margin:0 auto;
+  width:100%;
   background:var(--amber);
   color:var(--white);
   text-align:center;
-  padding:16px 32px;
-  border-radius:10px;
+  padding:15px 24px;
+  border-radius:8px;
   font-size:15px;
   font-weight:800;
   text-decoration:none;
   letter-spacing:0.2px;
-  box-shadow:0 4px 24px rgba(192,104,24,0.45);
-  transition:background .18s,transform .18s;
+  box-shadow:0 4px 20px rgba(192,104,24,0.4);
+  transition:background .18s;
 }
-.sticky-cta a:hover{background:var(--amber-bright);transform:translateY(-2px);}
-body{padding-bottom:80px;}
-@media(max-width:480px){
-  .sticky-cta a{font-size:14px;padding:15px 24px;}
+.sticky-cta a:hover{background:var(--amber-bright);}
+/* Reserve space so content isn't hidden behind sticky bar */
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px));}
+@media(min-width:901px){
+  /* Hide entirely on desktop — not needed */
+  .sticky-cta{display:none;}
+  body{padding-bottom:0;}
 }
-
-
 
 /* SCROLLING TRUST TICKER */
 .ticker-wrap{background:var(--amber);overflow:hidden;padding:10px 0;position:relative;}
@@ -424,13 +423,7 @@ body{padding-bottom:80px;}
 .proof-quote{font-family:'Lora',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.72);line-height:1.6;margin-bottom:6px;}
 .proof-attr{font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.5px;display:flex;align-items:center;gap:10px;}
 .proof-badge{background:rgba(76,175,130,0.15);border:1px solid rgba(76,175,130,0.3);color:#4caf82;font-size:10px;padding:2px 8px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;}
-@media(max-width:900px){
-  .proof-strip-inner{padding:24px 20px;flex-wrap:wrap;gap:20px;}
-  .proof-stat{padding:0;flex:1;min-width:80px;}
-  .proof-div{display:none;}
-  .proof-quote-wrap{padding-left:0;width:100%;flex-basis:100%;}
-}
-
+@media(max-width:900px){.proof-strip-inner{padding:24px 20px;flex-wrap:wrap;gap:20px;}.proof-stat{padding:0;flex:1;min-width:80px;}.proof-div{display:none;}.proof-quote-wrap{padding-left:0;width:100%;flex-basis:100%;}}
 
 /* LIVE ACTIVITY FEED */
 .activity-sec{background:var(--navy-deep);padding:72px 52px;}
@@ -454,7 +447,6 @@ body{padding-bottom:80px;}
 @media(max-width:900px){.activity-feed{grid-template-columns:1fr 1fr;}.activity-sec{padding:52px 20px;}}
 @media(max-width:600px){.activity-feed{grid-template-columns:1fr;}}
 
-
 /* BUYER RISK SECTION */
 .risk-sec{background:var(--chalk);padding:100px 52px;}
 .risk-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
@@ -474,7 +466,6 @@ body{padding-bottom:80px;}
 .risk-list li::before{content:'→';color:var(--amber-bright);font-weight:700;flex-shrink:0;margin-top:1px;}
 @media(max-width:900px){.risk-inner{grid-template-columns:1fr;gap:36px;}.risk-sec{padding:64px 20px;}}
 @media(max-width:600px){.risk-stats{grid-template-columns:1fr 1fr;}.risk-sec{padding:52px 16px;}}
-
 
 /* QUIZ MATCH ANIMATION */
 .match-anim{padding:8px 0 20px;}
@@ -526,32 +517,26 @@ body{padding-bottom:80px;}
   .sh h2{font-size:24px;}
   .how-box{padding:28px 20px;}
   .how-num{font-size:48px;}
-  /* Hero - tight and clean on mobile */
   .hero-left{padding:20px 16px 12px;}
   .hero-left h1{font-size:32px;margin-bottom:8px;line-height:1.1;}
   .hero-sub{font-size:13px;line-height:1.6;margin-bottom:12px;}
   .h-eyebrow{display:inline-block;width:auto;font-size:8.5px;letter-spacing:1.5px;padding:3px 9px;margin-bottom:10px;white-space:nowrap;}
-  /* Testimonial - compact */
   .hero-proof{padding:10px 14px;margin-bottom:12px;}
   .hero-proof::before{font-size:40px;}
   .hero-proof-stars{font-size:11px;margin-bottom:4px;}
   .hero-proof-quote{font-size:12px;line-height:1.5;margin-bottom:6px;}
   .hero-proof-author{font-size:9.5px;}
   .hero-proof-badge{font-size:9px;padding:2px 7px;}
-  /* Trust pills - single row */
   .h-trust{gap:10px;margin-bottom:0;}
   .h-ti{font-size:10.5px;}
-  /* Mini stats - no wrapping */
   .h-mini-stats{margin-top:12px;}
   .h-mini-stat{padding:11px 12px;}
   .h-ms-val{font-size:17px;}
   .h-ms-lbl{font-size:9.5px;}
-  /* Quiz */
   .hero-right{padding:12px 16px 16px;}
   .quiz-panel{max-width:100%;}
   .qp-opts{grid-template-columns:1fr;}
   .qp-inprow{grid-template-columns:1fr;}
-  /* Rest */
   .c-tabs{overflow-x:auto;flex-wrap:nowrap;}
   .c-tab{padding:11px 14px;font-size:11.5px;flex-shrink:0;}
   .c-res-amount{font-size:38px;}
@@ -574,6 +559,129 @@ body{padding-bottom:80px;}
   .faq-grid{grid-template-columns:1fr;}
 }
 </style>
+
+<!-- =====================================================
+     DARK QUIZ PANEL OVERRIDE
+     Replaces the white card with a cohesive dark glass panel
+     that matches the navy hero background.
+====================================================== -->
+<style>
+/* Core panel — dark glass */
+.quiz-panel {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* Header strip */
+.qp-head {
+  background: rgba(0,0,0,0.28);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+/* Progress bar — glowing amber */
+.qp-progress-track { background: rgba(255,255,255,0.07); }
+.qp-progress-fill {
+  background: linear-gradient(90deg, var(--amber), var(--amber-bright));
+  box-shadow: 0 0 10px rgba(217,128,42,0.55);
+}
+
+.qp-meta  { color: rgba(255,255,255,0.28); }
+.qp-title { color: var(--white); }
+
+/* Body */
+.qp-body { background: transparent; }
+.qp-question { color: rgba(255,255,255,0.88); }
+
+/* Option tiles */
+.qp-opt {
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+.qp-opt:hover {
+  border-color: rgba(217,128,42,0.5);
+  background: rgba(192,104,24,0.11);
+}
+.qp-opt.on {
+  border-color: var(--amber);
+  background: rgba(192,104,24,0.18);
+  box-shadow: 0 0 0 3px rgba(192,104,24,0.12);
+}
+.qp-opt-text { color: rgba(255,255,255,0.85); }
+.qp-opt-sub  { color: rgba(255,255,255,0.38); }
+
+/* Contact fields */
+.qp-lbl { color: rgba(255,255,255,0.32); }
+.qp-input {
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+}
+.qp-input::placeholder { color: rgba(255,255,255,0.2); }
+.qp-input:focus {
+  border-color: var(--amber);
+  background: rgba(192,104,24,0.08);
+  box-shadow: 0 0 0 3px rgba(192,104,24,0.1);
+}
+
+/* Notice + consent */
+.qp-notice {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: rgba(255,255,255,0.5);
+}
+.qp-consent { color: rgba(255,255,255,0.42); }
+.qp-consent input { accent-color: var(--amber); }
+
+/* Footer row */
+.qp-back { color: rgba(255,255,255,0.28); }
+.qp-back:hover { color: rgba(255,255,255,0.65); }
+.qp-submit {
+  color: var(--navy-deep);
+  box-shadow: 0 4px 18px rgba(192,104,24,0.4);
+}
+.qp-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(192,104,24,0.5);
+}
+.qp-trust { color: rgba(255,255,255,0.22); }
+
+/* ---- Success / match state ---- */
+.qp-success h3 { color: var(--white); }
+.qp-success p  { color: rgba(255,255,255,0.42); }
+
+.qps-icon {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.qps-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.qps-box h4  { color: rgba(255,255,255,0.28); }
+.qps-row     { border-bottom-color: rgba(255,255,255,0.06); }
+.qps-k       { color: rgba(255,255,255,0.32); }
+.qps-v       { color: rgba(255,255,255,0.85); }
+
+/* Match animation text */
+.match-anim-title    { color: rgba(255,255,255,0.82); }
+.match-step          { color: rgba(255,255,255,0.28); }
+.match-step.done     { color: rgba(255,255,255,0.82); }
+.ms-icon             { border-color: rgba(255,255,255,0.12); }
+.match-step.done .ms-icon { background: var(--amber); border-color: var(--amber); color: var(--navy-deep); }
+
+.match-confirmed h3  { color: var(--white); }
+.match-confirmed p   { color: rgba(255,255,255,0.42); }
+.match-agent-preview {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.map-label    { color: rgba(255,255,255,0.85); }
+.map-sublabel { color: rgba(255,255,255,0.35); }
+</style>
 </head>
 <body>
 
@@ -585,13 +693,11 @@ body{padding-bottom:80px;}
     <li><a href="#calcs">Calculators</a></li>
     <li><a href="#top" class="nav-cta">Get Expert Match</a></li>
   </ul>
-  <!-- Hamburger — mobile only -->
   <button class="nav-burger" id="nav-burger" aria-label="Menu" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- Mobile drawer -->
 <div class="nav-drawer" id="nav-drawer">
   <a href="#how"  onclick="closeNav()">How It Works</a>
   <a href="#blog" onclick="closeNav()">Insights</a>
@@ -601,8 +707,6 @@ body{padding-bottom:80px;}
   <a href="#top"  class="nav-cta" onclick="closeNav()">Get My Free Match →</a>
 </div>
 
-
-<!-- HERO — quiz lives here, one single flow -->
 <div id="quiz" style="position:absolute;top:0;visibility:hidden;"></div>
 <section class="hero" id="top">
   <div class="hero-left">
@@ -610,7 +714,6 @@ body{padding-bottom:80px;}
     <h1>The seller has<br>an expert.<br><em>Now you do too.</em></h1>
     <p class="hero-sub">Matched with a vetted buyers agent in 3 minutes. Always free.</p>
 
-    <!-- Quiz panel injected here on mobile only -->
     <div class="hero-mob-quiz" id="hero-mob-quiz"></div>
 
     <div class="h-trust">
@@ -622,7 +725,6 @@ body{padding-bottom:80px;}
   </div>
 
   <div class="hero-right">
-    <!-- THE ONE QUIZ. No mini quiz. No "complete profile". Just this. -->
     <div class="quiz-panel" id="quiz-panel">
 
       <div id="qstep-1" class="qp-step">
@@ -742,7 +844,6 @@ body{padding-bottom:80px;}
 
       <div id="qstep-done" class="hidden">
         <div class="qp-success">
-          <!-- Match processing animation -->
           <div class="match-anim" id="match-anim">
             <div class="match-anim-title">Finding your expert...</div>
             <div class="match-steps">
@@ -752,7 +853,6 @@ body{padding-bottom:80px;}
               <div class="match-step" id="ms-4"><span class="ms-icon">○</span><span class="ms-text">Agent briefed</span></div>
             </div>
           </div>
-          <!-- Final confirmed state (hidden until animation done) -->
           <div class="match-confirmed hidden" id="match-confirmed">
             <div class="match-conf-icon">✓</div>
             <h3>You're Matched, <span id="s-name"></span>!</h3>
@@ -769,7 +869,7 @@ body{padding-bottom:80px;}
               </div>
             </div>
             <div class="qps-box"><h4>Your Profile Summary</h4><div id="s-sum"></div></div>
-            <p style="font-size:11px;color:var(--text-soft);margin-top:8px;">Confirmation sent to your email. Check spam if you don't see it.</p>
+            <p style="font-size:11px;margin-top:8px;">Confirmation sent to your email. Check spam if you don't see it.</p>
           </div>
         </div>
       </div>
@@ -777,8 +877,6 @@ body{padding-bottom:80px;}
     </div>
   </div>
 </section>
-
-
 
 <!-- SCROLLING TRUST TICKER -->
 <div class="ticker-wrap">
@@ -837,8 +935,6 @@ body{padding-bottom:80px;}
   </div>
 </section>
 
-
-
 <!-- BUYER RISK SECTION -->
 <section class="risk-sec fade">
   <div class="risk-inner">
@@ -847,22 +943,10 @@ body{padding-bottom:80px;}
       <h2>The wrong move can cost more than<br><em>the agent's fee.</em></h2>
       <p>Most buyers don't realise how much they're leaving on the table. A few data points that should change how you think about buying property.</p>
       <div class="risk-stats">
-        <div class="risk-stat">
-          <div class="risk-stat-val">$47k</div>
-          <div class="risk-stat-lbl">Average amount Australian buyers overpay without professional representation</div>
-        </div>
-        <div class="risk-stat">
-          <div class="risk-stat-val">73%</div>
-          <div class="risk-stat-lbl">Of buyers using a buyers agent report paying below the initial asking price</div>
-        </div>
-        <div class="risk-stat">
-          <div class="risk-stat-val">3 min</div>
-          <div class="risk-stat-lbl">That's all it takes to get matched with your expert — free, no obligation</div>
-        </div>
-        <div class="risk-stat">
-          <div class="risk-stat-val">$0</div>
-          <div class="risk-stat-lbl">Cost to you. The buyers agent referral is funded by the agent, not the buyer</div>
-        </div>
+        <div class="risk-stat"><div class="risk-stat-val">$47k</div><div class="risk-stat-lbl">Average amount Australian buyers overpay without professional representation</div></div>
+        <div class="risk-stat"><div class="risk-stat-val">73%</div><div class="risk-stat-lbl">Of buyers using a buyers agent report paying below the initial asking price</div></div>
+        <div class="risk-stat"><div class="risk-stat-val">3 min</div><div class="risk-stat-lbl">That's all it takes to get matched with your expert — free, no obligation</div></div>
+        <div class="risk-stat"><div class="risk-stat-val">$0</div><div class="risk-stat-lbl">Cost to you. The buyers agent referral is funded by the agent, not the buyer</div></div>
       </div>
     </div>
     <div class="risk-right">
@@ -905,20 +989,14 @@ body{padding-bottom:80px;}
 <section class="sec sec-chalk" id="blog">
   <div class="wrap fade">
     <div class="sh"><span class="sh-ey ey-amber">Market Intelligence</span><h2 class="dk">Property Insights &amp; <em>Suburb Guides</em></h2><p class="sh-sub dk">In-depth analysis of Australia's best investment areas, strategies, and market movements.</p></div>
-
-    <!-- Featured banner -->
     <div class="blog-featured fade" onclick="openArticle('vic')">
       <div class="blog-feat-left">
         <span class="sh-ey ey-white" style="margin-bottom:12px;">Victoria · Featured</span>
         <h3>Top 10 Investment Suburbs in Victoria for 2026</h3>
         <p>Rental yields, capital growth data, and infrastructure pipeline. Ranked for investors right now.</p>
       </div>
-      <div class="blog-feat-right">
-        <span class="blog-feat-read">Read Full Guide →</span>
-      </div>
+      <div class="blog-feat-right"><span class="blog-feat-read">Read Full Guide →</span></div>
     </div>
-
-    <!-- 3x3 grid -->
     <div class="blog-grid fade">
       <div class="blog-card" onclick="openArticle('syd')"><span class="blog-card-tag">Sydney · NSW</span><h4>Top 10 Investment Areas in Sydney 2026</h4><p>Western Sydney infrastructure surge, Inner West yields, and coastal markets ranked.</p><div class="blog-card-meta">8 min · Apr 2026</div></div>
       <div class="blog-card" onclick="openArticle('qld')"><span class="blog-card-tag">Queensland</span><h4>Best Suburbs in Brisbane &amp; Gold Coast 2026</h4><p>Olympics legacy and population growth driving QLD investment markets forward.</p><div class="blog-card-meta">7 min · Mar 2026</div></div>
@@ -1092,7 +1170,7 @@ body{padding-bottom:80px;}
   </div>
 </section>
 
-<!-- FAQ — SEO + conversion -->
+<!-- FAQ -->
 <section class="sec sec-chalk" id="faq">
   <div class="wrap fade">
     <div class="sh center">
@@ -1123,7 +1201,7 @@ body{padding-bottom:80px;}
 
 <!-- FIXED BOTTOM CTA -->
 <div class="sticky-cta" id="sticky-cta">
-  <a href="#top" onclick="if(window.innerWidth<=900){event.preventDefault();var qp=document.getElementById('quiz-panel');if(qp){window.scrollTo({top:qp.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});}}">Get My Free Agent Match →</a>
+  <a href="#top" id="sticky-cta-link">Get My Free Agent Match →</a>
 </div>
 
 <!-- FOOTER -->
@@ -1138,18 +1216,14 @@ body{padding-bottom:80px;}
   <p class="f-dis">PropAdvice is a referral and lead generation platform only. We are not a licensed real estate agency or financial adviser. All calculator results are estimates only and should not be relied upon as financial advice. Please seek independent professional advice before making any property or financial decisions.</p>
 </footer>
 
-
 <script>
-
-// MOBILE: move quiz panel into hero-left slot (between sub and trust pills)
+// MOBILE: move quiz panel into hero-left slot
 (function(){
   var slot = document.getElementById('hero-mob-quiz');
   var panel = document.getElementById('quiz-panel');
   var heroRight = panel ? panel.parentElement : null;
   if (!slot || !panel || !heroRight) return;
-  var originalParent = heroRight;
   var isMoved = false;
-
   function reposition(){
     var mobile = window.innerWidth <= 900;
     if (mobile && !isMoved) {
@@ -1166,20 +1240,32 @@ body{padding-bottom:80px;}
   window.addEventListener('resize', reposition);
 })();
 
-// STICKY CTA: show after user scrolls past hero
+// STICKY CTA
 (function(){
   var cta = document.getElementById('sticky-cta');
   if (!cta) return;
   function checkScroll(){
-    var heroH = document.getElementById('top') ? document.getElementById('top').offsetHeight : 400;
-    if (window.scrollY > heroH * 0.6) cta.classList.add('visible');
+    // Only show on mobile
+    if (window.innerWidth > 900) { cta.classList.remove('visible'); return; }
+    // Show after user scrolls 200px
+    if (window.scrollY > 200) cta.classList.add('visible');
     else cta.classList.remove('visible');
   }
   window.addEventListener('scroll', checkScroll, {passive:true});
+  window.addEventListener('resize', checkScroll, {passive:true});
   checkScroll();
+  // Tap sticky CTA → scroll to quiz on mobile
+  var ctaLink = document.getElementById('sticky-cta-link');
+  if (ctaLink) {
+    ctaLink.addEventListener('click', function(e){
+      e.preventDefault();
+      var qp = document.getElementById('quiz-panel');
+      if (qp) { window.scrollTo({top: Math.max(0, qp.getBoundingClientRect().top + window.scrollY - 80), behavior:'smooth'}); }
+    });
+  }
 })();
 
-// Fix ALL internal anchor links to account for 100px fixed header
+// Smooth anchor scroll
 document.addEventListener('click', function(e) {
   const a = e.target.closest('a[href^="#"]');
   if (!a) return;
@@ -1189,13 +1275,8 @@ document.addEventListener('click', function(e) {
   if (href === '#top' || href === '#quiz') {
     if (window.innerWidth <= 900) {
       const qp = document.getElementById('quiz-panel');
-      if (qp) {
-        const offset = qp.getBoundingClientRect().top + window.scrollY - 108;
-        window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      if (qp) { const offset = qp.getBoundingClientRect().top + window.scrollY - 108; window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' }); }
+    } else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     return;
   }
   const target = document.querySelector(href);
@@ -1204,27 +1285,31 @@ document.addEventListener('click', function(e) {
   window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
 });
 
-// FAQ toggle
-function toggleFaq(el){
-  el.classList.toggle('open');
-  const a = el.nextElementSibling;
-  a.classList.toggle('open');
+// Mobile nav
+function toggleNav(){
+  document.getElementById('nav-burger').classList.toggle('open');
+  document.getElementById('nav-drawer').classList.toggle('open');
+}
+function closeNav(){
+  document.getElementById('nav-burger').classList.remove('open');
+  document.getElementById('nav-drawer').classList.remove('open');
 }
 
-// Hide sticky CTA once quiz is submitted
+// FAQ
+function toggleFaq(el){
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
 
-// ONE QUIZ. ONE FLOW. No mini quiz. No "complete profile". Done.
+// QUIZ
 const qd = {};
-
 function qNext(el, key, val, nextStep) {
   el.closest('.qp-opts').querySelectorAll('.qp-opt').forEach(o => o.classList.remove('on'));
   el.classList.add('on');
   qd[key] = val;
   setTimeout(() => showStep(nextStep), 280);
 }
-
 function qBack(from, to) { showStep(to); }
-
 function showStep(n) {
   document.querySelectorAll('[id^="qstep-"]').forEach(s => s.classList.add('hidden'));
   const t = document.getElementById('qstep-' + n);
@@ -1233,12 +1318,10 @@ function showStep(n) {
   t.classList.remove('qp-step');
   void t.offsetWidth;
   t.classList.add('qp-step');
-  // Mobile: scroll quiz panel into view
   if (window.innerWidth <= 900) {
     setTimeout(() => document.getElementById('quiz-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
   }
 }
-
 function qSubmit() {
   const fn = document.getElementById('qfn').value.trim();
   const ln = document.getElementById('qln').value.trim();
@@ -1246,14 +1329,13 @@ function qSubmit() {
   const ph = document.getElementById('qph').value.trim();
   if (!fn || !em) { alert('Please enter your name and email address.'); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { alert('Please enter a valid email address.'); return; }
-  if (!ph) { alert('Please enter your mobile number. Your matched agent needs it to call you.'); return; }
+  if (!ph) { alert('Please enter your mobile number.'); return; }
   if (!/^(\+?61|0)[2-9]\d{8}$/.test(ph.replace(/\s/g, ''))) { alert('Please enter a valid Australian mobile (e.g. 0412 345 678).'); return; }
   if (!document.getElementById('qconsent').checked) { alert('Please confirm your consent to proceed.'); return; }
 
-  gtag('event', 'conversion', { 'send_to': 'AW-18154215001/obnZCLmP6qocENmszdBD', 'value': 1.0, 'currency': 'AUD' });
+  if(typeof gtag!=='undefined') gtag('event', 'conversion', { 'send_to': 'AW-18154215001/obnZCLmP6qocENmszdBD', 'value': 1.0, 'currency': 'AUD' });
   const sc = document.getElementById('sticky-cta'); if(sc) sc.style.display='none';
 
-  // Build summary first (needed later)
   const L = {
     goal: { fh:'First Home', inv:'Investment', up:'Upgrading', dn:'Downsizing' },
     budget: { u500:'Under $500k', '500_800':'$500k–$800k', '800_1200':'$800k–$1.2M', '1200_2m':'$1.2M–$2M', '2mplus':'$2M+' },
@@ -1268,19 +1350,14 @@ function qSubmit() {
   document.getElementById('s-sum').innerHTML = html;
   document.getElementById('s-name').textContent = fn;
 
-  // Show the done step with animation
+  document.querySelectorAll('[id^="qstep-"]').forEach(s => s.classList.add('hidden'));
   document.getElementById('qstep-done').classList.remove('hidden');
 
-  // Animate match steps
   const steps = [1,2,3,4];
   steps.forEach((n, i) => {
     setTimeout(() => {
       const el = document.getElementById('ms-' + n);
-      if (el) {
-        el.classList.add('done');
-        el.querySelector('.ms-icon').textContent = '✓';
-      }
-      // After last step, show confirmed state
+      if (el) { el.classList.add('done'); el.querySelector('.ms-icon').textContent = '✓'; }
       if (i === steps.length - 1) {
         setTimeout(() => {
           const anim = document.getElementById('match-anim');
@@ -1316,14 +1393,14 @@ doMort();doBorrow();doStamp();doYield();doCF();
 
 // ARTICLES
 const articles={
-  'budget2026':{eyebrow:'🏛️ Federal Budget · Policy · May 2026',title:'2026 Federal Budget: What It Means for Australian Property Buyers',intro:'The Albanese Government\'s 2026 Federal Budget landed with several measures directly affecting property buyers, investors, and renters. Here\'s what actually matters and what you need to do about it.',readTime:'11 min read',content:`<h2>The Big Picture: Housing Was Front and Centre</h2><p>For the first time in years, housing affordability dominated the Federal Budget narrative. The government announced a multi-pronged approach — expanding first home buyer schemes, funding 40,000 new social and affordable dwellings, and targeted tax changes that will affect investors and owner-occupiers differently.</p><div class="art-callout"><p>💡 <strong>PropAdvice view:</strong> Most of these measures benefit buyers who act in the next 12 months. Scheme places fill up fast — the First Home Guarantee allocated its full 50,000 places within 9 months last cycle.</p></div><h2>First Home Buyer Changes</h2><p>The Federal Budget 2026 expanded the Help to Buy shared equity scheme, allocating an additional $1.1 billion and raising income thresholds. Under the updated scheme, eligible buyers can purchase with as little as a 2% deposit, with the government taking up to a 40% equity stake in the property.</p><ul><li><strong>Income cap raised:</strong> Singles up to $90,000 (was $80,000), couples up to $120,000 (was $100,000).</li><li><strong>Price caps lifted:</strong> Property price caps increased by approximately $50,000 in each state to reflect current market conditions.</li><li><strong>First Home Guarantee continues:</strong> 50,000 places per year with a 5% deposit and no LMI — now includes permanent residents for the first time.</li><li><strong>Regional First Home Buyer Guarantee:</strong> 10,000 additional places for buyers purchasing outside capital cities.</li></ul><h2>What Happened with Negative Gearing?</h2><p>Negative gearing survived — again. Despite significant pre-budget speculation, the government made no changes to negative gearing deductibility or the 50% capital gains tax discount for investment properties held over 12 months. This was largely expected given the political sensitivity and the government's focus on supply-side measures instead.</p><div class="art-callout"><p>💡 Negative gearing remains fully intact. If you were holding off buying an investment property over CGT fears, those fears were unfounded for this budget cycle.</p></div><h2>Housing Supply: 40,000 New Homes</h2><p>The government committed $6.2 billion to build 40,000 social and affordable homes over five years through the Housing Australia Future Fund. An additional $1 billion was allocated to state and territory governments to fast-track planning approvals and infrastructure for medium-density housing. The practical impact on investors: more supply in affordable housing corridors over the medium term, which marginally softens rental yields in some markets but is unlikely to shift the dial materially within 3 years.</p><h2>Shared Equity: The Hidden Opportunity</h2><p>Help to Buy's expansion is significant but misunderstood. The government co-owning up to 40% of your property sounds attractive for access — but it means you also share 40% of your capital gains on sale. For a property that grows from $600,000 to $900,000 over 10 years, that's $120,000 of your gain that flows back to the government on exit. For buyers planning to hold long-term and build equity aggressively, a more conventional route with a buyers agent negotiating a strong price may ultimately be more valuable.</p><h2>Stamp Duty & State Interactions</h2><p>The Federal Budget doesn't directly control stamp duty (a state tax), but the Commonwealth's Help to Buy and First Home Guarantee schemes interact with state concessions. Victoria, NSW, and Queensland have all maintained their First Home Buyer stamp duty exemptions at current thresholds with no 2026 changes announced.</p><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>State</th><th>FHB Stamp Duty Threshold</th><th>2026 Change</th><th>Federal Scheme Compatible</th></tr></thead><tbody><tr><td><strong>VIC</strong></td><td>$600,000 full exemption</td><td>No change</td><td>Yes — stacks with FHBG</td></tr><tr><td><strong>NSW</strong></td><td>$800,000 full exemption</td><td>No change</td><td>Yes</td></tr><tr><td><strong>QLD</strong></td><td>$500,000 full exemption</td><td>No change</td><td>Yes</td></tr><tr><td><strong>WA</strong></td><td>$430,000 full exemption</td><td>No change</td><td>Yes</td></tr><tr><td><strong>SA</strong></td><td>$650,000 full exemption</td><td>No change</td><td>Yes</td></tr></tbody></table></div><h2>Tax Cuts: Serviceability Impact</h2><p>The Stage 3 successor tax adjustments in the 2026 budget deliver modest rate reductions for middle-income earners. For property buyers, the practical effect is a small improvement in borrowing serviceability — APRA stress tests are applied to your income net of tax, so a $1,000 annual tax cut translates to roughly $10,000–$15,000 of additional borrowing capacity depending on the lender.</p><h2>What Should Buyers Do Right Now?</h2><ul><li><strong>Check your scheme eligibility first:</strong> Use our quiz to get matched with an agent who knows exactly which schemes apply to your situation.</li><li><strong>Don't wait for more supply:</strong> The 40,000 homes are a 5-year pipeline. The market today is what it is — waiting for supply doesn't help buyers in 2026.</li><li><strong>Investors: act before sentiment shifts:</strong> With negative gearing intact and rates expected to ease through 2026, the investment case is strong right now.</li><li><strong>Run your numbers:</strong> Use our stamp duty and cash flow calculators below to model your exact situation before committing.</li></ul>`,},
-  'vic':{eyebrow:'📍 Victoria · Featured · Apr 2026',title:'Top 10 Investment Suburbs in Victoria for 2025–2026',intro:'We analysed rental yields, capital growth history, infrastructure pipelines, and population projections across metro and regional Victoria — ranked for investors right now.',readTime:'8 min read',content:`<h2>Why Victoria Right Now?</h2><p>Victoria's property market has stabilised after the post-pandemic correction, with Melbourne's median dwelling price sitting around $780,000 — creating strong value compared to Sydney. Infrastructure investment is accelerating, with the Metro Tunnel, Suburban Rail Loop, and the North East Link all driving suburb-level capital growth.</p><div class="art-callout"><p>💡 <strong>PropAdvice tip:</strong> Victoria's land tax thresholds mean portfolio structure matters more here than anywhere else. A buyers agent can help you buy in the right entity.</p></div><h2>The Top 10 — Ranked</h2><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Region</th><th>Gross Yield</th><th>10yr Growth</th><th>Why It's Hot</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Sunshine</strong></td><td>Inner West</td><td class="yield-good">4.2%</td><td>7.8% p.a.</td><td>Metro Tunnel, gentrification</td></tr><tr><td class="rank">2</td><td><strong>Frankston</strong></td><td>Bayside South</td><td class="yield-good">4.6%</td><td>6.9% p.a.</td><td>Affordability + beach + health precinct</td></tr><tr><td class="rank">3</td><td><strong>Footscray</strong></td><td>Inner West</td><td class="yield-good">3.8%</td><td>8.4% p.a.</td><td>Metro Tunnel hub, hospital precinct</td></tr><tr><td class="rank">4</td><td><strong>Werribee</strong></td><td>Western Corridor</td><td class="yield-good">4.8%</td><td>6.2% p.a.</td><td>Population growth, Avalon Airport</td></tr><tr><td class="rank">5</td><td><strong>Bendigo</strong></td><td>Regional VIC</td><td class="yield-good">5.1%</td><td>7.1% p.a.</td><td>Regional city growth, hospital expansion</td></tr><tr><td class="rank">6</td><td><strong>Heidelberg</strong></td><td>North East</td><td class="yield-good">3.6%</td><td>7.5% p.a.</td><td>NE Link, hospital precinct</td></tr><tr><td class="rank">7</td><td><strong>Geelong</strong></td><td>Geelong</td><td class="yield-good">4.9%</td><td>8.2% p.a.</td><td>Fastest growing city in VIC</td></tr><tr><td class="rank">8</td><td><strong>Maidstone</strong></td><td>Inner West</td><td class="yield-good">4.1%</td><td>7.3% p.a.</td><td>Undervalued, Metro proximity</td></tr><tr><td class="rank">9</td><td><strong>Ballarat</strong></td><td>Regional VIC</td><td class="yield-good">5.4%</td><td>6.0% p.a.</td><td>Tree-changers, affordability</td></tr><tr><td class="rank">10</td><td><strong>Reservoir</strong></td><td>North</td><td class="yield-good">3.7%</td><td>7.9% p.a.</td><td>Train access, gentrification</td></tr></tbody></table></div>`},
-  'syd':{eyebrow:'🌉 Sydney · NSW · Apr 2026',title:'Top 10 Investment Areas in Sydney 2026',intro:'Western Sydney\'s infrastructure surge, Inner West yields, and coastal lifestyle markets — ranked for capital growth and rental returns right now.',readTime:'8 min read',content:`<h2>Sydney's Market in 2026</h2><p>Sydney's median house price has surpassed $1.4 million. But within that are pockets delivering 4–5% gross yields and double-digit capital growth corridors driven by the $120 billion Western Sydney infrastructure pipeline.</p><div class="art-callout"><p>💡 The Western Sydney Airport is one of the largest single infrastructure investments in Australian history. Suburbs within 15 minutes of Badgerys Creek are repricing right now.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Area</th><th>Zone</th><th>Gross Yield</th><th>Key Driver</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Marsden Park</strong></td><td>Western Sydney</td><td class="yield-good">4.3%</td><td>Airport corridor</td></tr><tr><td class="rank">2</td><td><strong>Liverpool</strong></td><td>South West</td><td class="yield-good">4.1%</td><td>Health precinct</td></tr><tr><td class="rank">3</td><td><strong>Marrickville</strong></td><td>Inner West</td><td class="yield-good">3.5%</td><td>Gentrification, metro</td></tr><tr><td class="rank">4</td><td><strong>Penrith</strong></td><td>Western Sydney</td><td class="yield-good">4.6%</td><td>Panthers precinct</td></tr><tr><td class="rank">5</td><td><strong>Campbelltown</strong></td><td>South West</td><td class="yield-good">4.9%</td><td>University, hospital</td></tr><tr><td class="rank">6</td><td><strong>Parramatta</strong></td><td>Greater West</td><td class="yield-good">4.2%</td><td>CBD2 boom</td></tr><tr><td class="rank">7</td><td><strong>Hornsby</strong></td><td>Upper North Shore</td><td class="yield-good">3.7%</td><td>Rezoning uplift</td></tr><tr><td class="rank">8</td><td><strong>Ingleburn</strong></td><td>South West</td><td class="yield-good">4.7%</td><td>Affordability</td></tr></tbody></table></div>`},
-  'qld':{eyebrow:'☀️ Queensland · Mar 2026',title:'Best Suburbs in Brisbane & Gold Coast 2026',intro:'The Olympics legacy, interstate migration surge, and population growth are driving Queensland\'s property market into a multi-year growth cycle.',readTime:'7 min read',content:`<h2>Why Queensland is Australia's #1 Investment Story</h2><p>Queensland has absorbed more interstate migrants than any other state since 2022. Brisbane's median house price has risen 62% over five years and still sits well below Sydney and Melbourne.</p><div class="art-callout"><p>💡 The 2032 Brisbane Olympics is a 7-year infrastructure catalyst. $17 billion in public spending is being deployed right now.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Woolloongabba</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>Olympics stadium</td></tr><tr><td class="rank">2</td><td><strong>Ipswich</strong></td><td>Western Corridor</td><td class="yield-good">5.8%</td><td>Fastest growing LGA in QLD</td></tr><tr><td class="rank">3</td><td><strong>Zillmere</strong></td><td>Northside</td><td class="yield-good">5.2%</td><td>Affordability, yields</td></tr><tr><td class="rank">4</td><td><strong>Coomera</strong></td><td>Northern GC</td><td class="yield-good">4.9%</td><td>Olympics venue, light rail</td></tr><tr><td class="rank">5</td><td><strong>Southport</strong></td><td>GC CBD</td><td class="yield-good">5.1%</td><td>Hospital precinct</td></tr></tbody></table></div>`},
-  'perth':{eyebrow:'🌅 Perth · WA · Feb 2026',title:'Perth Property: Best Suburbs to Buy in 2026',intro:'Affordability, yields above 5%, and WA\'s booming resources economy make Perth Australia\'s best value capital city market.',readTime:'6 min read',content:`<h2>Perth: The Market Nobody Saw Coming</h2><p>Rental vacancy has dropped to a historic 0.7% — the tightest in the nation. Perth's median house price has risen over 70% in four years and still sits below $750,000.</p><div class="art-callout"><p>💡 Perth's 0.7% vacancy means every property gets 20+ applications within 48 hours.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Yield</th><th>Median</th><th>Why</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Armadale</strong></td><td class="yield-good">5.8%</td><td>$480k</td><td>Metronet rail</td></tr><tr><td class="rank">2</td><td><strong>Midland</strong></td><td class="yield-good">5.6%</td><td>$510k</td><td>Hospital precinct</td></tr><tr><td class="rank">3</td><td><strong>Rockingham</strong></td><td class="yield-good">5.4%</td><td>$540k</td><td>Coastal, defence</td></tr><tr><td class="rank">4</td><td><strong>Balga</strong></td><td class="yield-good">6.2%</td><td>$420k</td><td>High yield</td></tr><tr><td class="rank">5</td><td><strong>Ellenbrook</strong></td><td class="yield-good">5.1%</td><td>$580k</td><td>Family demand</td></tr></tbody></table></div>`},
-  'buyers-agent':{eyebrow:'📋 Strategy · Jan 2026',title:'What Does a Buyers Agent Actually Do?',intro:'A full breakdown of fees, the buying process, off-market access, and when professional representation is truly worth it.',readTime:'9 min read',content:`<h2>The Problem Most Buyers Don't Know They Have</h2><p>When you buy property in Australia, the seller has a licensed professional whose entire job is to get the highest price possible. That agent owes legal duty to the vendor — not to you.</p><div class="art-callout"><p>💡 A buyers agent is legally obligated to act solely in your interest. Their fee comes from you — so they work for you alone.</p></div><h2>What They Actually Do</h2><ul><li><strong>Off-market sourcing:</strong> Access 15–30% of properties that never reach Domain or realestate.com.au.</li><li><strong>Due diligence:</strong> Building & pest inspections, strata reports, flood overlays — all coordinated before you make an offer.</li><li><strong>Auction bidding:</strong> Bids without emotional attachment, to a strict ceiling.</li><li><strong>Negotiation:</strong> Negotiates price and settlement terms on your behalf.</li></ul><h2>What Does It Cost?</h2><ul><li><strong>Fixed fee:</strong> Typically $8,000–$18,000 depending on price bracket.</li><li><strong>Percentage:</strong> Usually 1–2.5% of purchase price.</li></ul><p>A good buyers agent typically saves 3–6% on purchase price — the fee pays for itself multiple times over.</p>`},
-  'gearing':{eyebrow:'💰 Finance · Jan 2026',title:'Negative vs Positive Gearing: Which Wins in 2026?',intro:'Tax scenarios, cash flow modelling, and which strategy wins at different price points in the current rate environment.',readTime:'10 min read',content:`<h2>The Basics</h2><p><strong>Negative gearing:</strong> rental income is less than expenses. The shortfall is a tax loss you offset against other income. <strong>Positive gearing:</strong> rental income exceeds all expenses. Cash flow positive from day one.</p><div class="art-callout"><p>💡 Neither is universally better. The right answer depends on your income tax rate, cash flow, and investment horizon.</p></div><h2>When Negative Gearing Makes Sense</h2><ul><li><strong>High-income earners (45% bracket):</strong> A $20,000 annual loss saves $9,000 in tax.</li><li><strong>Capital growth focus:</strong> Inner-ring Sydney and Melbourne deliver 7–9% p.a. growth despite low yields.</li></ul><h2>When Positive Gearing Makes Sense</h2><ul><li><strong>Lower income earners:</strong> The tax break from negative gearing is limited below $120k.</li><li><strong>Building a portfolio:</strong> Positive cash flow improves serviceability for your next purchase.</li><li><strong>Nearing retirement:</strong> You need cash flow, not deductions.</li></ul>`},
-  'fhb':{eyebrow:'🔑 First Home Buyers · Dec 2025',title:'Complete First Home Buyer Guide Australia 2026',intro:'Every grant and scheme explained — FHSS, First Home Guarantee, stamp duty concessions, and the full step-by-step process.',readTime:'12 min read',content:`<h2>The Full Toolkit</h2><p>Between federal and state schemes, you could save $40,000–$70,000 in upfront costs — but only if you structure your purchase correctly.</p><h2>Federal Schemes</h2><ul><li><strong>First Home Guarantee (FHBG):</strong> Buy with 5% deposit — no LMI. 50,000 places per year.</li><li><strong>Family Home Guarantee:</strong> Single parents buy with just 2% deposit.</li><li><strong>FHSS Scheme:</strong> Withdraw up to $50,000 per person from super for your deposit — taxed at 15% instead of your marginal rate.</li></ul><div class="art-callout"><p>💡 FHSS is massively underused. A couple on $200k combined could save $15,000+ in tax by running deposit savings through super. Talk to your accountant before you start saving.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>State</th><th>FHB Exemption Threshold</th><th>Max Saving</th></tr></thead><tbody><tr><td><strong>VIC</strong></td><td>$600,000</td><td>~$31,000</td></tr><tr><td><strong>NSW</strong></td><td>$800,000</td><td>~$31,000</td></tr><tr><td><strong>QLD</strong></td><td>$500,000</td><td>~$8,750</td></tr><tr><td><strong>WA</strong></td><td>$430,000</td><td>~$17,765</td></tr></tbody></table></div>`}
+  'budget2026':{eyebrow:'🏛️ Federal Budget · Policy · May 2026',title:'2026 Federal Budget: What It Means for Australian Property Buyers',intro:'The Albanese Government\'s 2026 Federal Budget landed with several measures directly affecting property buyers, investors, and renters. Here\'s what actually matters and what you need to do about it.',readTime:'11 min read',content:`<h2>The Big Picture: Housing Was Front and Centre</h2><p>For the first time in years, housing affordability dominated the Federal Budget narrative. The government announced a multi-pronged approach — expanding first home buyer schemes, funding 40,000 new social and affordable dwellings, and targeted tax changes that will affect investors and owner-occupiers differently.</p><div class="art-callout"><p>💡 <strong>PropAdvice view:</strong> Most of these measures benefit buyers who act in the next 12 months. Scheme places fill up fast — the First Home Guarantee allocated its full 50,000 places within 9 months last cycle.</p></div><h2>First Home Buyer Changes</h2><p>The Federal Budget 2026 expanded the Help to Buy shared equity scheme, allocating an additional $1.1 billion and raising income thresholds. Under the updated scheme, eligible buyers can purchase with as little as a 2% deposit, with the government taking up to a 40% equity stake in the property.</p><ul><li><strong>Income cap raised:</strong> Singles up to $90,000 (was $80,000), couples up to $120,000 (was $100,000).</li><li><strong>Price caps lifted:</strong> Property price caps increased by approximately $50,000 in each state to reflect current market conditions.</li><li><strong>First Home Guarantee continues:</strong> 50,000 places per year with a 5% deposit and no LMI — now includes permanent residents for the first time.</li><li><strong>Regional First Home Buyer Guarantee:</strong> 10,000 additional places for buyers purchasing outside capital cities.</li></ul><h2>What Happened with Negative Gearing?</h2><p>Negative gearing survived — again. Despite significant pre-budget speculation, the government made no changes to negative gearing deductibility or the 50% capital gains tax discount for investment properties held over 12 months.</p><div class="art-callout"><p>💡 Negative gearing remains fully intact. If you were holding off buying an investment property over CGT fears, those fears were unfounded for this budget cycle.</p></div><h2>Housing Supply: 40,000 New Homes</h2><p>The government committed $6.2 billion to build 40,000 social and affordable homes over five years through the Housing Australia Future Fund.</p><h2>What Should Buyers Do Right Now?</h2><ul><li><strong>Check your scheme eligibility first:</strong> Use our quiz to get matched with an agent who knows exactly which schemes apply to your situation.</li><li><strong>Don't wait for more supply:</strong> The 40,000 homes are a 5-year pipeline.</li><li><strong>Investors: act before sentiment shifts:</strong> With negative gearing intact and rates expected to ease through 2026, the investment case is strong right now.</li></ul>`},
+  'vic':{eyebrow:'📍 Victoria · Featured · Apr 2026',title:'Top 10 Investment Suburbs in Victoria for 2025–2026',intro:'We analysed rental yields, capital growth history, infrastructure pipelines, and population projections across metro and regional Victoria — ranked for investors right now.',readTime:'8 min read',content:`<h2>Why Victoria Right Now?</h2><p>Victoria's property market has stabilised after the post-pandemic correction, with Melbourne's median dwelling price sitting around $780,000 — creating strong value compared to Sydney.</p><div class="art-callout"><p>💡 <strong>PropAdvice tip:</strong> Victoria's land tax thresholds mean portfolio structure matters more here than anywhere else. A buyers agent can help you buy in the right entity.</p></div><h2>The Top 10 — Ranked</h2><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Region</th><th>Gross Yield</th><th>10yr Growth</th><th>Why It's Hot</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Sunshine</strong></td><td>Inner West</td><td class="yield-good">4.2%</td><td>7.8% p.a.</td><td>Metro Tunnel, gentrification</td></tr><tr><td class="rank">2</td><td><strong>Frankston</strong></td><td>Bayside South</td><td class="yield-good">4.6%</td><td>6.9% p.a.</td><td>Affordability + beach + health precinct</td></tr><tr><td class="rank">3</td><td><strong>Footscray</strong></td><td>Inner West</td><td class="yield-good">3.8%</td><td>8.4% p.a.</td><td>Metro Tunnel hub, hospital precinct</td></tr><tr><td class="rank">4</td><td><strong>Werribee</strong></td><td>Western Corridor</td><td class="yield-good">4.8%</td><td>6.2% p.a.</td><td>Population growth, Avalon Airport</td></tr><tr><td class="rank">5</td><td><strong>Bendigo</strong></td><td>Regional VIC</td><td class="yield-good">5.1%</td><td>7.1% p.a.</td><td>Regional city growth, hospital expansion</td></tr><tr><td class="rank">6</td><td><strong>Heidelberg</strong></td><td>North East</td><td class="yield-good">3.6%</td><td>7.5% p.a.</td><td>NE Link, hospital precinct</td></tr><tr><td class="rank">7</td><td><strong>Geelong</strong></td><td>Geelong</td><td class="yield-good">4.9%</td><td>8.2% p.a.</td><td>Fastest growing city in VIC</td></tr><tr><td class="rank">8</td><td><strong>Maidstone</strong></td><td>Inner West</td><td class="yield-good">4.1%</td><td>7.3% p.a.</td><td>Undervalued, Metro proximity</td></tr><tr><td class="rank">9</td><td><strong>Ballarat</strong></td><td>Regional VIC</td><td class="yield-good">5.4%</td><td>6.0% p.a.</td><td>Tree-changers, affordability</td></tr><tr><td class="rank">10</td><td><strong>Reservoir</strong></td><td>North</td><td class="yield-good">3.7%</td><td>7.9% p.a.</td><td>Train access, gentrification</td></tr></tbody></table></div>`},
+  'syd':{eyebrow:'🌉 Sydney · NSW · Apr 2026',title:'Top 10 Investment Areas in Sydney 2026',intro:'Western Sydney\'s infrastructure surge, Inner West yields, and coastal lifestyle markets — ranked for capital growth and rental returns right now.',readTime:'8 min read',content:`<h2>Sydney's Market in 2026</h2><p>Sydney's median house price has surpassed $1.4 million. But within that are pockets delivering 4–5% gross yields and double-digit capital growth corridors driven by the $120 billion Western Sydney infrastructure pipeline.</p><div class="art-callout"><p>💡 The Western Sydney Airport is one of the largest single infrastructure investments in Australian history. Suburbs within 15 minutes of Badgerys Creek are repricing right now.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Area</th><th>Zone</th><th>Gross Yield</th><th>Key Driver</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Marsden Park</strong></td><td>Western Sydney</td><td class="yield-good">4.3%</td><td>Airport corridor</td></tr><tr><td class="rank">2</td><td><strong>Liverpool</strong></td><td>South West</td><td class="yield-good">4.1%</td><td>Health precinct</td></tr><tr><td class="rank">3</td><td><strong>Marrickville</strong></td><td>Inner West</td><td class="yield-good">3.5%</td><td>Gentrification, metro</td></tr><tr><td class="rank">4</td><td><strong>Penrith</strong></td><td>Western Sydney</td><td class="yield-good">4.6%</td><td>Panthers precinct</td></tr><tr><td class="rank">5</td><td><strong>Campbelltown</strong></td><td>South West</td><td class="yield-good">4.9%</td><td>University, hospital</td></tr></tbody></table></div>`},
+  'qld':{eyebrow:'☀️ Queensland · Mar 2026',title:'Best Suburbs in Brisbane & Gold Coast 2026',intro:'The Olympics legacy, interstate migration surge, and population growth are driving Queensland\'s property market into a multi-year growth cycle.',readTime:'7 min read',content:`<h2>Why Queensland is Australia's #1 Investment Story</h2><p>Queensland has absorbed more interstate migrants than any other state since 2022. Brisbane's median house price has risen 62% over five years.</p><div class="art-callout"><p>💡 The 2032 Brisbane Olympics is a 7-year infrastructure catalyst. $17 billion in public spending is being deployed right now.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Type</th><th>Gross Yield</th><th>Why Now</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Woolloongabba</strong></td><td>Inner South</td><td class="yield-good">4.4%</td><td>Olympics stadium</td></tr><tr><td class="rank">2</td><td><strong>Ipswich</strong></td><td>Western Corridor</td><td class="yield-good">5.8%</td><td>Fastest growing LGA in QLD</td></tr><tr><td class="rank">3</td><td><strong>Zillmere</strong></td><td>Northside</td><td class="yield-good">5.2%</td><td>Affordability, yields</td></tr><tr><td class="rank">4</td><td><strong>Coomera</strong></td><td>Northern GC</td><td class="yield-good">4.9%</td><td>Olympics venue, light rail</td></tr><tr><td class="rank">5</td><td><strong>Southport</strong></td><td>GC CBD</td><td class="yield-good">5.1%</td><td>Hospital precinct</td></tr></tbody></table></div>`},
+  'perth':{eyebrow:'🌅 Perth · WA · Feb 2026',title:'Perth Property: Best Suburbs to Buy in 2026',intro:'Affordability, yields above 5%, and WA\'s booming resources economy make Perth Australia\'s best value capital city market.',readTime:'6 min read',content:`<h2>Perth: The Market Nobody Saw Coming</h2><p>Rental vacancy has dropped to a historic 0.7% — the tightest in the nation. Perth's median house price has risen over 70% in four years.</p><div class="art-callout"><p>💡 Perth's 0.7% vacancy means every property gets 20+ applications within 48 hours.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>#</th><th>Suburb</th><th>Yield</th><th>Median</th><th>Why</th></tr></thead><tbody><tr><td class="rank">1</td><td><strong>Armadale</strong></td><td class="yield-good">5.8%</td><td>$480k</td><td>Metronet rail</td></tr><tr><td class="rank">2</td><td><strong>Midland</strong></td><td class="yield-good">5.6%</td><td>$510k</td><td>Hospital precinct</td></tr><tr><td class="rank">3</td><td><strong>Rockingham</strong></td><td class="yield-good">5.4%</td><td>$540k</td><td>Coastal, defence</td></tr><tr><td class="rank">4</td><td><strong>Balga</strong></td><td class="yield-good">6.2%</td><td>$420k</td><td>High yield</td></tr><tr><td class="rank">5</td><td><strong>Ellenbrook</strong></td><td class="yield-good">5.1%</td><td>$580k</td><td>Family demand</td></tr></tbody></table></div>`},
+  'buyers-agent':{eyebrow:'📋 Strategy · Jan 2026',title:'What Does a Buyers Agent Actually Do?',intro:'A full breakdown of fees, the buying process, off-market access, and when professional representation is truly worth it.',readTime:'9 min read',content:`<h2>The Problem Most Buyers Don't Know They Have</h2><p>When you buy property in Australia, the seller has a licensed professional whose entire job is to get the highest price possible.</p><div class="art-callout"><p>💡 A buyers agent is legally obligated to act solely in your interest. Their fee comes from you — so they work for you alone.</p></div><h2>What They Actually Do</h2><ul><li><strong>Off-market sourcing:</strong> Access 15–30% of properties that never reach Domain.</li><li><strong>Due diligence:</strong> Building & pest inspections, strata reports, flood overlays.</li><li><strong>Auction bidding:</strong> Bids without emotional attachment, to a strict ceiling.</li><li><strong>Negotiation:</strong> Negotiates price and settlement terms on your behalf.</li></ul><h2>What Does It Cost?</h2><ul><li><strong>Fixed fee:</strong> Typically $8,000–$18,000.</li><li><strong>Percentage:</strong> Usually 1–2.5% of purchase price.</li></ul><p>A good buyers agent typically saves 3–6% on purchase price.</p>`},
+  'gearing':{eyebrow:'💰 Finance · Jan 2026',title:'Negative vs Positive Gearing: Which Wins in 2026?',intro:'Tax scenarios, cash flow modelling, and which strategy wins at different price points.',readTime:'10 min read',content:`<h2>The Basics</h2><p><strong>Negative gearing:</strong> rental income is less than expenses — the shortfall offsets your taxable income. <strong>Positive gearing:</strong> rental income exceeds all expenses.</p><div class="art-callout"><p>💡 Neither is universally better. The right answer depends on your income tax rate, cash flow, and investment horizon.</p></div><h2>When Negative Gearing Makes Sense</h2><ul><li><strong>High-income earners (45% bracket):</strong> A $20,000 annual loss saves $9,000 in tax.</li><li><strong>Capital growth focus:</strong> Inner-ring Sydney and Melbourne deliver 7–9% p.a. growth despite low yields.</li></ul><h2>When Positive Gearing Makes Sense</h2><ul><li><strong>Lower income earners:</strong> The tax break is limited below $120k.</li><li><strong>Building a portfolio:</strong> Positive cash flow improves serviceability for your next purchase.</li></ul>`},
+  'fhb':{eyebrow:'🔑 First Home Buyers · Dec 2025',title:'Complete First Home Buyer Guide Australia 2026',intro:'Every grant and scheme explained — FHSS, First Home Guarantee, stamp duty concessions, and the full step-by-step process.',readTime:'12 min read',content:`<h2>The Full Toolkit</h2><p>Between federal and state schemes, you could save $40,000–$70,000 in upfront costs — but only if you structure your purchase correctly.</p><h2>Federal Schemes</h2><ul><li><strong>First Home Guarantee (FHBG):</strong> Buy with 5% deposit — no LMI. 50,000 places per year.</li><li><strong>Family Home Guarantee:</strong> Single parents buy with just 2% deposit.</li><li><strong>FHSS Scheme:</strong> Withdraw up to $50,000 per person from super for your deposit.</li></ul><div class="art-callout"><p>💡 FHSS is massively underused. A couple on $200k combined could save $15,000+ in tax.</p></div><div class="suburb-table-wrap"><table class="suburb-table"><thead><tr><th>State</th><th>FHB Exemption Threshold</th><th>Max Saving</th></tr></thead><tbody><tr><td><strong>VIC</strong></td><td>$600,000</td><td>~$31,000</td></tr><tr><td><strong>NSW</strong></td><td>$800,000</td><td>~$31,000</td></tr><tr><td><strong>QLD</strong></td><td>$500,000</td><td>~$8,750</td></tr><tr><td><strong>WA</strong></td><td>$430,000</td><td>~$17,765</td></tr></tbody></table></div>`}
 };
 
 function openArticle(id) {
